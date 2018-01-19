@@ -2,36 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="608927f4-2e05-41ef-9300-578ea880f59d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_3_8_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_3_8_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/App.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/connector/Acceptor.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/connector/Acceptor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/connector/Processor.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/connector/Processor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/connector/StandardEventLooperProcessor.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/connector/StandardEventLooperProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/connector/StandardSocketAcceptor.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/connector/StandardSocketAcceptor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/core/Request.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/core/Request.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/core/Response.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/core/Response.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/http/Cookie.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/http/Cookie.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/http/HttpHeader.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/http/HttpHeader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/http/HttpMethod.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/http/HttpMethod.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/http/Session.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/http/Session.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/http/URL.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/http/URL.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/http/util/Parser.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/http/util/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/message/ByteBufferHandler.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/message/ByteBufferHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/message/ByteBufferUtil.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/message/ByteBufferUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/message/Reader.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/message/Reader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/message/Writer.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/message/Writer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/Constant.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/Constant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/EventHandler.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/EventHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/EventLooper.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/EventLooper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/EventQueue.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/EventQueue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/Executor.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/Executor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/NioChannel.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/NioChannel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/ReadHandler.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/ReadHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/WriteHandler.java" afterPath="$PROJECT_DIR$/src/main/java/httpserver/net/nio/WriteHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/httpserver/AppTest.java" afterPath="$PROJECT_DIR$/src/test/java/httpserver/AppTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/httpserver/BufferReader.java" afterPath="$PROJECT_DIR$/src/test/java/httpserver/BufferReader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/httpserver/BufferWriter.java" afterPath="$PROJECT_DIR$/src/test/java/httpserver/BufferWriter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -810,7 +781,7 @@
       <workItem from="1515289724797" duration="11676000" />
       <workItem from="1515376368077" duration="7690000" />
       <workItem from="1515463508026" duration="3755000" />
-      <workItem from="1516330329014" duration="522000" />
+      <workItem from="1516330329014" duration="1121000" />
     </task>
     <task id="LOCAL-00001" summary="project init">
       <created>1516330706719</created>
@@ -855,7 +826,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51319000" />
+    <option name="totallyTimeSpent" value="51918000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="2" width="1932" height="1045" extended-state="0" />
