@@ -1,7 +1,12 @@
 package httpserver;
 
-import httpserver.connector.StandardEventLooperProcessor;
-import httpserver.connector.StandardSocketAcceptor;
+import httpserver.connector.nio.AbstractConnector;
+import httpserver.connector.nio.NioConnector;
+import httpserver.core.Server;
+
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.*;
 
 /**
  * Hello world!
@@ -9,15 +14,8 @@ import httpserver.connector.StandardSocketAcceptor;
  */
 public class App 
 {
-    public static void main( String[] args )
-    {
-        StandardSocketAcceptor standardSocketAcceptor = new StandardSocketAcceptor();
-        StandardEventLooperProcessor standardEventLooperProcessor = new StandardEventLooperProcessor();
-        //for(int i=0;i<5;i++){
-            Thread accpet = new Thread(standardSocketAcceptor);
-            accpet.start();
-        //}
-        Thread process = new Thread(standardEventLooperProcessor);
-        process.start();
+    public static void main( String[] args ) throws Exception{
+        NioConnector connector = new NioConnector() ;
+        connector.doStart();
     }
 }

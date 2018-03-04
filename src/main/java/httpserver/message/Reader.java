@@ -5,6 +5,6 @@ import java.nio.ByteBuffer;
 
 public interface Reader {
 
-    public void read(ByteBufferHandler byteBufferHandler) throws IOException;
+    public void read() throws IOException;
 
 }

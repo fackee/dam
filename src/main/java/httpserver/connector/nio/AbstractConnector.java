@@ -1,0 +1,189 @@
+package httpserver.connector.nio;
+
+import httpserver.core.AbstractLifeCycle;
+import httpserver.core.ContainerLifeCycle;
+import httpserver.core.Destroyable;
+import httpserver.core.Server;
+import sun.nio.ch.ThreadPool;
+
+import java.io.IOException;
+import java.net.Socket;
+
+/**
+ * Created by geeche on 2018/2/3.
+ */
+public abstract class AbstractConnector extends ContainerLifeCycle implements Connector{
+
+    private String name;
+
+    private Server server;
+    private ThreadPool threadPool;
+    private String host;
+    private int port = 8080;
+    private int acceptorQueueSize = 0;
+    private int acceptors = 1;
+    private boolean reuseAddress;
+
+
+    private Thread[] acceptorThread;
+
+    public AbstractConnector(){
+
+    }
+
+
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public void setServer(Server server) {
+        this.server = server;
+    }
+
+    @Override
+    public Server getServer() {
+        return server;
+    }
+
+    @Override
+    public String getHost() {
+        return host;
+    }
+
+    @Override
+    public void setHost(String hostName) {
+        this.host = hostName;
+    }
+
+    @Override
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    @Override
+    public int getPort() {
+        return port;
+    }
+
+    @Override
+    public Object getConnection() {
+        return null;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAcceptorQueueSize() {
+        return acceptorQueueSize;
+    }
+
+    public void setAcceptorQueueSize(int acceptorQueueSize) {
+        this.acceptorQueueSize = acceptorQueueSize;
+    }
+
+    public int getAcceptors() {
+        return acceptors;
+    }
+
+    public void setAcceptors(int acceptors) {
+        if(acceptors > 2*Runtime.getRuntime().availableProcessors()){
+            return;
+        }
+        this.acceptors = acceptors;
+    }
+
+    public boolean getReuseAddress() {
+        return reuseAddress;
+    }
+
+    public void setReuseAddress(boolean reuseAddress) {
+        this.reuseAddress = reuseAddress;
+    }
+
+
+    protected void configure(Socket socket) {
+
+    }
+
+    @Override
+    public abstract void open() throws IOException ;
+
+    @Override
+    public abstract void close() throws IOException ;
+
+    protected abstract void accept(int acceptId) throws IOException,InterruptedException;
+
+    @Override
+    protected void doStart() throws Exception {
+//        if(server == null){
+//            throw new IllegalStateException("No server");
+//        }
+        open();
+
+//        if(threadPool == null){
+//            threadPool = server.getThreadPool();
+//            addBean(threadPool,false);
+//        }
+
+        super.doStart();
+
+        synchronized (this){
+            acceptorThread = new Thread[getAcceptors()];
+            for(int i=0;i<acceptorThread.length;i++){
+                acceptorThread[i] = new Thread(new Acceptor(i));
+                acceptorThread[i].start();
+            }
+        }
+    }
+
+    @Override
+    protected void doStop() throws Exception {
+        try {
+            close();
+        }catch (IOException e){
+
+        }
+        super.doStop();
+
+        Thread[] acceptors;
+        synchronized (this){
+            acceptors = acceptorThread;
+            acceptorThread = null;
+        }
+        if(acceptors != null){
+            for(Thread thread : acceptors){
+                if(thread != null){
+                    thread.interrupt();
+                }
+            }
+        }
+    }
+
+
+    private class Acceptor implements Runnable{
+
+        int acceptorId = 0;
+
+        Acceptor(int acceptorId){
+            this.acceptorId = acceptorId;
+        }
+
+        @Override
+        public void run() {
+            while (true){
+                try {
+                    accept(acceptorId);
+                } catch (IOException e) {
+
+                } catch (InterruptedException e) {
+
+                }
+            }
+
+        }
+    }
+}

@@ -1,7 +1,6 @@
 package httpserver;
 
-import httpserver.message.ByteBufferHandler;
-import httpserver.net.nio.Constant;
+import httpserver.connector.nio.Constant;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
