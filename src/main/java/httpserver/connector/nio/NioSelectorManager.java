@@ -1,5 +1,7 @@
 package httpserver.connector.nio;
 
+import httpserver.connector.SelectChannelEndPoint;
+
 import java.io.IOException;
 
 /**
@@ -8,6 +10,11 @@ import java.io.IOException;
 public class NioSelectorManager extends SelectorManager{
 
     public NioSelectorManager(){
+
+    }
+
+    @Override
+    public void endPointUpgraded(SelectChannelEndPoint selectChannelEndPoint, Connection old) {
 
     }
 }

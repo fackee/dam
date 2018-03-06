@@ -5,5 +5,4 @@ package httpserver.connector;
  */
 public interface AsyncEndPoint extends ConnectedEndPoint{
 
-
 }

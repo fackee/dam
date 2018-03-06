@@ -152,7 +152,7 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                             key = ((SocketChannel) sc).register(selector,SelectionKey.OP_READ,att);
                             SelectChannelEndPoint endPoint = createEndPoint((SocketChannel)sc,key);
                             key.attach(endPoint);
-                            endPoint.excute();
+                            //TODO endpoint execute
                         }else if(channel.isOpen()){
                             key = sc.register(selector,SelectionKey.OP_CONNECT);
                         }
@@ -163,11 +163,11 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                         key = socketChannel.register(selector,SelectionKey.OP_READ,null);
                         SelectChannelEndPoint endPoint = createEndPoint(socketChannel,key);
                         key.attach(endPoint);
-                        endPoint.excute();
+                        //TODO endpoint execute
                     }
                 }
             }catch (IOException e){
-
+                //TODO doWork IOException
             }
 
             int select = selector.selectNow();
@@ -192,7 +192,8 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                     Object attachment = selectionKey.attachment();
                     if(attachment instanceof SelectChannelEndPoint){
                         if(selectionKey.isReadable() || selectionKey.isWritable()){
-                            ((SelectChannelEndPoint)attachment).excute();
+                            //TODO endpoint execute
+                            //((SelectChannelEndPoint)attachment).excute();
                         }
                     }else if(selectionKey.isConnectable()){
                         socketChannel = (SocketChannel) selectionKey.channel();

@@ -195,10 +195,10 @@ public abstract class AbstractEndPoint implements EndPoint{
     }
 
     @Override
-    public abstract boolean blockReadable(long millisecs) ;
+    public abstract boolean blockReadable(long millisecs) throws IOException;
 
     @Override
-    public abstract boolean blockWritable(long millisecs) ;
+    public abstract boolean blockWritable(long millisecs) throws IOException;
 
     @Override
     public boolean isOpen() {
