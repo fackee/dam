@@ -2,6 +2,7 @@ package httpserver.connector;
 
 import httpserver.connector.EndPoint;
 import httpserver.connector.nio.buffer.Buffer;
+import httpserver.util.thread.Task;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -199,6 +200,8 @@ public abstract class AbstractEndPoint implements EndPoint{
 
     @Override
     public abstract boolean blockWritable(long millisecs) throws IOException;
+
+    public abstract void dispatch(Task task);
 
     @Override
     public boolean isOpen() {

@@ -1,5 +1,6 @@
 package httpserver.connector.nio;
 
+import httpserver.connector.Connection;
 import httpserver.connector.EndPoint;
 import httpserver.connector.SelectChannelEndPoint;
 import httpserver.core.AbstractLifeCycle;

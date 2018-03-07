@@ -1,8 +1,6 @@
-package httpserver.connector.nio;
+package httpserver.connector;
 
-import httpserver.core.AbstractLifeCycle;
 import httpserver.core.ContainerLifeCycle;
-import httpserver.core.Destroyable;
 import httpserver.core.Server;
 import sun.nio.ch.ThreadPool;
 

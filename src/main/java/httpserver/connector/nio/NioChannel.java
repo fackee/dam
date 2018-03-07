@@ -1,13 +1,12 @@
 package httpserver.connector.nio;
 
+import httpserver.connector.Constant;
 import httpserver.message.ByteBufferHandler;
 import httpserver.message.Reader;
 import httpserver.message.Writer;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 
 public class NioChannel implements Reader,Writer{

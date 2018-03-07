@@ -1,13 +1,14 @@
 package httpserver.connector;
 
-import httpserver.connector.nio.AsyncHttpConnection;
-import httpserver.connector.nio.Connection;
 import httpserver.connector.nio.SelectorManager;
+import httpserver.util.thread.ExecutorThreadPool;
+import httpserver.util.thread.Task;
 
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
+import java.util.concurrent.ExecutorService;
 
 /**
  * Created by geeche on 2018/2/3.
@@ -76,12 +77,20 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
         return false;
     }
 
+    @Override
+    public void dispatch(Task task){
+        connection.getServer().getWorkerService().dispatch(task);
+    }
 
-    public void doUpdateKey() {
+    public void doUpdateKey() throws IOException {
         synchronized (this){
             if(getChannel().isOpen()){
                 if(key == null){
-
+                    if(getChannel().isOpen()){
+                        getChannel().close();
+                    }
+                }else{
+                    worker.addWork(this);
                 }
             }else{
                 if(key !=null && key.isValid()){
@@ -90,4 +99,5 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
             }
         }
     }
+
 }

@@ -1,8 +1,7 @@
 package httpserver.connector.nio;
 
+import httpserver.connector.Connection;
 import httpserver.connector.SelectChannelEndPoint;
-
-import java.io.IOException;
 
 /**
  * Created by geeche on 2018/2/3.

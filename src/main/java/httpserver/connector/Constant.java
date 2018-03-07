@@ -1,4 +1,4 @@
-package httpserver.connector.nio;
+package httpserver.connector;
 
 public class Constant {
 

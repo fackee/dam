@@ -1,4 +1,4 @@
-package httpserver.connector.nio;
+package httpserver.connector;
 
 import httpserver.core.LifeCycle;
 import httpserver.core.Server;

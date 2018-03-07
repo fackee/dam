@@ -1,6 +1,6 @@
 package httpserver;
 
-import httpserver.connector.nio.Constant;
+import httpserver.connector.Constant;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

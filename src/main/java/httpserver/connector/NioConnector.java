@@ -1,4 +1,7 @@
-package httpserver.connector.nio;
+package httpserver.connector;
+
+import httpserver.connector.nio.NioSelectorManager;
+import httpserver.connector.nio.SelectorManager;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
