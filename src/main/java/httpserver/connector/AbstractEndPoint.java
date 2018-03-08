@@ -177,6 +177,10 @@ public abstract class AbstractEndPoint implements EndPoint{
 
     @Override
     public int fill(Buffer buffer) {
+        if(inShut){
+            return -1;
+        }
+
         return 0;
     }
 
@@ -201,7 +205,13 @@ public abstract class AbstractEndPoint implements EndPoint{
     @Override
     public abstract boolean blockWritable(long millisecs) throws IOException;
 
-    public abstract void dispatch(Task task);
+    public abstract void updateKey();
+
+    public abstract void doUpdateKey();
+
+    public abstract void shedule() throws IOException;
+
+    public abstract void dispatch();
 
     @Override
     public boolean isOpen() {
@@ -212,6 +222,7 @@ public abstract class AbstractEndPoint implements EndPoint{
     public Object getTransport() {
         return channel;
     }
+
 
 
 }

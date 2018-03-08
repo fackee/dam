@@ -15,10 +15,13 @@ public class Server {
 
 
     private Connector connector;
+
     private ExecutorThreadPool acceptService;
     private ExecutorThreadPool workerService;
     private HandleWrapper handleWrapper;
+
     private ThreadPool threadPool;
+
     public Server(){
         this(5);
     }

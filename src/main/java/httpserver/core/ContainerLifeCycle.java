@@ -30,7 +30,7 @@ public class ContainerLifeCycle extends AbstractLifeCycle implements Destroyable
     protected void doStop() throws Exception {
         started = false;
         super.doStop();
-        final List<Bean> reverse = new ArrayList<>(beans);
+        final List<Bean> reverse = new ArrayList<Bean>(beans);
         Collections.reverse(reverse);
         for(Bean bean : reverse){
             if(bean.bean instanceof LifeCycle){
@@ -46,7 +46,7 @@ public class ContainerLifeCycle extends AbstractLifeCycle implements Destroyable
 
     @Override
     public void destroy() {
-        final List<Bean> reverse = new ArrayList<>(beans);
+        final List<Bean> reverse = new ArrayList<Bean>(beans);
         Collections.reverse(reverse);
         for(Bean bean : reverse){
             if(bean.bean instanceof Destroyable){
@@ -115,7 +115,7 @@ public class ContainerLifeCycle extends AbstractLifeCycle implements Destroyable
     }
 
     public <T>List<T> getBeans(Class<T> clazz){
-        ArrayList<T> beanRes = new ArrayList<>();
+        ArrayList<T> beanRes = new ArrayList<T>();
         for(Bean bean : beans){
             if(clazz.isInstance(bean.bean)){
                 beanRes.add((T)bean.bean);

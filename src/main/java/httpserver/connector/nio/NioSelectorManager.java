@@ -8,6 +8,9 @@ import httpserver.connector.SelectChannelEndPoint;
  */
 public class NioSelectorManager extends SelectorManager{
 
+
+
+
     public NioSelectorManager(){
 
     }
@@ -15,5 +18,11 @@ public class NioSelectorManager extends SelectorManager{
     @Override
     public void endPointUpgraded(SelectChannelEndPoint selectChannelEndPoint, Connection old) {
 
+    }
+
+
+    @Override
+    public boolean dispatch(Runnable runnable) {
+        return false;
     }
 }

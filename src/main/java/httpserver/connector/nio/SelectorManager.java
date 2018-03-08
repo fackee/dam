@@ -6,6 +6,7 @@ import httpserver.connector.SelectChannelEndPoint;
 import httpserver.core.AbstractLifeCycle;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -92,7 +93,10 @@ public abstract class SelectorManager extends AbstractLifeCycle{
 
     public abstract void endPointUpgraded(SelectChannelEndPoint selectChannelEndPoint, Connection old);
 
+    public abstract boolean dispatch(Runnable runnable);
+
     public class SelectorWorker{
+
         private final int id;
 
         private final ConcurrentLinkedQueue<Object> workQueue = new ConcurrentLinkedQueue<Object>();
@@ -107,7 +111,6 @@ public abstract class SelectorManager extends AbstractLifeCycle{
         }
 
         public void addWork(Object work){
-            System.out.println("addword");
             workQueue.add(work);
         }
 
@@ -135,36 +138,48 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                     Channel channel = null;
                     SelectionKey key = null;
                     if(work instanceof EndPoint){
-                        System.out.println("read");
+                        System.out.println("EndPoint->doUpdateKey");
                         final SelectChannelEndPoint endPoint = (SelectChannelEndPoint)work;
                         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
                         channel = endPoint.getChannel();
                         ((SocketChannel)channel).read(byteBuffer);
                         System.out.println(new String(byteBuffer.array()));
                         byteBuffer.clear();
+                                String httpResponse = "HTTP/1.1 200 OK\r\n" +
+                                        "Content-Length: 38\r\n" +
+                                        "Content-Type: text/html\r\n" +
+                                        "\r\n" +
+                                        "<html><body>Hello World!</body></html>";
+                                byteBuffer.put(httpResponse.getBytes());
+                                byteBuffer.flip();
+                                ((SocketChannel)channel).write(byteBuffer);
                         endPoint.doUpdateKey();
                     }else if(work instanceof ChannelAndAttachment){
-                        System.out.println("regread");
+                        System.out.println("ChannelAndAttachment");
                         final ChannelAndAttachment caa = (ChannelAndAttachment) work;
                         final SelectableChannel sc = caa.channel;
                         channel = sc;
                         final Object att = caa.attachment;
                         if( (sc instanceof SocketChannel) && ((SocketChannel)sc).isConnected() ){
+                            System.out.println("ChannelAndAttachment->SocketChannel->regRead");
                             key = ((SocketChannel) sc).register(selector,SelectionKey.OP_READ,att);
                             SelectChannelEndPoint endPoint = createEndPoint((SocketChannel)sc,key);
                             key.attach(endPoint);
-                            //TODO endpoint execute
+                            endPoint.shedule();
                         }else if(channel.isOpen()){
                             key = sc.register(selector,SelectionKey.OP_CONNECT);
                         }
                     }else if(work instanceof SocketChannel){
-                        System.out.println("regread");
+                        System.out.print("SocketChannel->regRead");
                         final SocketChannel socketChannel = (SocketChannel)work;
                         channel = socketChannel;
                         key = socketChannel.register(selector,SelectionKey.OP_READ,null);
+                        System.out.println("===>"+key.interestOps());
                         SelectChannelEndPoint endPoint = createEndPoint(socketChannel,key);
                         key.attach(endPoint);
-                        //TODO endpoint execute
+                        endPoint.shedule();
+                    }else if(work instanceof ChangeTask){
+                        ((Runnable)work).run();
                     }
                 }
             }catch (IOException e){
@@ -193,8 +208,7 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                     Object attachment = selectionKey.attachment();
                     if(attachment instanceof SelectChannelEndPoint){
                         if(selectionKey.isReadable() || selectionKey.isWritable()){
-                            //TODO endpoint execute
-                            //((SelectChannelEndPoint)attachment).excute();
+                            ((SelectChannelEndPoint)attachment).shedule();
                         }
                     }else if(selectionKey.isConnectable()){
                         socketChannel = (SocketChannel) selectionKey.channel();
@@ -217,9 +231,15 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                     s.wakeup();
                 }
             }catch (Exception e){
+                addWork(new ChangeTask() {
+                    @Override
+                    public void run() {
+                        renewSelector();
+                    }
+                });
                 renewSelector();
             }
-            renewSelector();
+
         }
 
         private void renewSelector() {
@@ -250,6 +270,19 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                 throw new RuntimeException("recreating selector",e);
             }
         }
+
+        public void destroyEndPoint(SelectChannelEndPoint endp)
+        {
+
+        }
+
+        public Selector getSelector() {
+            return selector;
+        }
+
+        public SelectorManager getManager(){
+            return SelectorManager.this;
+        }
     }
 
 
@@ -264,4 +297,6 @@ public abstract class SelectorManager extends AbstractLifeCycle{
         }
     }
 
+
+    private interface ChangeTask extends Runnable{}
 }

@@ -14,7 +14,7 @@ public class ByteBufferHandler {
 
     private volatile int writePosition = 0;
 
-    private final Queue<Integer> writeMarker = new LinkedBlockingDeque<>(1024);
+    private final Queue<Integer> writeMarker = new LinkedBlockingDeque<Integer>(1024);
 
     public ByteBufferHandler(ByteBuffer readBuffer){
         this.readBuffer = readBuffer;

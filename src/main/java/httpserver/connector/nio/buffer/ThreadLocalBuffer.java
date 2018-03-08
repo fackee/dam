@@ -11,36 +11,16 @@ public class ThreadLocalBuffer{
         nioBufferThreadLocal.set(nioBuffer);
     }
 
-    private NioBuffer getNioBuffer(){
+    private final NioBuffer getNioBuffer(){
         return nioBufferThreadLocal.get();
     }
 
-
-
-
-
-
-
-    class BufferHandlerImpl implements BufferHandler{
-
-        @Override
-        public String decode() {
-            return getNioBuffer().bytes().toString();
+    private final void setNioBuffer(final NioBuffer nioBuffer){
+        if(nioBufferThreadLocal.get() != null){
+            nioBufferThreadLocal.remove();
         }
-
-        @Override
-        public byte[] encode(String resp) {
-            return null;
-        }
+        nioBufferThreadLocal.set(nioBuffer);
     }
 
-    interface BufferHandler{
-
-        String decode();
-
-
-        byte[] encode(String resp);
-
-    }
 
 }
