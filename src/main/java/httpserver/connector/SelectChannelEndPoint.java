@@ -32,6 +32,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
 
 
     private int interestOps;
+
     private volatile boolean writeable;
 
     private boolean onIdle;
@@ -104,7 +105,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
 
     @Override
     public void shedule() throws IOException{
-        System.out.println("shedule==>"+key.isValid()+readBloking+writeBloking);
+        System.out.println("shedule==>"+interestOps+key.isValid()+readBloking+writeBloking);
         if(key == null || !key.isValid()){
             readBloking = false;
             writeBloking = false;

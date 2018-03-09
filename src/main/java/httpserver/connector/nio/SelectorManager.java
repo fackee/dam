@@ -145,14 +145,14 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                         ((SocketChannel)channel).read(byteBuffer);
                         System.out.println(new String(byteBuffer.array()));
                         byteBuffer.clear();
-                                String httpResponse = "HTTP/1.1 200 OK\r\n" +
-                                        "Content-Length: 38\r\n" +
-                                        "Content-Type: text/html\r\n" +
-                                        "\r\n" +
-                                        "<html><body>Hello World!</body></html>";
-                                byteBuffer.put(httpResponse.getBytes());
-                                byteBuffer.flip();
-                                ((SocketChannel)channel).write(byteBuffer);
+                        String httpResponse = "HTTP/1.1 200 OK\r\n" +
+                                "Content-Length: 38\r\n" +
+                                "Content-Type: text/html\r\n" +
+                                "\r\n" +
+                                "<html><body>Hello World!</body></html>";
+                        byteBuffer.put(httpResponse.getBytes());
+                        byteBuffer.flip();
+                        ((SocketChannel)channel).write(byteBuffer);
                         endPoint.doUpdateKey();
                     }else if(work instanceof ChannelAndAttachment){
                         System.out.println("ChannelAndAttachment");

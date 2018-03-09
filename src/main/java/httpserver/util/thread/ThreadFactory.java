@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by zhujianxin on 2018/3/7.
  */
-public class EventThreadFactory implements java.util.concurrent.ThreadFactory{
+public class ThreadFactory implements java.util.concurrent.ThreadFactory{
 
     private final AtomicLong threadNum = new AtomicLong(0L);
 
