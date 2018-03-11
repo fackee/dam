@@ -7,6 +7,8 @@ import java.util.concurrent.Executor;
  */
 public interface ThreadPool extends Executor{
 
+    public boolean dispatch(Runnable job);
+
     public void join() throws InterruptedException;
 
     public int getThreads();

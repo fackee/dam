@@ -1,6 +1,7 @@
 package httpserver;
 
 import httpserver.connector.Constant;
+import httpserver.util.thread.QueueThreadPool;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -87,6 +88,7 @@ public class AppTest
 //        temp.clear();
 //        temp = null;
 //        System.out.println(new String(dst));
+        System.out.println(new QueueThreadPool.ThreadBuilder().maxThread(100).build().toString());
         assertTrue( true );
     }
 
