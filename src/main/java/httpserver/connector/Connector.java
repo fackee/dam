@@ -21,8 +21,6 @@ public interface Connector extends LifeCycle{
     Server getServer();
 
 
-
-
     String getHost();
 
     void setHost(String hostName);

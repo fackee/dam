@@ -3,10 +3,9 @@ package httpserver.core;
 import httpserver.connector.Connector;
 import httpserver.handler.HandleWrapper;
 import httpserver.util.thread.ExecutorThreadPool;
-import sun.nio.ch.ThreadPool;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import httpserver.util.thread.QueueThreadPool;
+import httpserver.util.thread.ThreadPool;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * Created by geeche on 2018/1/25.
@@ -29,6 +28,18 @@ public class Server {
         this(acceptThreadNum,10000);
     }
     public Server(int acceptThreadNum,int workThreadNum){
+        this(acceptThreadNum,workThreadNum,
+                new QueueThreadPool.ThreadBuilder()
+                        .maxThread(workThreadNum)
+                        .minThread(100)
+                        .jobQueue(new ArrayBlockingQueue<Runnable>(workThreadNum))
+                        .maxQueueSize(workThreadNum)
+                        .build());
+    }
+
+
+    public Server(int acceptThreadNum,int workThreadNum,ThreadPool threadPool){
+        this.threadPool = threadPool;
         acceptService = new ExecutorThreadPool(acceptThreadNum);
         workerService = new ExecutorThreadPool(workThreadNum);
     }
@@ -38,11 +49,32 @@ public class Server {
         return threadPool;
     }
 
+    public void setConnector(Connector connector) {
+        this.connector = connector;
+    }
+
+    public Connector getConnector() {
+        return connector;
+    }
+
+    public void setHandleWrapper(HandleWrapper handleWrapper) {
+        this.handleWrapper = handleWrapper;
+    }
+
+    public HandleWrapper getHandleWrapper() {
+        return handleWrapper;
+    }
+
+
     public ExecutorThreadPool getAcceptService() {
         return acceptService;
     }
 
     public ExecutorThreadPool getWorkerService() {
         return workerService;
+    }
+
+    public void serve(){
+        connector.start();
     }
 }

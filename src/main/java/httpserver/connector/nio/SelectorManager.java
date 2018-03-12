@@ -140,19 +140,7 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                     if(work instanceof EndPoint){
                         System.out.println("EndPoint->doUpdateKey");
                         final SelectChannelEndPoint endPoint = (SelectChannelEndPoint)work;
-                        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
                         channel = endPoint.getChannel();
-                        ((SocketChannel)channel).read(byteBuffer);
-                        System.out.println(new String(byteBuffer.array()));
-                        byteBuffer.clear();
-                        String httpResponse = "HTTP/1.1 200 OK\r\n" +
-                                "Content-Length: 38\r\n" +
-                                "Content-Type: text/html\r\n" +
-                                "\r\n" +
-                                "<html><body>Hello World!</body></html>";
-                        byteBuffer.put(httpResponse.getBytes());
-                        byteBuffer.flip();
-                        ((SocketChannel)channel).write(byteBuffer);
                         endPoint.doUpdateKey();
                     }else if(work instanceof ChannelAndAttachment){
                         System.out.println("ChannelAndAttachment");
@@ -175,6 +163,7 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                         channel = socketChannel;
                         key = socketChannel.register(selector,SelectionKey.OP_READ,null);
                         System.out.println("===>"+key.interestOps());
+
                         SelectChannelEndPoint endPoint = createEndPoint(socketChannel,key);
                         key.attach(endPoint);
                         endPoint.shedule();

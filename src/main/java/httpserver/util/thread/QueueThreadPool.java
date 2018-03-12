@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by zhujianxin on 2018/3/9.
  */
-public class QueueThreadPool extends AbstractLifeCycle implements ThreadPool{
+public class QueueThreadPool extends AbstractLifeCycle implements ThreadPool,Executor{
 
 
     private final AtomicInteger startedThreadNum = new AtomicInteger();

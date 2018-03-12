@@ -2,6 +2,7 @@ package httpserver.connector;
 
 import httpserver.connector.nio.NioSelectorManager;
 import httpserver.connector.nio.SelectorManager;
+import httpserver.core.Server;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -19,7 +20,8 @@ public class NioConnector extends AbstractConnector{
 
     private final SelectorManager selectorManager = new NioSelectorManager();
 
-    public NioConnector(){
+    public NioConnector(Server server){
+        super(server);
         addBean(selectorManager,true);
         setAcceptors(Runtime.getRuntime().availableProcessors()-2 <= 0 ? 1 : Runtime.getRuntime().availableProcessors()-2);
     }
@@ -39,7 +41,6 @@ public class NioConnector extends AbstractConnector{
                 acceptorChannel.socket().setReuseAddress(getReuseAddress());
                 InetSocketAddress address = getHost() == null ? new InetSocketAddress(getPort()) : new InetSocketAddress(getHost(),getPort());
                 acceptorChannel.socket().bind(new InetSocketAddress(8888));
-                System.out.println("open");
                 localPort = acceptorChannel.socket().getLocalPort();
                 if(localPort < 0){
                     throw new IOException("Server channel not bound");
@@ -65,7 +66,6 @@ public class NioConnector extends AbstractConnector{
             socketChannel.configureBlocking(false);
             Socket socket = socketChannel.socket();
             configure(socket);
-            System.out.println("accept");
             selectorManager.register(socketChannel);
         }
     }

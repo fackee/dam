@@ -47,11 +47,13 @@ public class ExecutorThreadPool extends AbstractLifeCycle implements ThreadPool,
 
 
     @Override
-    public void execute(Runnable runnable) {
-        try{
-            service.execute(runnable);
+    public boolean dispatch(Runnable job) {
+        try {
+            service.execute(job);
+            return true;
         }catch (RejectedExecutionException e){
-            //TODO Thread rejected
+            //TODO LOGGER
+            return false;
         }
     }
 

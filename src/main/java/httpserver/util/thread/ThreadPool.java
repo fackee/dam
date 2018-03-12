@@ -5,7 +5,7 @@ import java.util.concurrent.Executor;
 /**
  * Created by zhujianxin on 2018/3/7.
  */
-public interface ThreadPool extends Executor{
+public interface ThreadPool{
 
     public boolean dispatch(Runnable job);
 
@@ -16,4 +16,6 @@ public interface ThreadPool extends Executor{
     public int getIdleThreads();
 
     public void stop();
+
+
 }

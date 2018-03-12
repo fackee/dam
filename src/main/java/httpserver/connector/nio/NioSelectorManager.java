@@ -2,6 +2,7 @@ package httpserver.connector.nio;
 
 import httpserver.connector.Connection;
 import httpserver.connector.SelectChannelEndPoint;
+import httpserver.util.thread.ThreadPool;
 
 /**
  * Created by geeche on 2018/2/3.
@@ -23,6 +24,7 @@ public class NioSelectorManager extends SelectorManager{
 
     @Override
     public boolean dispatch(Runnable runnable) {
-        return false;
+        new Thread(runnable).start();
+        return true;
     }
 }

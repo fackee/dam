@@ -2,7 +2,8 @@ package httpserver.connector;
 
 import httpserver.core.ContainerLifeCycle;
 import httpserver.core.Server;
-import sun.nio.ch.ThreadPool;
+import httpserver.util.thread.ThreadPool;
+
 
 import java.io.IOException;
 import java.net.Socket;
@@ -25,8 +26,8 @@ public abstract class AbstractConnector extends ContainerLifeCycle implements Co
 
     private Thread[] acceptorThread;
 
-    public AbstractConnector(){
-
+    public AbstractConnector(Server server){
+        this.server = server;
     }
 
 
@@ -117,23 +118,25 @@ public abstract class AbstractConnector extends ContainerLifeCycle implements Co
 
     @Override
     protected void doStart() throws Exception {
-//        if(server == null){
-//            throw new IllegalStateException("No server");
-//        }
+        if(server == null){
+            throw new IllegalStateException("No server");
+        }
         open();
 
-//        if(threadPool == null){
-//            threadPool = server.getThreadPool();
-//            addBean(threadPool,false);
-//        }
+        if(threadPool == null){
+            threadPool = server.getThreadPool();
+            addBean(threadPool,false);
+        }
 
         super.doStart();
 
         synchronized (this){
             acceptorThread = new Thread[getAcceptors()];
             for(int i=0;i<acceptorThread.length;i++){
-                acceptorThread[i] = new Thread(new Acceptor(i));
-                acceptorThread[i].start();
+                if(!threadPool.dispatch(new Acceptor(i))){
+                    throw new IllegalStateException("");
+                }
+
             }
         }
     }
@@ -181,7 +184,6 @@ public abstract class AbstractConnector extends ContainerLifeCycle implements Co
 
                 }
             }
-
         }
     }
 }

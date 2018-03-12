@@ -4,6 +4,7 @@ import httpserver.connector.nio.SelectorManager;
 
 import java.io.EOFException;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
@@ -37,10 +38,11 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
 
     private boolean onIdle;
 
-    private final Runnable handler = new Runnable() {
-        @Override
-        public void run() {
+    private final Runnable handler = ()-> {
+        try {
             handle();
+        }catch (IOException e){
+
         }
     };
 
@@ -153,6 +155,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
                 }else{
                     state = STATE_DISPATCHED;
                     boolean dispatched = manager.dispatch(handler);
+                    System.out.println("dispatched==>>"+dispatched);
                     if(!dispatched){
                         state = STATE_NEEDDISPATCH;
                         doUpdateKey();
@@ -240,9 +243,19 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
 
     }
 
-    protected void handle(){
-//        connection = new HttpConnection(getServer,this);
-//        connection.handle();
+    protected void handle() throws IOException{
+        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+        ((SocketChannel)getChannel()).read(byteBuffer);
+        System.out.println(new String(byteBuffer.array()));
+        byteBuffer.clear();
+        String httpResponse = "HTTP/1.1 200 OK\r\n" +
+                "Content-Length: 38\r\n" +
+                "Content-Type: text/html\r\n" +
+                "\r\n" +
+                "<html><body>Hello World!</body></html>";
+        byteBuffer.put(httpResponse.getBytes());
+        byteBuffer.flip();
+        ((SocketChannel)channel).write(byteBuffer);
     }
 
 }
