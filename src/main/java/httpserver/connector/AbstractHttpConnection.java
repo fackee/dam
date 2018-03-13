@@ -32,4 +32,9 @@ public class AbstractHttpConnection implements Connection{
     public Server getServer() {
         return server;
     }
+
+    public Connection handle() {
+        server.handle();
+        return this;
+    }
 }

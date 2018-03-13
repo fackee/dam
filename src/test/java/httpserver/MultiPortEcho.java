@@ -70,7 +70,7 @@ import java.util.Set;
                             == SelectionKey.OP_READ) {
                         // Read the data
                         SocketChannel sc = (SocketChannel)key.channel();
-
+                        System.out.println(sc.socket().getRemoteSocketAddress().toString());
                         // Echo data
                         int bytesEchoed = 0;
                         sc.read(echoBuffer);
@@ -83,6 +83,7 @@ import java.util.Set;
                     }else if((key.readyOps() & SelectionKey.OP_WRITE)
                             == SelectionKey.OP_WRITE){
                         SocketChannel sc = (SocketChannel)key.channel();
+                        System.out.println(sc.socket().getRemoteSocketAddress().toString());
                         eb.put(httpResponse.getBytes());
                         eb.flip();
                         sc.write(eb);

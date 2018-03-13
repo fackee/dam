@@ -69,4 +69,18 @@ public class NioConnector extends AbstractConnector{
             selectorManager.register(socketChannel);
         }
     }
+
+
+    class NioSelectorManager extends SelectorManager{
+
+        @Override
+        public void endPointUpgraded(SelectChannelEndPoint selectChannelEndPoint, Connection old) {
+
+        }
+
+        @Override
+        public boolean dispatch(Runnable runnable) {
+            return getServer().getWorkerService().dispatch(runnable);
+        }
+    }
 }

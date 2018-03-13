@@ -36,8 +36,6 @@ public class Server {
                         .maxQueueSize(workThreadNum)
                         .build());
     }
-
-
     public Server(int acceptThreadNum,int workThreadNum,ThreadPool threadPool){
         this.threadPool = threadPool;
         acceptService = new ExecutorThreadPool(acceptThreadNum);
@@ -76,5 +74,9 @@ public class Server {
 
     public void serve(){
         connector.start();
+    }
+
+    public void handle() {
+        handleWrapper.handle();
     }
 }

@@ -256,6 +256,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
         byteBuffer.put(httpResponse.getBytes());
         byteBuffer.flip();
         ((SocketChannel)channel).write(byteBuffer);
+        connection = (HttpConnection)connection.handle();
     }
 
 }

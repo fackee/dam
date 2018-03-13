@@ -14,9 +14,7 @@ public class HandleWrapper {
 
     private final List<Handler> handlers = new CopyOnWriteArrayList<Handler>();
 
-    private Context context;
 
-    private Request request;
-
-    private Response response;
+    public void handle() {
+    }
 }
