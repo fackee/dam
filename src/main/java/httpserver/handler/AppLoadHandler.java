@@ -8,13 +8,13 @@ import httpserver.http.util.Parser;
 /**
  * Created by geeche on 2018/1/27.
  */
-public class MessageHandler extends AbstractHandler{
+public class AppLoadHandler extends AbstractHandler{
 
     private String message;
 
     private HttpField httpField;
 
-    public MessageHandler(String message,HttpField httpField){
+    public AppLoadHandler(String message, HttpField httpField){
         this.message = message;
         this.httpField = httpField;
     }

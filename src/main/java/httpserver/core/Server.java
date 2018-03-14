@@ -76,7 +76,7 @@ public class Server {
         connector.start();
     }
 
-    public void handle() {
+    public void handle(String target,Request request,Response response) {
         handleWrapper.handle();
     }
 }

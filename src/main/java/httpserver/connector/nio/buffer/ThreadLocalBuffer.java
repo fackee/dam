@@ -11,16 +11,25 @@ public class ThreadLocalBuffer{
         nioBufferThreadLocal.set(nioBuffer);
     }
 
-    private final NioBuffer getNioBuffer(){
+    public NioBuffer getNioBuffer(){
         return nioBufferThreadLocal.get();
     }
 
-    private final void setNioBuffer(final NioBuffer nioBuffer){
+    public void setNioBuffer(final NioBuffer nioBuffer){
         if(nioBufferThreadLocal.get() != null){
             nioBufferThreadLocal.remove();
         }
         nioBufferThreadLocal.set(nioBuffer);
     }
 
+
+    public enum BufferSize{
+
+        REQUEST_BUFFER_SIZE(1024*16),
+
+        RESPONSE_BUFFER_SIZE(32*1024);
+
+        BufferSize(int size) {}
+    }
 
 }

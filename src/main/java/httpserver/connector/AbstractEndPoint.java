@@ -2,12 +2,14 @@ package httpserver.connector;
 
 import httpserver.connector.EndPoint;
 import httpserver.connector.nio.buffer.Buffer;
+import httpserver.connector.nio.buffer.NioBuffer;
 import httpserver.util.thread.Task;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketException;
+import java.nio.ByteBuffer;
 import java.nio.channels.ByteChannel;
 import java.nio.channels.Channel;
 import java.nio.channels.SelectableChannel;
@@ -180,8 +182,19 @@ public abstract class AbstractEndPoint implements EndPoint{
         if(inShut){
             return -1;
         }
+        int len = 0;
+        if(buffer instanceof NioBuffer) {
+            final NioBuffer nioBuffer = (NioBuffer)buffer;
+            final ByteBuffer byteBuffer = nioBuffer.byteBuffer();
+            synchronized (byteBuffer){
+                try {
+                    len = channel.read(byteBuffer);
+                }catch (IOException e){
 
-        return 0;
+                }
+            }
+        }
+        return len;
     }
 
     @Override

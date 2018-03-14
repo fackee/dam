@@ -12,4 +12,6 @@ public interface Connection {
 
     Server getServer();
 
+    Connection handle();
+
 }

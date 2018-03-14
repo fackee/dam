@@ -17,7 +17,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
     private SelectorManager manager;
     private SelectorManager.SelectorWorker worker;
     private SelectionKey key;
-    private HttpConnection connection;
+    private Connection connection;
 
 
     private static final int STATE_NEEDDISPATCH = -1;
@@ -243,19 +243,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
 
     }
 
-    protected void handle() throws IOException{
-        ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
-        ((SocketChannel)getChannel()).read(byteBuffer);
-        System.out.println(new String(byteBuffer.array()));
-        byteBuffer.clear();
-        String httpResponse = "HTTP/1.1 200 OK\r\n" +
-                "Content-Length: 38\r\n" +
-                "Content-Type: text/html\r\n" +
-                "\r\n" +
-                "<html><body>Hello World!</body></html>";
-        byteBuffer.put(httpResponse.getBytes());
-        byteBuffer.flip();
-        ((SocketChannel)channel).write(byteBuffer);
+    private void handle() throws IOException{
         connection = (HttpConnection)connection.handle();
     }
 
