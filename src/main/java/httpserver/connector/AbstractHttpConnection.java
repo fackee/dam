@@ -50,7 +50,7 @@ public class AbstractHttpConnection implements Connection{
     public Connection handle() {
         endPoint.fill(requestBuffer);
         currentRequestBuffer.setNioBuffer(responseBuffer);
-        System.out.println(new String(requestBuffer.byteBuffer().array()));
+        //System.out.println(new String(requestBuffer.byteBuffer().array()));
         try {
             endPoint.blockWritable(10L);
         } catch (IOException e) {
@@ -65,7 +65,7 @@ public class AbstractHttpConnection implements Connection{
         String target = null;
         Request request = null;
         Response response = null;
-        server.handle(target, request, response);
+        //server.handle(target, request, response);
         return this;
     }
 }

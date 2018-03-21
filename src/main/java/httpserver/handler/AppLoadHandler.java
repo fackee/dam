@@ -24,5 +24,10 @@ public class AppLoadHandler extends AbstractHandler{
 
     }
 
+    @Override
+    public void destroy() {
+
+    }
+
 
 }

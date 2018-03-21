@@ -37,6 +37,8 @@ public class AppTest
      */
     public void testApp()
     {
+        LifeCycle life = new SLife();
+        life.doStart();
 //        final ByteBuffer byteBuffer = ByteBuffer.allocate(88);
 //        ByteBufferHandler byteBufferHandler = new ByteBufferHandler(byteBuffer);
 //        for(int i=0;i<20;i++){
@@ -92,30 +94,58 @@ public class AppTest
         assertTrue( true );
     }
 
-    private ByteBuffer createBuffer(boolean direct,int length){
-        if(direct){
-            if(length < Constant.KB){
-                return  ByteBuffer.allocateDirect(Constant.KB);
-            }else if(length < Constant.KB*4){
-                return  ByteBuffer.allocateDirect(Constant.KB*4);
-            }else if(length < Constant.KB*128){
-                return ByteBuffer.allocateDirect(Constant.KB*128);
-            }else if(length < Constant.MB){
-                return  ByteBuffer.allocateDirect(Constant.MB);
-            }else{
-                return ByteBuffer.allocateDirect(Constant.MB*4);
-            }
+//    private ByteBuffer createBuffer(boolean direct,int length){
+//        if(direct){
+//            if(length < Constant.KB){
+//                return  ByteBuffer.allocateDirect(Constant.KB);
+//            }else if(length < Constant.KB*4){
+//                return  ByteBuffer.allocateDirect(Constant.KB*4);
+//            }else if(length < Constant.KB*128){
+//                return ByteBuffer.allocateDirect(Constant.KB*128);
+//            }else if(length < Constant.MB){
+//                return  ByteBuffer.allocateDirect(Constant.MB);
+//            }else{
+//                return ByteBuffer.allocateDirect(Constant.MB*4);
+//            }
+//        }
+//        if(length < Constant.KB){
+//            return ByteBuffer.allocate(Constant.KB);
+//        }else if(length < Constant.KB*4){
+//            return  ByteBuffer.allocate(Constant.KB*4);
+//        }else if(length < Constant.KB*128){
+//            return ByteBuffer.allocate(Constant.KB*128);
+//        }else if(length < Constant.MB){
+//            return  ByteBuffer.allocate(Constant.MB);
+//        }else{
+//            return  ByteBuffer.allocate(Constant.MB*4);
+//        }
+//    }
+
+
+    class SLife extends Plife{
+        SLife(){
+            System.out.println("S-structure");
         }
-        if(length < Constant.KB){
-            return ByteBuffer.allocate(Constant.KB);
-        }else if(length < Constant.KB*4){
-            return  ByteBuffer.allocate(Constant.KB*4);
-        }else if(length < Constant.KB*128){
-            return ByteBuffer.allocate(Constant.KB*128);
-        }else if(length < Constant.MB){
-            return  ByteBuffer.allocate(Constant.MB);
-        }else{
-            return  ByteBuffer.allocate(Constant.MB*4);
+        @Override
+        public void doStart() {
+            super.doStart();
+            System.out.println("S-doStart()");
         }
+    }
+
+    class Plife implements LifeCycle{
+        Plife(){
+            System.out.println("P-structure");
+        }
+        @Override
+        public void doStart() {
+            System.out.println("P-doStart()");
+        }
+    }
+
+    interface LifeCycle{
+
+        void doStart();
+
     }
 }

@@ -7,6 +7,7 @@ import httpserver.core.Server;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
@@ -71,16 +72,53 @@ public class NioConnector extends AbstractConnector{
     }
 
 
+    public void endPointUpgraded(SelectChannelEndPoint selectChannelEndPoint, Connection old) {
+
+    }
+
+
+    public Connection newConnection(SocketChannel channel, EndPoint endPoint, Object att) {
+        return new HttpConnection(getServer(),endPoint);
+    }
+
+    private void closeEndPoint(SelectChannelEndPoint endPoint) {
+
+    }
+
     class NioSelectorManager extends SelectorManager{
 
         @Override
         public void endPointUpgraded(SelectChannelEndPoint selectChannelEndPoint, Connection old) {
+            NioConnector.this.endPointUpgraded(selectChannelEndPoint,old);
+        }
+
+        @Override
+        public void closeEndPoint(SelectChannelEndPoint endPoint) {
+            NioConnector.this.closeEndPoint(endPoint);
+        }
+
+        @Override
+        public void openEndPoint(SelectChannelEndPoint endPoint) {
 
         }
 
         @Override
-        public boolean dispatch(Runnable runnable) {
-            return getServer().getWorkerService().dispatch(runnable);
+        public Connection newConnection(SocketChannel channel, EndPoint endPoint, Object att) {
+            return null;
         }
+
+        @Override
+        public EndPoint newEndPoint(SocketChannel channel, SelectorWorker worker, SelectionKey key) {
+            return null;
+        }
+
+
+        @Override
+        public boolean dispatch(Runnable runnable) {
+            return getServer().getThreadPool().dispatch(runnable);
+        }
+
+
     }
+
 }

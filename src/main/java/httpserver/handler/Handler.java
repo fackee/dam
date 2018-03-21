@@ -16,4 +16,6 @@ public interface Handler extends LifeCycle{
 
     public void setServer(Server server);
 
+    public void destroy();
+
 }

@@ -91,9 +91,18 @@ public abstract class SelectorManager extends AbstractLifeCycle{
         }
     }
 
-    public abstract void endPointUpgraded(SelectChannelEndPoint selectChannelEndPoint, Connection old);
 
     public abstract boolean dispatch(Runnable runnable);
+
+    public abstract void endPointUpgraded(SelectChannelEndPoint selectChannelEndPoint, Connection old);
+
+    public abstract void closeEndPoint(SelectChannelEndPoint endPoint);
+
+    public abstract void openEndPoint(SelectChannelEndPoint endPoint);
+
+    public abstract Connection newConnection(SocketChannel channel,EndPoint endPoint,Object att);
+
+    public abstract EndPoint newEndPoint(SocketChannel channel,SelectorWorker worker,SelectionKey key);
 
     public class SelectorWorker{
 
@@ -260,17 +269,17 @@ public abstract class SelectorManager extends AbstractLifeCycle{
             }
         }
 
-        public void destroyEndPoint(SelectChannelEndPoint endp)
-        {
-
-        }
-
         public Selector getSelector() {
             return selector;
         }
 
         public SelectorManager getManager(){
             return SelectorManager.this;
+        }
+
+
+        public void destroyEndPoint(SelectChannelEndPoint endPoint) {
+            closeEndPoint(endPoint);
         }
     }
 

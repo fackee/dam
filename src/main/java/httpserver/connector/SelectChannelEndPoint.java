@@ -1,6 +1,7 @@
 package httpserver.connector;
 
 import httpserver.connector.nio.SelectorManager;
+import httpserver.core.Server;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -188,7 +189,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
             }
             changed = interestOps != currentOps;
         }
-
+        System.out.println(readBloking+"/"+writeBloking+"/"+interestOps);
         if (changed) {
             worker.addWork(this);
             worker.wakeUp();
@@ -244,7 +245,8 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
     }
 
     private void handle() throws IOException{
-        connection = (HttpConnection)connection.handle();
+        connection = manager.newConnection(getChannel(),this,null);
+        connection.handle();
     }
 
 }

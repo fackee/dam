@@ -22,6 +22,5 @@ public class App
         Connector connector = new NioConnector(server);
         server.setConnector(connector);
         server.serve();
-
     }
 }
