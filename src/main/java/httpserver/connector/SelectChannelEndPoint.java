@@ -90,7 +90,10 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
             }
             //long now = worker.getNow();
             //long end =  now + millisecs;
-
+            readBloking = true;
+            while (!isInputShutdown()){
+                updateKey();
+            }
         }
         return false;
     }
@@ -101,7 +104,10 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
             if(isOutputShutdown()){
                 throw new EOFException();
             }
-
+            writeBloking = true;
+            while (!isOutputShutdown()){
+                updateKey();
+            }
         }
         return false;
     }
@@ -244,9 +250,19 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
 
     }
 
+
     private void handle() throws IOException{
-        connection = manager.newConnection(getChannel(),this,null);
         connection.handle();
     }
 
+    @Override
+    public void close() throws IOException {
+        try {
+            super.close();
+        }catch (IOException e){
+
+        }finally {
+            updateKey();
+        }
+    }
 }

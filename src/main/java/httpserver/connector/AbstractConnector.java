@@ -7,6 +7,8 @@ import httpserver.util.thread.ThreadPool;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.nio.channels.SocketChannel;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by geeche on 2018/2/3.
@@ -25,6 +27,8 @@ public abstract class AbstractConnector extends ContainerLifeCycle implements Co
 
 
     private Thread[] acceptorThread;
+
+    private final AtomicLong statsStartedAt = new AtomicLong(-1L);
 
     public AbstractConnector(Server server){
         this.server = server;
@@ -103,9 +107,28 @@ public abstract class AbstractConnector extends ContainerLifeCycle implements Co
         this.reuseAddress = reuseAddress;
     }
 
+    public ThreadPool getThreadPool() {
+        return threadPool;
+    }
+
+    public void setThreadPool(ThreadPool threadPool) {
+        removeBean(this.threadPool);
+        this.threadPool = threadPool;
+        addBean( this.threadPool);
+    }
 
     protected void configure(Socket socket) {
 
+    }
+
+    protected void connectionOpened(){
+        if(statsStartedAt.get() == -1){
+            return;
+        }
+        statsStartedAt.getAndIncrement();
+    }
+
+    protected void connectionUpgrade(){
     }
 
     @Override
@@ -163,7 +186,6 @@ public abstract class AbstractConnector extends ContainerLifeCycle implements Co
             }
         }
     }
-
 
     private class Acceptor implements Runnable{
 

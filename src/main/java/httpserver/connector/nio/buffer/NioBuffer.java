@@ -90,6 +90,7 @@ public class NioBuffer implements Buffer{
     @Override
     public byte[] bytes(int offset, int length) {
         final byte[] dst = new byte[length];
+        byteBuffer.flip();
         byteBuffer.get(dst,offset,length);
         return dst;
     }

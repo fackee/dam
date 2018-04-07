@@ -2,18 +2,17 @@ package httpserver.core;
 
 import httpserver.http.Cookie;
 import httpserver.http.HttpHeader;
-import httpserver.http.Parameter;
+import httpserver.http.HttpParameter;
 import httpserver.http.Session;
 
 public interface Request {
 
-    HttpHeader getHeader();
+    public HttpHeader getHeader();
 
-    Cookie getCookie();
+    public Cookie getCookie();
 
-    Session getSession();
+    public Session getSession();
 
-    Parameter getParameter();
-
+    public HttpParameter getParameter();
 
 }

@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -92,17 +94,18 @@ public abstract class SelectorManager extends AbstractLifeCycle{
     }
 
 
+
     public abstract boolean dispatch(Runnable runnable);
 
     public abstract void endPointUpgraded(SelectChannelEndPoint selectChannelEndPoint, Connection old);
 
     public abstract void closeEndPoint(SelectChannelEndPoint endPoint);
 
-    public abstract void openEndPoint(SelectChannelEndPoint endPoint);
+    public abstract void endPointOpend(SelectChannelEndPoint endPoint);
 
     public abstract Connection newConnection(SocketChannel channel,EndPoint endPoint,Object att);
 
-    public abstract EndPoint newEndPoint(SocketChannel channel,SelectorWorker worker,SelectionKey key);
+    public abstract SelectChannelEndPoint newEndPoint(SocketChannel channel,SelectorWorker worker,SelectionKey key) throws IOException;
 
     public class SelectorWorker{
 
@@ -113,6 +116,8 @@ public abstract class SelectorManager extends AbstractLifeCycle{
         private volatile Selector selector;
 
         private volatile Thread selectedThread;
+
+        private Map<SelectChannelEndPoint,Object> endPoints = new ConcurrentHashMap<SelectChannelEndPoint,Object>(16);
 
         SelectorWorker(int acceptorId) throws IOException{
             id = acceptorId;
@@ -219,7 +224,10 @@ public abstract class SelectorManager extends AbstractLifeCycle{
         }
 
         private SelectChannelEndPoint createEndPoint(SocketChannel channel, SelectionKey key) throws IOException{
-            return new SelectChannelEndPoint(channel,this,key);
+            SelectChannelEndPoint endPoint = newEndPoint(channel,this,key);
+            endPointOpend(endPoint);
+            endPoints.put(endPoint,this);
+            return endPoint;
         }
 
         public void wakeUp() {

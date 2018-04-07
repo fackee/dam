@@ -13,7 +13,7 @@ public class HttpConnection extends AbstractHttpConnection{
     private Response response;
 
 
-    public HttpConnection(Server server, EndPoint endPoint) {
-        super(server, endPoint);
+    public HttpConnection(Connector connector, EndPoint endPoint,Server server) {
+        super(server,connector,endPoint);
     }
 }

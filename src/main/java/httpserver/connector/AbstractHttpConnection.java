@@ -19,22 +19,20 @@ import java.nio.ByteBuffer;
 public class AbstractHttpConnection implements Connection{
 
     private Server server;
+    private Connector connector;
     private EndPoint endPoint;
     private HttpField httpField;
     private Parser parser;
 
-    private final NioBuffer requestBuffer = new NioBuffer(ThreadLocalBuffer.BufferSize.REQUEST_BUFFER_SIZE.ordinal());
-    private final NioBuffer responseBuffer = new NioBuffer(ThreadLocalBuffer.BufferSize.REQUEST_BUFFER_SIZE.ordinal());
+    private final ThreadLocalBuffer currentRequestBuffer = new ThreadLocalBuffer(ThreadLocalBuffer.BufferSize.REQUEST_BUFFER_SIZE.getSize());
+    private final ThreadLocalBuffer currentResponseBuffer = new ThreadLocalBuffer(ThreadLocalBuffer.BufferSize.RESPONSE_BUFFER_SIZE.getSize());
 
-    private final ThreadLocalBuffer currentRequestBuffer;
+    private static final String HTTP_MESSAGE_REGEX = "\r\n";
 
-    private final ThreadLocalBuffer currentResponseBuffer;
-
-    public AbstractHttpConnection(Server server,EndPoint endPoint){
+    public AbstractHttpConnection(Server server,Connector connector,EndPoint endPoint){
         this.server = server;
+        this.connector = connector;
         this.endPoint = endPoint;
-        currentRequestBuffer = new ThreadLocalBuffer(requestBuffer);
-        currentResponseBuffer = new ThreadLocalBuffer(responseBuffer);
     }
 
     @Override
@@ -48,9 +46,12 @@ public class AbstractHttpConnection implements Connection{
     }
 
     public Connection handle() {
-        endPoint.fill(requestBuffer);
-        currentRequestBuffer.setNioBuffer(responseBuffer);
-        //System.out.println(new String(requestBuffer.byteBuffer().array()));
+        Buffer tempbuffer = new NioBuffer();
+        endPoint.fill(tempbuffer);
+        currentRequestBuffer.fillBuffer(tempbuffer);
+        tempbuffer = null;
+        String[] lines = new String(currentRequestBuffer.getData()).split(HTTP_MESSAGE_REGEX);
+        System.out.println(new String(currentRequestBuffer.getData()));
         try {
             endPoint.blockWritable(10L);
         } catch (IOException e) {

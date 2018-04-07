@@ -1,8 +1,8 @@
 package httpserver.connector;
 
-import httpserver.connector.nio.NioSelectorManager;
 import httpserver.connector.nio.SelectorManager;
 import httpserver.core.Server;
+import httpserver.util.thread.ThreadPool;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -25,6 +25,13 @@ public class NioConnector extends AbstractConnector{
         super(server);
         addBean(selectorManager,true);
         setAcceptors(Runtime.getRuntime().availableProcessors()-2 <= 0 ? 1 : Runtime.getRuntime().availableProcessors()-2);
+    }
+
+    @Override
+    public void setThreadPool(ThreadPool threadPool) {
+        super.setThreadPool(threadPool);
+        removeBean(selectorManager);
+        addBean(selectorManager,true);
     }
 
     @Override
@@ -53,7 +60,16 @@ public class NioConnector extends AbstractConnector{
 
     @Override
     public void close() throws IOException {
-
+        synchronized (this){
+            if(acceptorChannel != null){
+                removeBean(acceptorChannel);
+                if(acceptorChannel.isOpen()){
+                    acceptorChannel.close();
+                }
+            }
+            acceptorChannel = null;
+            localPort = -1;
+        }
     }
 
     @Override
@@ -72,24 +88,41 @@ public class NioConnector extends AbstractConnector{
     }
 
 
-    public void endPointUpgraded(SelectChannelEndPoint selectChannelEndPoint, Connection old) {
+    public SelectChannelEndPoint newEndPoint(SocketChannel channel, SelectorManager.SelectorWorker worker,SelectionKey key) throws IOException{
+        SelectChannelEndPoint endPoint = new SelectChannelEndPoint(channel,worker,key);
+        endPoint.setConnection(worker.getManager().newConnection(channel,endPoint,key.attachment()));
+        return endPoint;
+    }
+
+
+    public void closeEndPoint(SelectChannelEndPoint endPoint) {
 
     }
 
 
-    public Connection newConnection(SocketChannel channel, EndPoint endPoint, Object att) {
-        return new HttpConnection(getServer(),endPoint);
-    }
-
-    private void closeEndPoint(SelectChannelEndPoint endPoint) {
-
+    public Connection newConnection(SocketChannel channel,final EndPoint endPoint) {
+        return new HttpConnection(NioConnector.this,endPoint,getServer());
     }
 
     class NioSelectorManager extends SelectorManager{
 
         @Override
+        public boolean dispatch(Runnable runnable) {
+            ThreadPool threadPool = getThreadPool();
+            if(threadPool == null){
+                threadPool = getServer().getThreadPool();
+            }
+            return threadPool.dispatch(runnable);
+        }
+
+        @Override
         public void endPointUpgraded(SelectChannelEndPoint selectChannelEndPoint, Connection old) {
-            NioConnector.this.endPointUpgraded(selectChannelEndPoint,old);
+            connectionUpgrade();
+        }
+
+        @Override
+        public void endPointOpend(SelectChannelEndPoint endPoint) {
+            connectionOpened();
         }
 
         @Override
@@ -97,26 +130,17 @@ public class NioConnector extends AbstractConnector{
             NioConnector.this.closeEndPoint(endPoint);
         }
 
-        @Override
-        public void openEndPoint(SelectChannelEndPoint endPoint) {
-
-        }
 
         @Override
         public Connection newConnection(SocketChannel channel, EndPoint endPoint, Object att) {
-            return null;
+            return NioConnector.this.newConnection(channel,endPoint);
         }
 
         @Override
-        public EndPoint newEndPoint(SocketChannel channel, SelectorWorker worker, SelectionKey key) {
-            return null;
+        public SelectChannelEndPoint newEndPoint(SocketChannel channel, SelectorWorker worker, SelectionKey key) throws IOException{
+            return NioConnector.this.newEndPoint(channel,worker,key);
         }
 
-
-        @Override
-        public boolean dispatch(Runnable runnable) {
-            return getServer().getThreadPool().dispatch(runnable);
-        }
 
 
     }

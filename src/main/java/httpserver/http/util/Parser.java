@@ -1,46 +1,130 @@
 package httpserver.http.util;
 
-import httpserver.http.HttpMethod;
-import httpserver.http.URL;
+import httpserver.connector.EndPoint;
+import httpserver.core.Request;
+import httpserver.http.HttpField;
+import httpserver.http.HttpHeader;
+import httpserver.http.HttpParameter;
 
 public class Parser {
 
-    public static URL getURL(String httpMessage){
-        int startIndex = httpMessage.indexOf("Host");
-        int endIndex = httpMessage.indexOf("Connection");
-        URL url = new URL(httpMessage.substring(startIndex + 5,endIndex).trim());
-        return url;
-    }
+    private static final String METHOD_GET = "GET";
+    private static final String METHOD_POST = "POST";
+    private static final String METHOD_HEAD = "HEAD";
+    private static final String METHOD_PUT = "PUT";
+    private static final String METHOD_DELETE = "DELETE";
+    private static final String METHOD_OPTIONS = "OPTIONS";
 
-    public static HttpMethod getMethod(String httpMessage){
-        int endIndex = httpMessage.indexOf('/');
-        String method = httpMessage.substring(0,endIndex).trim();
+    private static final String HTTP_MESSAGE_REGEX = "\r\n";
+    private static final String HTTP_PARAM_RAGEX="&";
 
-        switch (method){
-            case "GET":
-                return new HttpMethod(HttpMethod.Method.GET);
-            case "POST":
-                return new HttpMethod(HttpMethod.Method.POST);
-            case "HEAD":
-                return new HttpMethod(HttpMethod.Method.HEAD);
-            case "PUT":
-                return new HttpMethod(HttpMethod.Method.PUT);
-            case "DELETE":
-                return new HttpMethod(HttpMethod.Method.DELETE);
-            case "OPTIONS":
-                return new HttpMethod(HttpMethod.Method.OPTIONS);
+    private EndPoint endPoint;
+    private Request request;
+    private String requestContent;
+    private HttpField httpField;
+    public Parser(EndPoint endPoint,byte[] data){
+        this.endPoint = endPoint;
+        if(data != null){
+            requestContent = new String(data);
         }
-        return new HttpMethod(HttpMethod.Method.GET);
     }
 
-    public static String getHttpProtocalVersion(String httpMessage){
-        int startIndex = httpMessage.indexOf('/');
-        int endIndex = httpMessage.indexOf('\n');
-        return httpMessage.substring(startIndex+1,endIndex).trim();
+    public void parse(){
+        if(requestContent != null || requestContent.length() != 0){
+            String[] lineContent = requestContent.split(HTTP_MESSAGE_REGEX);
+            if(lineContent.length > 0){
+                HttpParameter httpParameter = new HttpParameter();
+                HttpHeader.HttpHeaderBuilder headerBuilder = new HttpHeader.HttpHeaderBuilder();
+                for(String target : lineContent){
+                    messageParse(target,httpParameter,headerBuilder);
+                }
+                HttpHeader httpHeader = headerBuilder.builde();
+                httpField = new HttpField.HttpBuilder()
+                        .header(httpHeader)
+                        .parameter(httpParameter)
+                        .builde();
+            }
+        }
     }
 
+    public HttpHeader.HttpMethod methodCase(String target){
+        if(target.startsWith(METHOD_GET)){
+            return new HttpHeader.HttpMethod(HttpHeader.Method.GET);
+        }
+        if(target.startsWith(METHOD_POST)){
+            return new HttpHeader.HttpMethod(HttpHeader.Method.POST);
+        }
+        if(target.startsWith(METHOD_HEAD)){
+            return new HttpHeader.HttpMethod(HttpHeader.Method.HEAD);
+        }
+        if(target.startsWith(METHOD_PUT)){
+            return new HttpHeader.HttpMethod(HttpHeader.Method.PUT);
+        }
+        if(target.startsWith(METHOD_DELETE)){
+            return new HttpHeader.HttpMethod(HttpHeader.Method.DELETE);
+        }
+        if(target.startsWith(METHOD_OPTIONS)){
+            return new HttpHeader.HttpMethod(HttpHeader.Method.OPTIONS);
+        }
+        return null;
+    }
 
+    public void messageParse(String target, HttpParameter httpParameter, HttpHeader.HttpHeaderBuilder builder){
+        if(target.contains("/ HTTP/")){
+            String method = target.substring(0,target.indexOf(" /"));
+            builder.httpMethod(methodCase(method));
+            builder.httpProtocalVersion(target.substring(target.indexOf("HTTP/"),target.length()));
+            if(method.equals(METHOD_GET)){
+                String urlString = target.substring(target.indexOf(" /"),target.indexOf("HTTP/"));
+                if(urlString.contains("?")){
+                    builder.url(new HttpHeader.URL(urlString.substring(target.indexOf(" /"),target.indexOf("?"))));
+                    String parameterString = target.substring(target.indexOf("?")+1,target.indexOf("HTTP/"));
+                    String[] parametersArr = parameterString.split("&");
+                    for(String param : parametersArr){
+                        httpParameter.setParameter(param.substring(0,param.indexOf("=")),param.substring(param.indexOf("=")+1,param.length()));
+                    }
+                }else{
+                    builder.url(new HttpHeader.URL(target.substring(target.indexOf(" /"),target.indexOf("HTTP/"))));
+                }
+            }
+        }
+        if(target.contains("HOST:")){
+            builder.host(target.substring(target.indexOf(":")+1,target.length()));
+            return;
+        }
+        if(target.contains("Pargma:")){
 
+        }
+        if(target.contains("Cache-Control:")){
+            builder.cacheControl(target.substring(target.indexOf(":")+1,target.length()));
+            return;
+        }
+        if(target.contains("Upgrade-Insecure-Requests:")){
+
+        }
+        if(target.contains("User-Agent:")){
+            builder.userAgent(target.substring(target.indexOf(":")+1,target.length()));
+            return;
+        }
+        if(target.contains("Accept:")){
+            builder.accept(target.substring(target.indexOf(":")+1,target.length()));
+            return;
+        }
+        if(target.contains("Accept-Encoding:")){
+            builder.acceptEncoding(target.substring(target.indexOf(":")+1,target.length()));
+            return;
+        }
+        if(target.contains("Accept-Language:")){
+            builder.acceptLanguage(target.substring(target.indexOf(":")+1,target.length()));
+            return;
+        }
+        if(!target.contains(":") && !target.contains("HTTP")){
+            String[] paramArr = target.split(HTTP_PARAM_RAGEX);
+            for(String param : paramArr){
+                httpParameter.setParameter(param.substring(0,param.indexOf("=")),param.substring(param.indexOf("=")+1,param.length()));
+            }
+        }
+    }
 
     public static void main(String[] args) {
         String httpMessage = "POST / HTTP/1.1\n" +
@@ -57,8 +141,10 @@ public class Parser {
                 "Accept-Language: zh-CN,zh;q=0.9\n" +
                 "\n" +
                 "um=qwer&psd=qwer1234";
-        System.out.println(getURL(httpMessage).getAbsoluteURL() + "\n" + getURL(httpMessage).getRelativeURL());
-        System.out.println(getMethod(httpMessage).getMethod());
-        System.out.println(getHttpProtocalVersion(httpMessage));
+        String m = "GET /a/b?c=123&d=abcd HTTP/1.1";
+        String[] arr = m.substring(m.indexOf("?")+1,m.indexOf("HTTP/")).split("&");
+        for(String s :arr){
+            System.out.println(s.substring(0,s.indexOf("="))+"      "+s.substring(s.indexOf("=")+1,s.length()));
+        }
     }
 }
