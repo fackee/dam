@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/dam-util/pom.xml" />
         <option value="$PROJECT_DIR$/dam-annotation/pom.xml" />
+        <option value="$PROJECT_DIR$/dam-bridge/pom.xml" />
       </list>
     </option>
   </component>

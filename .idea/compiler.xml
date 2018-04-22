@@ -6,15 +6,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="dam" />
         <module name="dam-annotation" />
+        <module name="dam-bridge" />
+        <module name="dam-brige" />
+        <module name="dam-exception" />
+        <module name="dam-handler" />
+        <module name="dam-http" />
+        <module name="dam-io" />
+        <module name="dam-start" />
         <module name="dam-util" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="dam" target="1.7" />
-      <module name="dam-annotation" target="1.7" />
-      <module name="dam-util" target="1.7" />
+      <module name="dam-annotation" target="1.8" />
+      <module name="dam-bridge" target="1.8" />
+      <module name="dam-brige" target="1.8" />
+      <module name="dam-exception" target="1.8" />
+      <module name="dam-handler" target="1.8" />
+      <module name="dam-http" target="1.8" />
+      <module name="dam-io" target="1.8" />
+      <module name="dam-start" target="1.8" />
+      <module name="dam-util" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
