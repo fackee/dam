@@ -7,11 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="dam" />
+        <module name="dam-annotation" />
         <module name="dam-util" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="dam" target="1.7" />
+      <module name="dam-annotation" target="1.7" />
       <module name="dam-util" target="1.7" />
     </bytecodeTargetLevel>
   </component>

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/dam.iml" filepath="$PROJECT_DIR$/dam.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dam-annotation/dam-annotation.iml" filepath="$PROJECT_DIR$/dam-annotation/dam-annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/dam-util/dam-util.iml" filepath="$PROJECT_DIR$/dam-util/dam-util.iml" />
     </modules>
   </component>
