@@ -34,7 +34,11 @@ public interface EndPoint {
 
     public int fill(Buffer buffer);
 
-    public int flush(Buffer buffer);
+    public void flush() throws IOException;
+
+    public int flush(Buffer buffer) throws IOException;
+
+    public int flush(Buffer header,Buffer body) throws IOException;
 
     public boolean isBlocking();
 
@@ -46,6 +50,5 @@ public interface EndPoint {
 
     public Object getTransport();
 
-    public void flush() throws IOException;
 
 }

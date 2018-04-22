@@ -64,7 +64,7 @@ public abstract class SelectorManager extends AbstractLifeCycle{
             workers[i] = new SelectorWorker(i);
         }
         super.doStart();
-        for(int i=0;i<getWorkLength();i++){
+        for(int i=0;i<1;i++){
             final int id = i;
             new Thread(new Runnable() {
                 @Override
@@ -152,35 +152,31 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                     Channel channel = null;
                     SelectionKey key = null;
                     if(work instanceof EndPoint){
-                        System.out.println("EndPoint->doUpdateKey");
+                        System.out.println(work + "endpoint doUpdatekey->registerSelf");
                         final SelectChannelEndPoint endPoint = (SelectChannelEndPoint)work;
                         channel = endPoint.getChannel();
                         endPoint.doUpdateKey();
                     }else if(work instanceof ChannelAndAttachment){
-                        System.out.println("ChannelAndAttachment");
                         final ChannelAndAttachment caa = (ChannelAndAttachment) work;
                         final SelectableChannel sc = caa.channel;
                         channel = sc;
                         final Object att = caa.attachment;
                         if( (sc instanceof SocketChannel) && ((SocketChannel)sc).isConnected() ){
-                            System.out.println("ChannelAndAttachment->SocketChannel->regRead");
                             key = ((SocketChannel) sc).register(selector,SelectionKey.OP_READ,att);
                             SelectChannelEndPoint endPoint = createEndPoint((SocketChannel)sc,key);
                             key.attach(endPoint);
-                            endPoint.shedule();
+                            endPoint.schedule();
                         }else if(channel.isOpen()){
                             key = sc.register(selector,SelectionKey.OP_CONNECT);
                         }
                     }else if(work instanceof SocketChannel){
-                        System.out.print("SocketChannel->regRead");
+                        System.out.println("newly request,newly endpoint");
                         final SocketChannel socketChannel = (SocketChannel)work;
                         channel = socketChannel;
                         key = socketChannel.register(selector,SelectionKey.OP_READ,null);
-                        System.out.println("===>"+key.interestOps());
-
                         SelectChannelEndPoint endPoint = createEndPoint(socketChannel,key);
                         key.attach(endPoint);
-                        endPoint.shedule();
+                        endPoint.schedule();
                     }else if(work instanceof ChangeTask){
                         ((Runnable)work).run();
                     }
@@ -198,6 +194,7 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                 return;
             }
             for(SelectionKey selectionKey : selector.selectedKeys()){
+                System.out.println("selectedKeySiez:"+selector.selectedKeys().size());
                 SocketChannel socketChannel = null;
                 try {
                     if(!selectionKey.isValid()){
@@ -210,8 +207,11 @@ public abstract class SelectorManager extends AbstractLifeCycle{
                     }
                     Object attachment = selectionKey.attachment();
                     if(attachment instanceof SelectChannelEndPoint){
-                        if(selectionKey.isReadable() || selectionKey.isWritable()){
-                            ((SelectChannelEndPoint)attachment).shedule();
+                        if(selectionKey.isWritable() || selectionKey.isReadable()){
+                            final SelectChannelEndPoint endPoint = (SelectChannelEndPoint)attachment;
+                            System.out.println("foreach selectionKey    isReadable:"+selectionKey.isReadable()+"     isWritable:"+selectionKey.isWritable());
+                            System.out.println("foreach selectionKey:" + endPoint + "   readBlock:"+endPoint.isReadBloking()+"  writeBlock:"+endPoint.isWriteBloking());
+                            endPoint.schedule();
                         }
                     }else if(selectionKey.isConnectable()){
                         socketChannel = (SocketChannel) selectionKey.channel();

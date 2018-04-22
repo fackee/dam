@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="httpserver" />
+        <module name="dam" />
+        <module name="dam-util" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
-      <module name="httpserver" target="1.8" />
+    <bytecodeTargetLevel>
+      <module name="dam" target="1.7" />
+      <module name="dam-util" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

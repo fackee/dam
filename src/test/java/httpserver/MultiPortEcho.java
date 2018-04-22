@@ -51,7 +51,6 @@ import java.util.Set;
 
                 Set selectedKeys = selector.selectedKeys();
                 Iterator it = selectedKeys.iterator();
-
                 while (it.hasNext()) {
                     SelectionKey key = (SelectionKey)it.next();
 
@@ -98,7 +97,7 @@ import java.util.Set;
         static public void main( String args[] ) throws Exception {
 
 
-            new MultiPortEcho(new int[]{8888});
+            new MultiPortEcho(new int[]{8080});
         }
     }
 

@@ -148,7 +148,7 @@ public abstract class AbstractConnector extends ContainerLifeCycle implements Co
 
         if(threadPool == null){
             threadPool = server.getThreadPool();
-            addBean(threadPool,false);
+            addBean(threadPool,true);
         }
 
         super.doStart();

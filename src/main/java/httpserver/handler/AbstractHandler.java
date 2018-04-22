@@ -1,8 +1,8 @@
 package httpserver.handler;
 
 import httpserver.core.AbstractLifeCycle;
-import httpserver.core.Request;
-import httpserver.core.Response;
+import httpserver.http.Request;
+import httpserver.http.Response;
 import httpserver.core.Server;
 
 /**
@@ -10,10 +10,10 @@ import httpserver.core.Server;
  */
 public abstract class AbstractHandler extends AbstractLifeCycle implements Handler{
 
-    private  Server server;
+    private Server server;
 
     @Override
-    public abstract void handle(String target, Request baseRequest, Response baseResponse);
+    public abstract void handle(Request baseRequest, Response baseResponse);
 
     @Override
     public Server getServer() {
@@ -23,5 +23,10 @@ public abstract class AbstractHandler extends AbstractLifeCycle implements Handl
     @Override
     public void setServer(Server server) {
         this.server = server;
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }

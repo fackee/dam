@@ -1,16 +1,23 @@
 package httpserver.core;
 
 import httpserver.connector.Connector;
+import httpserver.handler.AbstractHandler;
 import httpserver.handler.HandleWrapper;
+import httpserver.handler.Handler;
+import httpserver.http.Request;
+import httpserver.http.Response;
 import httpserver.util.thread.ExecutorThreadPool;
 import httpserver.util.thread.QueueThreadPool;
 import httpserver.util.thread.ThreadPool;
+
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * Created by geeche on 2018/1/25.
  */
-public class Server {
+public class Server extends AbstractHandler {
 
 
     private Connector connector;
@@ -18,7 +25,7 @@ public class Server {
     private ExecutorThreadPool acceptService;
     private ExecutorThreadPool workerService;
     private HandleWrapper handleWrapper;
-
+    private final List<Handler> handlerChain = new LinkedList<>();
     private ThreadPool threadPool;
 
     public Server(){
@@ -40,6 +47,7 @@ public class Server {
         this.threadPool = threadPool;
         acceptService = new ExecutorThreadPool(acceptThreadNum);
         workerService = new ExecutorThreadPool(workThreadNum);
+        handleWrapper = new HandleWrapper(new LinkedList<Handler>());
     }
 
 
@@ -63,7 +71,11 @@ public class Server {
         return handleWrapper;
     }
 
-
+    public void setHandler(Handler handler){
+        synchronized (handlerChain){
+            handlerChain.add(handler);
+        }
+    }
     public ExecutorThreadPool getAcceptService() {
         return acceptService;
     }
@@ -72,11 +84,21 @@ public class Server {
         return workerService;
     }
 
-    public void serve(){
-        connector.start();
+    @Override
+    protected void doStart() throws Exception {
+        connector.start();;
     }
 
-    public void handle(String target,Request request,Response response) {
-        handleWrapper.handle();
+    @Override
+    public void handle(Request baseRequest, Response baseResponse) {
+        handleWrapper.handle(baseRequest,baseResponse);
+    }
+
+    public void serve() {
+        try {
+            this.doStart();
+        } catch (Exception e) {
+
+        }
     }
 }

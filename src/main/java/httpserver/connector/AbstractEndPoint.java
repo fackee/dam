@@ -84,7 +84,7 @@ public abstract class AbstractEndPoint implements EndPoint{
 
     @Override
     public boolean isOutputShutdown() {
-        return inShut || !channel.isOpen() || socket != null && socket.isOutputShutdown();
+        return outShut || !channel.isOpen() || socket != null && socket.isOutputShutdown();
     }
 
     protected final void shutdownChannelInput()throws IOException{
@@ -191,6 +191,14 @@ public abstract class AbstractEndPoint implements EndPoint{
                     len = channel.read(byteBuffer);
                 }catch (IOException e){
 
+                }finally {
+                    if(!isInputShutdown()){
+                        try {
+                            shutdownInput();
+                        } catch (IOException e) {
+
+                        }
+                    }
                 }
             }
         }
@@ -198,13 +206,43 @@ public abstract class AbstractEndPoint implements EndPoint{
     }
 
     @Override
-    public int flush(Buffer buffer) {
-        return 0;
+    public int flush(Buffer buffer) throws IOException{
+        int len = 0;
+        if(buffer instanceof NioBuffer){
+            final NioBuffer nioBuffer = (NioBuffer)buffer;
+            final ByteBuffer byteBuffer = nioBuffer.byteBuffer();
+            buffer.flip();
+            len = channel.write(byteBuffer);
+        }
+        return len;
+    }
+
+    @Override
+    public int flush(Buffer header,Buffer body){
+        int len = 0;
+        try {
+            if(header != null && header.byteBuffer().position()!=0){
+                len += flush(header);
+            }
+            if(body != null && body.byteBuffer().position() != 0){
+                len += flush(body);
+            }
+        }catch (IOException e){
+
+        }finally {
+            if(!isOutputShutdown()){
+                try {
+                    shutdownOutput();
+                } catch (IOException e) {
+
+                }
+            }
+        }
+        return len;
     }
 
     @Override
     public void flush() throws IOException {
-
     }
 
     @Override
@@ -222,7 +260,7 @@ public abstract class AbstractEndPoint implements EndPoint{
 
     public abstract void doUpdateKey();
 
-    public abstract void shedule() throws IOException;
+    public abstract void schedule() throws IOException;
 
     public abstract void dispatch();
 

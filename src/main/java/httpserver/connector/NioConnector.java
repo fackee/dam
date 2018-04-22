@@ -48,7 +48,7 @@ public class NioConnector extends AbstractConnector{
                 acceptorChannel.configureBlocking(true);
                 acceptorChannel.socket().setReuseAddress(getReuseAddress());
                 InetSocketAddress address = getHost() == null ? new InetSocketAddress(getPort()) : new InetSocketAddress(getHost(),getPort());
-                acceptorChannel.socket().bind(new InetSocketAddress(8888));
+                acceptorChannel.socket().bind(address);
                 localPort = acceptorChannel.socket().getLocalPort();
                 if(localPort < 0){
                     throw new IOException("Server channel not bound");

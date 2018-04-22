@@ -1,8 +1,10 @@
 package httpserver.connector;
 
-import httpserver.core.Request;
-import httpserver.core.Response;
+import httpserver.http.*;
 import httpserver.core.Server;
+import httpserver.http.util.HttpGenerate;
+
+import java.io.IOException;
 
 /**
  * Created by geeche on 2018/2/23.
@@ -15,5 +17,22 @@ public class HttpConnection extends AbstractHttpConnection{
 
     public HttpConnection(Connector connector, EndPoint endPoint,Server server) {
         super(server,connector,endPoint);
+        request = new HttpRequest(new HttpHeader.HttpHeaderBuilder().builde());
+        response = new HttpResponse();
+    }
+
+    @Override
+    public Connection handle() {
+        super.handle();
+        getServer().handle(request,response);
+        try {
+            if(!getEndPoint().blockWritable(10000)){
+                System.out.println("write Event OK? write back");
+                HttpGenerate httpGenerate = new HttpGenerate(getEndPoint(),new HttpField.HttpBuilder().builde(),response).generate();
+            }
+        } catch (IOException e) {
+
+        }
+        return this;
     }
 }

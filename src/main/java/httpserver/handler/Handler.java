@@ -1,8 +1,8 @@
 package httpserver.handler;
 
 import httpserver.core.LifeCycle;
-import httpserver.core.Request;
-import httpserver.core.Response;
+import httpserver.http.Request;
+import httpserver.http.Response;
 import httpserver.core.Server;
 
 /**
@@ -10,7 +10,7 @@ import httpserver.core.Server;
  */
 public interface Handler extends LifeCycle{
 
-    public void handle(String target, Request baseRequest, Response baseResponse);
+    public void handle(Request baseRequest, Response baseResponse);
 
     public Server getServer();
 

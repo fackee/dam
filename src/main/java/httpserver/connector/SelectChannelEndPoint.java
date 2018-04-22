@@ -1,11 +1,10 @@
 package httpserver.connector;
 
 import httpserver.connector.nio.SelectorManager;
-import httpserver.core.Server;
+import httpserver.connector.nio.buffer.Buffer;
 
 import java.io.EOFException;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
@@ -90,10 +89,18 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
             }
             //long now = worker.getNow();
             //long end =  now + millisecs;
-            readBloking = true;
-            while (!isInputShutdown()){
+            readBloking = true;;
+            while (readBloking && !isInputShutdown()){
                 updateKey();
+                try {
+                    this.wait(100000);
+                } catch (InterruptedException e) {
+
+                }finally {
+                    readBloking = false;
+                }
             }
+            readBloking = false;
         }
         return false;
     }
@@ -105,52 +112,69 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
                 throw new EOFException();
             }
             writeBloking = true;
-            while (!isOutputShutdown()){
+            while (writeBloking && !isOutputShutdown()){
+                System.out.println("write Block and updateKey");
                 updateKey();
+                try {
+                    this.wait(100000);
+                } catch (InterruptedException e) {
+
+                }finally {
+                    writeBloking =false;
+                }
             }
+            writeBloking = false;
         }
         return false;
     }
 
+    public boolean isWriteable() {
+        return writeable;
+    }
+
+    public int flush(Buffer header, Buffer body){
+        int len = super.flush(header,body);
+        return len;
+    }
+
     @Override
-    public void shedule() throws IOException{
-        System.out.println("shedule==>"+interestOps+key.isValid()+readBloking+writeBloking);
-        if(key == null || !key.isValid()){
-            readBloking = false;
-            writeBloking = false;
-            this.notifyAll();
-            return;
-        }
-
-        if(readBloking || writeBloking){
-            if(readBloking && key.isReadable()){
+    public void schedule() throws IOException{
+        synchronized (this){
+            if(key == null || !key.isValid()){
                 readBloking = false;
-            }
-            if(writeBloking && key.isWritable()){
                 writeBloking = false;
+                this.notifyAll();
+                return;
             }
-            this.notifyAll();
-            key.interestOps(0);
-            if(state <STATE_DISPATCHED){
-                doUpdateKey();
-            }
-        }
 
-        if((key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE && (key.interestOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE){
-            interestOps = key.interestOps() & ~SelectionKey.OP_WRITE;
-            key.interestOps(interestOps);
-            writeable = true;
-        }
-        System.out.println("state"+state);
-        if(state >= STATE_DISPATCHED){
-            key.interestOps(0);
-        }else{
-            dispatch();
+            if(readBloking || writeBloking){
+                if(readBloking && key.isReadable()){
+                    readBloking = false;
+                }
+                if(writeBloking && key.isWritable()){
+                    writeBloking = false;
+                }
+                this.notifyAll();
+                key.interestOps(0);
+                if(state <STATE_DISPATCHED){
+                    doUpdateKey();
+                }
+            }
+
+            if((key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE && (key.interestOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE){
+                interestOps = key.interestOps() & ~SelectionKey.OP_WRITE;
+                key.interestOps(interestOps);
+                writeable = true;
+            }
             if(state >= STATE_DISPATCHED){
                 key.interestOps(0);
+            }else{
+                dispatch();
+                if(state >= STATE_DISPATCHED){
+                    key.interestOps(0);
+                }
             }
         }
-
     }
 
     @Override
@@ -162,7 +186,6 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
                 }else{
                     state = STATE_DISPATCHED;
                     boolean dispatched = manager.dispatch(handler);
-                    System.out.println("dispatched==>>"+dispatched);
                     if(!dispatched){
                         state = STATE_NEEDDISPATCH;
                         doUpdateKey();
@@ -195,20 +218,27 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
             }
             changed = interestOps != currentOps;
         }
-        System.out.println(readBloking+"/"+writeBloking+"/"+interestOps);
         if (changed) {
+            System.out.println("updateKey,interestOps change and add self to workQueue"+this);
             worker.addWork(this);
             worker.wakeUp();
         }
 
     }
 
+    public boolean isReadBloking() {
+        return readBloking;
+    }
+
+    public boolean isWriteBloking() {
+        return writeBloking;
+    }
+
     public void doUpdateKey(){
-        System.out.println("doUpdateKey=="+interestOps);
         synchronized (this){
             if(getChannel().isOpen()){
                 if(interestOps > 0){
-                    if(key ==null && !key.isValid()){
+                    if(key == null && !key.isValid()){
                         SelectableChannel sc = (SelectableChannel)getChannel();
                         if(sc.isRegistered()){
                             updateKey();
@@ -227,6 +257,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
                             }
                         }
                     }else{
+                        System.out.println("doUpdatekey->register:"+interestOps);
                         key.interestOps(interestOps);
                     }
                 }else{

@@ -13,9 +13,9 @@ import java.util.concurrent.atomic.AtomicLong;
 public class QueueThreadPool extends AbstractLifeCycle implements ThreadPool,Executor{
 
 
-    private final AtomicInteger startedThreadNum = new AtomicInteger();
+    private final AtomicInteger startedThreadNum = new AtomicInteger(0);
 
-    private final AtomicInteger idleThreadNum = new AtomicInteger();
+    private final AtomicInteger idleThreadNum = new AtomicInteger(0);
 
     private final AtomicLong lastShrink = new AtomicLong();
 
