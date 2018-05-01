@@ -6,5 +6,8 @@ public class HttpProtocalException extends RuntimeException{
         super();
     }
 
+    public HttpProtocalException(String msg){
+        super(msg);
+    }
 
 }

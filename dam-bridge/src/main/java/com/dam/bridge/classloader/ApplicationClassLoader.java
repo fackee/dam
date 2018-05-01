@@ -16,7 +16,8 @@ public class ApplicationClassLoader extends ClassLoader{
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         String className = getClassName(name);
-        return super.defineClass(name,clazzBytes,0,clazzBytes.length);
+        className = className.replace(".class","");
+        return super.defineClass(className,clazzBytes,0,clazzBytes.length);
     }
 
     private String getClassName(String name){

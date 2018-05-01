@@ -11,5 +11,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="dam-annotation" />
+    <orderEntry type="module" module-name="dam-http" />
+    <orderEntry type="module" module-name="dam-io" />
+    <orderEntry type="module" module-name="dam-util" />
+    <orderEntry type="module" module-name="dam-exception" />
   </component>
 </module>

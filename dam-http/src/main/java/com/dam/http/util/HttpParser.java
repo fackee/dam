@@ -1,9 +1,9 @@
 package com.dam.http.util;
 
-import com.dam.connector.EndPoint;
-import com.dam.connector.nio.buffer.Buffer;
-import com.dam.connector.nio.buffer.NioBuffer;
-import com.dam.connector.nio.buffer.ThreadLocalBuffer;
+import com.dam.io.EndPoint;
+import com.dam.io.nio.buffer.Buffer;
+import com.dam.io.nio.buffer.NioBuffer;
+import com.dam.io.nio.buffer.ThreadLocalBuffer;
 import com.dam.http.HttpField;
 import com.dam.http.HttpHeader;
 import com.dam.http.HttpParameter;
@@ -82,7 +82,7 @@ public class HttpParser {
     }
 
     public void messageParse(String target, HttpParameter httpParameter, HttpHeader.HttpHeaderBuilder builder) {
-        if (target.contains("/ HTTP/")) {
+        if (target.contains(" HTTP/")) {
             String method = target.substring(0, target.indexOf(" /"));
             builder.httpMethod(methodCase(method));
             builder.httpProtocalVersion(target.substring(target.indexOf("HTTP/"), target.length()));

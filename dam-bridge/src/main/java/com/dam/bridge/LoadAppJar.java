@@ -1,69 +1,97 @@
 package com.dam.bridge;
 
 
+import com.dam.bridge.classloader.ApplicationClassLoader;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class LoadAppJar {
 
     private static final String FILE_SPERATE = "/";
+    private static final String PACKAGE_LINK = ".";
 
     private static final String CLASS_SUFFIX = ".class";
 
-    private static final Map<String, Map<String,byte[]>> clazzMap = new ConcurrentHashMap<String, Map<String,byte[]>>(16);
+    private static final String JAR_SUFFIX = ".jar";
+    /**
+    * key->appName;value->controllers
+    */
+    private static final Map<String,List<Class>> clazzMap = new ConcurrentHashMap<>(16);
 
-    private static final List<JarFile> jarFiles = new ArrayList<>(10);
-
-    public static void loadJars(String jarFilePath) throws IOException {
-        File file = new File(jarFilePath);
-        if (file == null) {
-            return;
-        } else if (file.isFile() && file.getName().endsWith(".jar")) {
-            jarFiles.add(new JarFile(file));
-        } else if (file.isDirectory()) {
-            File[] files = file.listFiles();
-            for (File f : files) {
-                loadJars(f.getAbsolutePath());
+    public static void loadApps(String appsPath)throws IOException{
+        File file = new File(appsPath);
+        File[] files = file.listFiles();
+        for(File f : files){
+            if(f.isDirectory()){
+                String everyAppName = f.getName();
+                String everyAppPath = f.getAbsolutePath();
+                clazzMap.putIfAbsent(everyAppName,readJar(loadJar(everyAppPath)));
             }
         }
     }
+    public static JarFile loadJar(String jarFilePath) throws IOException {
+        File file = new File(jarFilePath);
+        if (file == null) {
+            return null;
+        } else if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            for (File f : files) {
+                if(f.isFile() && f.getName().endsWith(JAR_SUFFIX)){
+                    return new JarFile(f);
+                }else if(f.isDirectory()){
+                    return loadJar(f.getAbsolutePath());
+                }
+            }
+        }
+        return null;
+    }
 
-    public static void readJar(JarFile jarFile) {
-        Map<String,byte[]> jarClazzMap = new HashMap<>(jarFile.size()+8);
+    public static List<Class> readJar(JarFile jarFile) {
+        List<Class> result = new ArrayList<>();
         Enumeration<JarEntry> enumeration = jarFile.entries();
         while (enumeration.hasMoreElements()) {
             JarEntry entry = enumeration.nextElement();
             String className = entry.getName();
             if (className.endsWith(CLASS_SUFFIX)) {
-                String clazz = className.replace(CLASS_SUFFIX, "").replaceAll("/", ".");
+                InputStream inputStream = null;
+                ByteArrayOutputStream outputStream = null;
                 try {
-                    InputStream inputStream = jarFile.getInputStream(entry);
-                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    className = className.replaceAll(FILE_SPERATE,PACKAGE_LINK);
+                    inputStream = jarFile.getInputStream(entry);
+                    outputStream = new ByteArrayOutputStream();
                     byte[] buffer = new byte[inputStream.available()];
                     int read = 0;
                     while ((read = inputStream.read(buffer)) != -1) {
                         outputStream.write(buffer, 0, read);
                     }
-                    jarClazzMap.put(clazz,outputStream.toByteArray());
+                    ApplicationClassLoader classLoader = new ApplicationClassLoader(buffer);
+                    result.add(classLoader.loadClass(className));
                 } catch (IOException e) {
 
+                } catch (ClassNotFoundException e) {
+
+                }finally {
+                    try {
+                        inputStream.close();
+                        outputStream.close();
+                    } catch (IOException e) {
+
+                    }
                 }
             }
         }
-        clazzMap.put(jarFile.getName(),jarClazzMap);
+        return result;
     }
 
-    public static List<JarFile> getJarFiles() {
-        return jarFiles;
-    }
-
-    public static Map<String, Map<String, byte[]>> getClazzMap() {
+    public static Map<String, List<Class>> getClazzMap() {
         return clazzMap;
     }
 }

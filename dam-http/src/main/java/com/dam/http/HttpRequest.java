@@ -14,7 +14,7 @@ public class HttpRequest implements Request {
         this(httpHeader,httpParameter,new Cookie());
     }
     public HttpRequest(HttpHeader httpHeader, HttpParameter httpParameter, Cookie cookie){
-        this(httpHeader,httpParameter,cookie,new Session());
+        this(httpHeader,httpParameter,cookie,new HttpSession());
     }
     public HttpRequest(HttpHeader httpHeader, HttpParameter httpParameter, Cookie cookie, Session session){
         this.httpHeader = httpHeader;
@@ -39,7 +39,27 @@ public class HttpRequest implements Request {
     }
 
     @Override
-    public HttpParameter getParameter() {
+    public HttpParameter getHttpParameter() {
         return httpParameter;
+    }
+
+    @Override
+    public void setHttpHeader(HttpHeader httpHeader) {
+        this.httpHeader = httpHeader;
+    }
+
+    @Override
+    public void setHttpParameter(HttpParameter httpParameter) {
+        this.httpParameter = httpParameter;
+    }
+
+    @Override
+    public void setCookie(Cookie cookie) {
+        this.cookie = cookie;
+    }
+
+    @Override
+    public void setSession(Session session) {
+        this.session = session;
     }
 }

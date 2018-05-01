@@ -6,11 +6,12 @@
       <module fileurl="file://$PROJECT_DIR$/dam-annotation/dam-annotation.iml" filepath="$PROJECT_DIR$/dam-annotation/dam-annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/dam-bridge/dam-bridge.iml" filepath="$PROJECT_DIR$/dam-bridge/dam-bridge.iml" />
       <module fileurl="file://$PROJECT_DIR$/dam-exception/dam-exception.iml" filepath="$PROJECT_DIR$/dam-exception/dam-exception.iml" />
-      <module fileurl="file://$PROJECT_DIR$/dam-handler/dam-handler.iml" filepath="$PROJECT_DIR$/dam-handler/dam-handler.iml" />
       <module fileurl="file://$PROJECT_DIR$/dam-http/dam-http.iml" filepath="$PROJECT_DIR$/dam-http/dam-http.iml" />
       <module fileurl="file://$PROJECT_DIR$/dam-io/dam-io.iml" filepath="$PROJECT_DIR$/dam-io/dam-io.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dam-server/dam-server.iml" filepath="$PROJECT_DIR$/dam-server/dam-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/dam-start/dam-start.iml" filepath="$PROJECT_DIR$/dam-start/dam-start.iml" />
       <module fileurl="file://$PROJECT_DIR$/dam-util/dam-util.iml" filepath="$PROJECT_DIR$/dam-util/dam-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webapp-example/webapp-example.iml" filepath="$PROJECT_DIR$/webapp-example/webapp-example.iml" />
     </modules>
   </component>
 </project>

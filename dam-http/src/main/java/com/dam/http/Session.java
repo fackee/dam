@@ -1,4 +1,11 @@
 package com.dam.http;
 
-public class Session {
+public interface Session {
+
+    public Object getAttribute(String key);
+
+    public boolean setAttibute(String key,Object value);
+
+    public boolean addAttribute(String key ,Object value);
+
 }

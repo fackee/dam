@@ -1,7 +1,13 @@
 package com.dam.http;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 public class HttpResponse implements Response {
-    private String content;
+
+    private static final Map<String,Object> attribute = new ConcurrentHashMap<>();
+    private HttpHeader httpHeader;
+    private byte[] content;
     public HttpResponse(){}
     @Override
     public void setHeader(String key, String value) {
@@ -12,12 +18,23 @@ public class HttpResponse implements Response {
     public void addAttribute(String key, String value) {
 
     }
+
+
     @Override
-    public void setContent(String content) {
+    public byte[] getContent() {
+        return content;
+    }
+
+    @Override
+    public void setContent(byte[] content) {
         this.content = content;
     }
-    @Override
-    public String getContent() {
-        return content;
+
+    public HttpHeader getHttpHeader() {
+        return httpHeader;
+    }
+
+    public void setHttpHeader(HttpHeader httpHeader) {
+        this.httpHeader = httpHeader;
     }
 }

@@ -8,7 +8,9 @@
     <file url="file://$PROJECT_DIR$/dam-handler" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dam-http" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dam-io" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dam-server" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dam-start" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dam-util" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webapp-example" charset="UTF-8" />
   </component>
 </project>

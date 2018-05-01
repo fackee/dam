@@ -1,9 +1,9 @@
 package com.dam.http.util;
 
-import com.dam.connector.EndPoint;
-import com.dam.connector.nio.buffer.Buffer;
-import com.dam.connector.nio.buffer.NioBuffer;
-import com.dam.connector.nio.buffer.ThreadLocalBuffer;
+import com.dam.io.EndPoint;
+import com.dam.io.nio.buffer.Buffer;
+import com.dam.io.nio.buffer.NioBuffer;
+import com.dam.io.nio.buffer.ThreadLocalBuffer;
 import com.dam.http.HttpField;
 import com.dam.http.HttpResponse;
 import com.dam.http.Response;
@@ -38,7 +38,7 @@ public class HttpGenerate {
     }
 
     private boolean generateComplete(Buffer header, Buffer body) {
-        final byte[] headerByte = response.getContent().getBytes();
+        final byte[] headerByte = response.getContent();
         header.byteBuffer().put(headerByte);
         return true;
     }
