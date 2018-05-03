@@ -15,7 +15,6 @@
         <module name="dam-server" />
         <module name="dam-start" />
         <module name="dam-util" />
-        <module name="webapp-example" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
