@@ -136,7 +136,7 @@
     <distributionManagement>
         <repository>
             <id>localRepository</id>
-            <url>file:F:/Maven/LocalWarehouse</url>
+            <url>file:E:/maven/repository</url>
         </repository>
     </distributionManagement>
 </project>

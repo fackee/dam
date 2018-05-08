@@ -28,13 +28,14 @@ public class ReflectUtil {
                 for(Method method : methods){
                     handlerBeanList.add(parseHandlerBean(method));
                 }
+                controllerBean.setHandlerBeans(handlerBeanList);
             }
         }
         return controllerBean;
     }
 
     public static final HandlerBean parseHandlerBean(Method method){
-        Map<String,List<String>> result = new HashMap<>(1,1);
+        final Map<String,List<String>> result = new HashMap<>(1,1);
         final HandlerBean handlerBean = new HandlerBean();
         handlerBean.setHandlerName(method.getName());
         Annotation[] annotations = method.getDeclaredAnnotations();

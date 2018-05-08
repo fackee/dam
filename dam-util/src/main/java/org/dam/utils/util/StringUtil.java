@@ -19,4 +19,23 @@ public class StringUtil {
         }
         return isEquals;
     }
+
+    public static String format(String msg,Object ...args){
+        int index = 0;
+        while (msg.contains("{}")){
+            if(index < args.length){
+                Object arg = args[index++];
+                if(arg instanceof Integer){
+                    arg = String.valueOf(arg);
+                }
+                int startIndex = msg.indexOf("{}");
+                String before = msg.substring(0,startIndex+2);
+                String end = msg.substring(startIndex+2,msg.length());
+                msg = before.replace("{}",arg.toString()) + end;
+            }else{
+                break;
+            }
+        }
+        return msg;
+    }
 }

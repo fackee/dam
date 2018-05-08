@@ -25,21 +25,23 @@ public class HttpResponse implements Response {
             field.setAccessible(true);
             try {
                 String value = (String)field.get(responseHeader);
-                if("statusCode".equalsIgnoreCase(field.getName())){
-                    String headerLine = responseHeader.getHttpVersion() + " "+ (String) field.get(responseHeader) + "\r\n";
+                if(value != null && !"".equals(value) && value.length() > 0){
+                    if("statusCode".equalsIgnoreCase(field.getName())){
+                        String headerLine = responseHeader.getHttpVersion() + " "+ (String) field.get(responseHeader) + "\r\n";
+                        buffer.append(headerLine);
+                        continue;
+                    }
+                    if("httpVersion".equalsIgnoreCase(field.getName())){
+                        continue;
+                    }
+                    String headerLine = field.getName().replaceAll("_","-") + ": " + ((String)field.get(responseHeader)) +"\r\n";
                     buffer.append(headerLine);
-                    continue;
                 }
-                if("httpVersion".equalsIgnoreCase(field.getName())){
-                    continue;
-                }
-                String headerLine = field.getName().replaceAll("_","-") + ": " + ((String)field.get(responseHeader)) +"\r\n";
-                buffer.append(headerLine);
             } catch (IllegalAccessException e) {
 
             }
         }
-        buffer.append("\r\n");
+        buffer.append("\r\n\r\n");
         header = buffer.toString().getBytes();
     }
 

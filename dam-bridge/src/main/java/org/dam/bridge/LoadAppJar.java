@@ -16,36 +16,34 @@ public class LoadAppJar {
 
     private static final String FILE_SPERATE = "/";
     private static final String PACKAGE_LINK = ".";
-
     private static final String CLASS_SUFFIX = ".class";
+    private static final String JAR_SUFFIX = ".jar";
 
-    private static final String JAR_SUFFIX = ".loader";
-    /**
-    * key->appName;value->controllers
-    */
-    private static final Map<String,List<Class>> clazzMap = new ConcurrentHashMap<>(16);
-
-    public static void loadApps(String appsPath)throws IOException{
+    public LoadAppJar(){}
+    public Map<String, List<Class>> loadApps(String appsPath) throws IOException, ClassNotFoundException {
+        Map<String, List<Class>> clazzMap = new HashMap<>(16);
         File file = new File(appsPath);
         File[] files = file.listFiles();
-        for(File f : files){
-            if(f.isDirectory()){
+        for (File f : files) {
+            if (f.isDirectory()) {
                 String everyAppName = f.getName();
                 String everyAppPath = f.getAbsolutePath();
-                clazzMap.putIfAbsent(everyAppName,readJar(loadJar(everyAppPath)));
+                clazzMap.putIfAbsent(everyAppName, readJar(loadJar(everyAppPath)));
             }
         }
+        return clazzMap;
     }
-    public static JarFile loadJar(String jarFilePath) throws IOException {
+
+    private JarFile loadJar(String jarFilePath) throws IOException {
         File file = new File(jarFilePath);
         if (file == null) {
             return null;
         } else if (file.isDirectory()) {
             File[] files = file.listFiles();
             for (File f : files) {
-                if(f.isFile() && f.getName().endsWith(JAR_SUFFIX)){
+                if (f.isFile() && f.getName().endsWith(JAR_SUFFIX)) {
                     return new JarFile(f);
-                }else if(f.isDirectory()){
+                } else if (f.isDirectory()) {
                     return loadJar(f.getAbsolutePath());
                 }
             }
@@ -53,44 +51,17 @@ public class LoadAppJar {
         return null;
     }
 
-    public static List<Class> readJar(JarFile jarFile) {
+    private List<Class> readJar(JarFile jarFile) throws IOException, ClassNotFoundException {
         List<Class> result = new ArrayList<>();
         Enumeration<JarEntry> enumeration = jarFile.entries();
         while (enumeration.hasMoreElements()) {
             JarEntry entry = enumeration.nextElement();
             String className = entry.getName();
             if (className.endsWith(CLASS_SUFFIX)) {
-                InputStream inputStream = null;
-                ByteArrayOutputStream outputStream = null;
-                try {
-                    className = className.replaceAll(FILE_SPERATE,PACKAGE_LINK);
-                    inputStream = jarFile.getInputStream(entry);
-                    outputStream = new ByteArrayOutputStream();
-                    byte[] buffer = new byte[inputStream.available()];
-                    int read = 0;
-                    while ((read = inputStream.read(buffer)) != -1) {
-                        outputStream.write(buffer, 0, read);
-                    }
-                    ApplicationClassLoader classLoader = new ApplicationClassLoader(buffer);
-                    result.add(classLoader.loadClass(className));
-                } catch (IOException e) {
-
-                } catch (ClassNotFoundException e) {
-
-                }finally {
-                    try {
-                        inputStream.close();
-                        outputStream.close();
-                    } catch (IOException e) {
-
-                    }
-                }
+                ApplicationClassLoader classLoader = new ApplicationClassLoader();
+                result.add(classLoader.loadClass(className));
             }
         }
         return result;
-    }
-
-    public static Map<String, List<Class>> getClazzMap() {
-        return clazzMap;
     }
 }

@@ -40,9 +40,15 @@ public class HttpGenerate {
     private boolean generateComplete(Buffer header, Buffer body) {
 
         final byte[] headerByte = response.getHeaderBytes();
-        final byte[] bodyByte = response.getBodyBytes();
+        header.byteBuffer().position(0);
         header.byteBuffer().put(headerByte);
-        body.byteBuffer().put(bodyByte);
+        System.out.println(new String(headerByte));
+        final byte[] bodyByte = response.getBodyBytes();
+        if(bodyByte != null && bodyByte.length > 0){
+            body.byteBuffer().position(0);
+            body.byteBuffer().put(bodyByte);
+            System.out.println(new String(bodyByte));
+        };
         return true;
 
     }

@@ -2,6 +2,7 @@ package org.dam.server.handler;
 
 import org.dam.http.Request;
 import org.dam.http.Response;
+import org.dam.server.Server;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -17,13 +18,19 @@ public class HandleWrapper extends AbstractHandler {
 
     public HandleWrapper(LinkedList<Handler> handlers){
         handlerChain = Collections.synchronizedList(handlers);
-        addDefaultHandler();
     }
 
-    private void addDefaultHandler(){
-        handlerChain.add(new HttpHandler());
-        handlerChain.add(new SessionHandler());
-        handlerChain.add(new AppLoadHandler());
+    public HandleWrapper addDefaultHandler(){
+        HttpHandler httpHandler = new HttpHandler();
+        httpHandler.setServer(getServer());
+        handlerChain.add(httpHandler);
+        SessionHandler sessionHandler = new SessionHandler();
+        sessionHandler.setServer(getServer());
+        handlerChain.add(sessionHandler);
+        AppLoadHandler appLoadHandler = new AppLoadHandler();
+        appLoadHandler.setServer(getServer());
+        handlerChain.add(appLoadHandler);
+        return this;
     }
 
     @Override
@@ -37,7 +44,9 @@ public class HandleWrapper extends AbstractHandler {
                 break;
             }
         }
-        response.setHttpHeader("Content_Length",setContentLength(response));
+        if(response.getBodyBytes() != null && response.getBodyBytes().length > 0){
+            response.setHttpHeader("Content_Length",String.valueOf(response.getBodyBytes().length));
+        }
         response.generateHeaderBytes();
         return true;
     }
@@ -58,5 +67,10 @@ public class HandleWrapper extends AbstractHandler {
         }
         length += response.getBodyBytes().length;
         return String.valueOf(length + "Content-Length : 10000".length() + 4);
+    }
+
+    @Override
+    public void setServer(Server server) {
+        super.setServer(server);
     }
 }

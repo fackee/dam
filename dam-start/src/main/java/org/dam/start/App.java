@@ -1,37 +1,39 @@
 package org.dam.start;
 
-import org.dam.start.config.Configuration;
-import org.dam.start.load.LoadWebappsCache;
 import org.dam.server.Connector;
 import org.dam.server.Server;
+import org.dam.server.config.Configuration;
+import org.dam.server.cache.WebappsCache;
 import org.dam.server.nio.NioConnector;
-import sun.misc.OSEnvironment;
+import org.dam.utils.util.log.Logger;
+
+import java.io.FileNotFoundException;
+import java.util.Map;
 
 /**
  * Hello world!
- *
  */
-public class App 
-{
-//    static {
-//        try {
-//            LoadAppJar.loadApps("");
-//        } catch (IOException e) {
-//
-//        }
-//    }
+public class App {
+
     public static void run() {
-        Configuration configuration = new Configuration().config();
-        LoadWebappsCache cache = new LoadWebappsCache().cache();
-        Server server = new Server();
+        Configuration configuration = null;
+        try {
+            configuration = new Configuration().config();
+        } catch (FileNotFoundException e) {
+            Logger.ERROR("read configuration error:{}",e.toString());
+            System.exit(0);
+        }
+        WebappsCache webappsCache = new WebappsCache(configuration).cacheClassesApp();
+        Map map = WebappsCache.webAppMap;
+        Server server = new Server(configuration,webappsCache);
         Connector connector = new NioConnector(server);
         connector.setPort(8080);
         server.setConnector(connector);
         server.serve();
-        System.out.println("Dam started");
+        Logger.INFO("========================Dam started========================");
     }
 
-    public static void main( String[] args ) throws Exception{
+    public static void main(String[] args) throws Exception {
         run();
         //System.out.println(App.class.getResource(""));
     }

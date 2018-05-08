@@ -1,10 +1,12 @@
 package org.dam.server;
 
+import org.dam.server.config.Configuration;
 import org.dam.server.handler.AbstractHandler;
 import org.dam.server.handler.HandleWrapper;
 import org.dam.server.handler.Handler;
 import org.dam.http.Request;
 import org.dam.http.Response;
+import org.dam.server.cache.WebappsCache;
 import org.dam.utils.util.thread.ExecutorThreadPool;
 import org.dam.utils.util.thread.QueueThreadPool;
 import org.dam.utils.util.thread.ThreadPool;
@@ -19,21 +21,21 @@ import java.util.concurrent.ArrayBlockingQueue;
 public class Server extends AbstractHandler {
 
     private Connector connector;
-
+    private Configuration configuration;
     private ExecutorThreadPool acceptService;
     private ExecutorThreadPool workerService;
     private HandleWrapper handleWrapper;
     private final List<Handler> handlerChain = new LinkedList<>();
     private ThreadPool threadPool;
 
-    public Server(){
-        this(5);
+    public Server(Configuration configuration,WebappsCache webappsCache){
+        this(configuration,5);
     }
-    public Server(int acceptThreadNum){
-        this(acceptThreadNum,10000);
+    public Server(Configuration configuration,int acceptThreadNum){
+        this(configuration,acceptThreadNum,10000);
     }
-    public Server(int acceptThreadNum, int workThreadNum){
-        this(acceptThreadNum,workThreadNum,
+    public Server(Configuration configuration,int acceptThreadNum, int workThreadNum){
+        this(configuration,acceptThreadNum,workThreadNum,
                 new QueueThreadPool.ThreadBuilder()
                         .maxThread(workThreadNum)
                         .minThread(100)
@@ -41,11 +43,14 @@ public class Server extends AbstractHandler {
                         .maxQueueSize(workThreadNum)
                         .build());
     }
-    public Server(int acceptThreadNum, int workThreadNum, ThreadPool threadPool){
+    public Server(Configuration configuration,int acceptThreadNum, int workThreadNum, ThreadPool threadPool){
+        this.configuration = configuration;
         this.threadPool = threadPool;
         acceptService = new ExecutorThreadPool(acceptThreadNum);
         workerService = new ExecutorThreadPool(workThreadNum);
         handleWrapper = new HandleWrapper(new LinkedList<Handler>());
+        handleWrapper.setServer(this);
+        handleWrapper.addDefaultHandler();
     }
 
 
@@ -100,4 +105,9 @@ public class Server extends AbstractHandler {
 
         }
     }
+
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+    
 }

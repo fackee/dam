@@ -19,10 +19,10 @@ public class HttpConstant {
             "</html>";
 
     public enum HttpStatusCode {
-        OK("200 OK", 200), Created("Created", 201), Accepted("Accepted", 202), NO_CONTENT("NO Content", 204),
-        Multiple_Choices("Mutiple Choices", 300), Moved_Permanently("Moved Permanently", 301), Moved_Temporarily("Moved Temporarily", 302), Not_Modified("Not Modified", 304),
-        Bad_Request("Bad Request", 400), Unauthorized("Unauthorized", 401), Forbidden("Forbidden", 403), Not_Found("Not Found", 404),
-        Internal_Server_Error("500 Internal Server Error", 500), Not_Implemented("Not Implemented", 501), Bad_Gateway("Bad Gateway", 502), Service_Unavailable("Service Unavailable", 503);
+        OK("200 OK", 200), Created("201 Created", 201), Accepted("202 Accepted", 202), NO_CONTENT("204 NO Content", 204),
+        Multiple_Choices("300 Mutiple Choices", 300), Moved_Permanently("301 Moved Permanently", 301), Moved_Temporarily("302 Moved Temporarily", 302), Not_Modified("304 Not Modified", 304),
+        Bad_Request("400 Bad Request", 400), Unauthorized("401 Unauthorized", 401), Forbidden("403 Forbidden", 403), Not_Found("Not Found", 404),
+        Internal_Server_Error("500 Internal Server Error", 500), Not_Implemented("501 Not Implemented", 501), Bad_Gateway("502 Bad Gateway", 502), Service_Unavailable("503 Service Unavailable", 503);
 
 
         private String desc;
@@ -157,7 +157,7 @@ public class HttpConstant {
 //    be response-header fields. Unrecognized header fields are treated as
 //    entity-header fields.
 
-    enum HttpResponseLine {
+    public enum HttpResponseLine {
 
         Age("age"), Location("Location"), Proxy_Authenticate("Proxy-Authenticate"), Public("Public"),
         Retry_After("Retry-After"), Server("Server"), Vary("Vary"), Warning("Warning"),
@@ -201,7 +201,7 @@ public class HttpConstant {
 //    be assumed to be recognizable by the recipient. Unrecognized header
 //    fields SHOULD be ignored by the recipient and forwarded by proxies.
 
-    enum HttpEntity {
+    public enum HttpEntity {
 
         Allow("Allow"),
         Content_Base("Content-Base"), Content_Encoding("Content-Encoding"), Content_Language("Content-Language"), Content_Length("Content-Length"),
