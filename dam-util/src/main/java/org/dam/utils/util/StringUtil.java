@@ -38,4 +38,23 @@ public class StringUtil {
         }
         return msg;
     }
+
+    public static String getConfigPath(){
+
+        String filePath = StringUtil.class.getResource("").getPath();
+        try {
+            if(filePath.contains("file:/")){
+                filePath = filePath.replace("file:/","");
+                filePath = filePath.substring(0,filePath.indexOf("/lib/dam-"));
+            }else{
+                filePath = filePath.substring(1,filePath.indexOf("/lib/dam-"));
+            }
+        }catch (Exception e){
+            filePath = "C:/Users/roro/IdeaProjects/dam";
+        }
+        return filePath + "/config/config.properties";
+    }
+
+
+
 }

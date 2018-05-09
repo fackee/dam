@@ -20,14 +20,14 @@ public class App {
         try {
             configuration = new Configuration().config();
         } catch (FileNotFoundException e) {
-            Logger.ERROR("read configuration error:{}",e.toString());
+            Logger.ERROR("read configuration error:{}",
+                    Logger.printStackTraceToString(e.fillInStackTrace()));
             System.exit(0);
         }
         WebappsCache webappsCache = new WebappsCache(configuration).cacheClassesApp();
-        Map map = WebappsCache.webAppMap;
         Server server = new Server(configuration,webappsCache);
         Connector connector = new NioConnector(server);
-        connector.setPort(8080);
+        connector.setPort(80);
         server.setConnector(connector);
         server.serve();
         Logger.INFO("========================Dam started========================");
@@ -35,6 +35,5 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         run();
-        //System.out.println(App.class.getResource(""));
     }
 }

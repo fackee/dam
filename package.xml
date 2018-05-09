@@ -28,7 +28,7 @@
         <!--</fileSet>-->
         <fileSet>
             <directory>${project.build.directory}</directory>
-            <outputDirectory>F:/Toylet_1.0.0/lib</outputDirectory>
+            <outputDirectory>E:/Dam_v_1.0.0/lib</outputDirectory>
             <includes>
                 <include>${project.artifactId}-${project.version}.jar</include>
             </includes>

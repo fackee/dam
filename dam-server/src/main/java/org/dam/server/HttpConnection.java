@@ -40,6 +40,12 @@ public class HttpConnection extends AbstractHttpConnection {
             }
         } catch (IOException e) {
 
+        }finally {
+            try {
+                getEndPoint().close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return this;
     }

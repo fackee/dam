@@ -1,15 +1,16 @@
 package org.dam.server.config;
 
 import org.dam.exception.PropertiesNotFoundException;
+import org.dam.utils.util.StringUtil;
 
 import java.io.*;
 import java.util.*;
 
 public class Configuration {
 
-    private static final String confilePath = "C:/Users/geeche/IdeaProjects/dam/config/config.properties";
+    private static final String confilePath = StringUtil.getConfigPath();
 
-    private final Map<String,String> propertiesMap = new HashMap<>(16);
+    private static final Map<String,String> propertiesMap = new HashMap<>(16);
 
     public Configuration(){}
 
@@ -51,5 +52,44 @@ public class Configuration {
 
     public Iterator getPropertiesKeyIterator(){
         return propertiesMap.keySet().iterator();
+    }
+
+    public static class DefaultConfig{
+
+        private static DefaultConfig config ;
+
+        public static DefaultConfig getInstance(){
+            if(config == null){
+                config = new DefaultConfig();
+            }
+            return config;
+        }
+
+        public String getServerName(){
+            if(propertiesMap.containsKey("server")){
+                return propertiesMap.get("server");
+            }
+            return "Dam_v_1.0.0";
+        }
+
+        public String getAppsDirectory(){
+            if(propertiesMap.containsKey("www")){
+                return propertiesMap.get("www");
+            }
+            return "www";
+        }
+        public String getAppSource(){
+            if(propertiesMap.containsKey("appSource")){
+                return propertiesMap.get("appSource");
+            }
+            return "appSource/";
+        }
+
+        public String getWelcome(){
+            if(propertiesMap.containsKey("welCome")){
+                return propertiesMap.get("welCome");
+            }
+            return "E:/Dam_v_1.0.0/www/index.html";
+        }
     }
 }

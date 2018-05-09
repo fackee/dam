@@ -422,13 +422,13 @@ public class HttpHeader {
         private String WWW_Authenticate;
         private String Allow;
         private String Content_Base;
-        private String Content_Encoding;
         private String Content_Language;
         private String Content_Length;
         private String Content_Location;
         private String Content_MD5;
         private String Content_Range;
         private String Content_Type;
+        private String Content_Encoding;
         private String ETag;
         private String Expires;
         private String Last_Modified;

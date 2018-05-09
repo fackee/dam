@@ -1,8 +1,13 @@
 package org.dam.server.handler;
 
+import org.dam.exception.AppLoadException;
+import org.dam.exception.HttpProtocalException;
+import org.dam.exception.PropertiesNotFoundException;
 import org.dam.http.Request;
 import org.dam.http.Response;
+import org.dam.http.constant.HttpConstant;
 import org.dam.server.Server;
+import org.dam.utils.util.log.Logger;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -38,35 +43,23 @@ public class HandleWrapper extends AbstractHandler {
         for(Handler handler : handlerChain){
             try {
                 if(!handler.handle(request,response)){
+                    Logger.INFO("handle-[{}] back:",handler.getClass().getName());
                     break;
                 }
-            }catch (Exception e){
+            }catch (AppLoadException e){
+                Logger.ERROR("load app '{}' error:{}",request.getHeader().getRequestHeader()
+                        .getUrl().getRelativeUrl(),
+                        Logger.printStackTraceToString(e.fillInStackTrace()));
+                break;
+            }catch (HttpProtocalException e){
                 break;
             }
         }
         if(response.getBodyBytes() != null && response.getBodyBytes().length > 0){
-            response.setHttpHeader("Content_Length",String.valueOf(response.getBodyBytes().length));
+            response.setHttpHeader(HttpConstant.HttpEntity.Content_Length.toString(),String.valueOf(response.getBodyBytes().length));
         }
         response.generateHeaderBytes();
         return true;
-    }
-
-    private String setContentLength(Response response) {
-        int length = 0;
-        Field[] declaredFields = response.getHttpHeader().getResponseHeader().getClass().getDeclaredFields();
-        for(Field field : declaredFields){
-            field.setAccessible(true);
-            try {
-                String value = (String) field.get(response.getHttpHeader().getResponseHeader());
-                if(value != null){
-                    length += value.length();
-                }
-            } catch (IllegalAccessException e) {
-
-            }
-        }
-        length += response.getBodyBytes().length;
-        return String.valueOf(length + "Content-Length : 10000".length() + 4);
     }
 
     @Override

@@ -3,6 +3,8 @@ package org.dam.utils.util.log;
 import javafx.scene.input.DataFormat;
 import org.dam.utils.util.StringUtil;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ import java.util.Date;
 public class Logger {
 
     private static final SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+
     public static void ERROR(String msg,Object ...params){
         System.out.println("["+Thread.currentThread().getName()+ "]-" +
                 "["+format.format(new Date())+ "]" + ":" +
@@ -24,4 +27,9 @@ public class Logger {
                 StringUtil.format(msg,params));
     }
 
+    public static String printStackTraceToString(Throwable throwable){
+        StringWriter writer = new StringWriter();
+        throwable.printStackTrace(new PrintWriter(writer,true));
+        return writer.getBuffer().toString();
+    }
 }

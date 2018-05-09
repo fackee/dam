@@ -292,6 +292,10 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
 
     @Override
     public void close() throws IOException {
+        final SelectionKey selectionKey = key;
+        if(selectionKey != null){
+            selectionKey.cancel();
+        }
         try {
             super.close();
         }catch (IOException e){

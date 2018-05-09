@@ -6,17 +6,7 @@ public class HttpConstant {
 
     public static final String HTTP_VERSION = "HTTP/1.1 ";
     public static final String HTTP_MESSAGE_LINEFEED = "\r\n";
-    private static final String responseHeader = "HTTP/1.1 200 OK\r\n" +
-            "Content-Length: 38\r\n" +
-            "Content-Type: text/html\r\n" +
-            "\r\n" +
-            "\n" +
-            "<html>" +
-            "<header></header>" +
-            "<body>" +
-            "<h1>hello</h1><h2>dam</h2>" +
-            "</body>" +
-            "</html>";
+    public static final String STATUS = "statusCode";
 
     public enum HttpStatusCode {
         OK("200 OK", 200), Created("201 Created", 201), Accepted("202 Accepted", 202), NO_CONTENT("204 NO Content", 204),

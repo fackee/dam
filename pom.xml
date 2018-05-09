@@ -32,86 +32,6 @@
 
     <build>
         <plugins>
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-dependency-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>make-dependency</id>-->
-                        <!--<goals>-->
-                            <!--<goal>unpack</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<artifactItems>-->
-                                <!--<artifactItem>-->
-                                    <!--<groupId>com.dam</groupId>-->
-                                    <!--<artifactId>dam-exception</artifactId>-->
-                                    <!--<version>1.0-SNAPSHOT</version>-->
-                                    <!--<tloader>jar</type>-->
-                                    <!--<overWrite>true</overWrite>-->
-                                    <!--<outputDirectory>/lib</outputDirectory>-->
-                                <!--</artifactItem>-->
-                                <!--<artifactItem>-->
-                                    <!--<groupId>com.dam</groupId>-->
-                                    <!--<artifactId>dam-annotation</artifactId>-->
-                                    <!--<version>1.0-SNAPSHOT</version>-->
-                                    <!--<tloader>jar</type>-->
-                                    <!--<overWrite>true</overWrite>-->
-                                    <!--<outputDirectory>/lib</outputDirectory>-->
-                                <!--</artifactItem>-->
-                                <!--<artifactItem>-->
-                                    <!--<groupId>com.dam</groupId>-->
-                                    <!--<artifactId>dam-util</artifactId>-->
-                                    <!--<version>1.0-SNAPSHOT</version>-->
-                                    <!--<tloader>jar</type>-->
-                                    <!--<overWrite>true</overWrite>-->
-                                    <!--<outputDirectory>/lib</outputDirectory>-->
-                                <!--</artifactItem>-->
-                                <!--<artifactItem>-->
-                                    <!--<groupId>com.dam</groupId>-->
-                                    <!--<artifactId>dam-io</artifactId>-->
-                                    <!--<version>1.0-SNAPSHOT</version>-->
-                                    <!--<tloader>jar</type>-->
-                                    <!--<overWrite>true</overWrite>-->
-                                    <!--<outputDirectory>/lib</outputDirectory>-->
-                                <!--</artifactItem>-->
-                                <!--<artifactItem>-->
-                                    <!--<groupId>com.dam</groupId>-->
-                                    <!--<artifactId>dam-http</artifactId>-->
-                                    <!--<version>1.0-SNAPSHOT</version>-->
-                                    <!--<tloader>jar</type>-->
-                                    <!--<overWrite>true</overWrite>-->
-                                    <!--<outputDirectory>/lib</outputDirectory>-->
-                                <!--</artifactItem>-->
-                                <!--<artifactItem>-->
-                                    <!--<groupId>com.dam</groupId>-->
-                                    <!--<artifactId>dam-bridge</artifactId>-->
-                                    <!--<version>1.0-SNAPSHOT</version>-->
-                                    <!--<tloader>jar</type>-->
-                                    <!--<overWrite>true</overWrite>-->
-                                    <!--<outputDirectory>/lib</outputDirectory>-->
-                                <!--</artifactItem>-->
-                                <!--<artifactItem>-->
-                                    <!--<groupId>com.dam</groupId>-->
-                                    <!--<artifactId>dam-server</artifactId>-->
-                                    <!--<version>1.0-SNAPSHOT</version>-->
-                                    <!--<tloader>jar</type>-->
-                                    <!--<overWrite>true</overWrite>-->
-                                    <!--<outputDirectory>/lib</outputDirectory>-->
-                                <!--</artifactItem>-->
-                                <!--<artifactItem>-->
-                                    <!--<groupId>com.dam</groupId>-->
-                                    <!--<artifactId>dam-start</artifactId>-->
-                                    <!--<version>1.0-SNAPSHOT</version>-->
-                                    <!--<tloader>jar</type>-->
-                                    <!--<overWrite>true</overWrite>-->
-                                    <!--<outputDirectory>/lib</outputDirectory>-->
-                                <!--</artifactItem>-->
-                            <!--</artifactItems>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.2.1</version>
@@ -130,6 +50,26 @@
                         <descriptor>package.xml</descriptor>
                     </descriptors>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <copy todir="E:/Dam_v_1.0.0/lib" overwrite="true" >
+                                    <fileset dir="${project.build.directory}" erroronmissingdir="false">
+                                        <include name="*.jar"/>
+                                    </fileset>
+                                </copy>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

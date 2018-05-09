@@ -43,27 +43,33 @@ public class HttpMedia {
         return acceptMime;
     }
 
-    enum Mime{
+    public enum Mime{
 
-        HTML(".html"),HTM(".htm"),
-        JS(".js"),
-        CSS(".css"),
-        PNG(".PNG"),JPG(".jpg"),JPEG(".jpeg"), GIF(".gif"),ICO(".ico"),SVG(",svg"),
-        MP3(".mp3"),
-        AVI(".avi"),MP4(".mp4");
+        HTML(".html","text/html"),HTM(".htm","text/html"),
+        JS(".js","application/x-javascript"),
+        CSS(".css","text/css"),
+        PNG(".png","image/png"),JPG(".jpg","image/jpeg"),JPEG(".jpeg","image/jpeg"),
+        GIF(".gif","image/gif"),ICO(".ico","image/x-icon"),SVG(",svg","image/svg+xml"),
+        MP3(".mp3","audio/mpeg"),
+        AVI(".avi","video/x-msvideo"),MP4(".mp4","video/x-msvideo");
 
         private String mimeSuffix;
-
-        Mime(String mimeSuffix){
+        private String acceptMime;
+        Mime(String mimeSuffix,String acceptMime){
             this.mimeSuffix = mimeSuffix;
+            this.acceptMime = acceptMime;
         }
 
         public String getMimeSuffix() {
             return mimeSuffix;
         }
+
+        public String getAcceptMime() {
+            return acceptMime;
+        }
     }
 
-    enum Accept{
+    public enum Accept{
         TEXT_HTM("text/htm"),TEXT_HTML("text/html"),
         APPLICATION_X_JAVASCRIPT("application/x-javascript"),
         TEXT_CSS("text/css"),

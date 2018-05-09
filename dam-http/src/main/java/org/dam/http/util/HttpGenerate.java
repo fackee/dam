@@ -29,8 +29,8 @@ public class HttpGenerate {
     }
 
     public HttpGenerate generate() throws IOException{
-            final Buffer header = new NioBuffer();
-            final Buffer body = new NioBuffer();
+            final Buffer header = new NioBuffer(response.getHeaderBytes().length);
+            final Buffer body = new NioBuffer(response.getBodyBytes().length);
             if(generateComplete(header,body)){
                 flush(header,body);
             }
