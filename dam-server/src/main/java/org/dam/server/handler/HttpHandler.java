@@ -25,6 +25,8 @@ public class HttpHandler extends AbstractHandler {
 
     @Override
     public boolean handle(Request baseRequest, Response baseResponse) {
+        Logger.INFO("request target url:{}",baseRequest.getHeader().getRequestHeader()
+                .getUrl().getRelativeUrl());
         baseResponse.setHttpHeader(VERSION,baseRequest.getHeader().getRequestHeader().getUrl().getHttpVersion());
         List<String> accepts = HttpMedia.getAcceptMime();
         List<String> mimes = HttpMedia.getMimeList();
@@ -49,6 +51,7 @@ public class HttpHandler extends AbstractHandler {
     }
 
     private void handleStaticSource(Request baseRequest, Response baseResponse) {
+        Logger.INFO("==================HttpHandle handle with staticSource=================");
         baseResponse.setHttpHeader(STATUS,HttpConstant.HttpStatusCode.OK.getDesc());
         baseResponse.setHttpHeader(HttpConstant.HttpResponseLine.Server.toString(),DefaultConfig.getInstance().getServerName());
         baseResponse.setHttpHeader(HttpConstant.HttpEntity.Content_Type.toString(),HttpHelper

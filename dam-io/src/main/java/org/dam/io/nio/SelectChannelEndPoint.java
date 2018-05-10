@@ -115,10 +115,9 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
             }
             writeBloking = true;
             while (writeBloking && !isOutputShutdown()){
-                System.out.println("write Block and updateKey");
                 updateKey();
                 try {
-                    this.wait(100000);
+                    this.wait(5000);
                 } catch (InterruptedException e) {
 
                 }finally {

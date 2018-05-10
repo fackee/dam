@@ -131,7 +131,7 @@ public class NioConnector extends AbstractConnector {
         }
 
         @Override
-        public void closeEndPoint(SelectChannelEndPoint endPoint) {
+        public void closeEndPoint(final SelectChannelEndPoint endPoint) {
             NioConnector.this.closeEndPoint(endPoint);
         }
 

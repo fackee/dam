@@ -63,7 +63,7 @@ public class AppLoadHandler extends AbstractHandler {
                 baseResponse.setBodyBytes(StaticStream.getBytesByFilePath(Configuration.DefaultConfig.getInstance()
                 .getWelcome()));
             } catch (IOException e) {
-                baseResponse.setHttpHeader(HttpConstant.HttpEntity.Content_Type.toString(),HttpMedia.Accept.TEXT_HTML.getAccept());
+                HttpHelper.serverError(baseResponse);
                 baseResponse.setBodyBytes(HttpHelper.handleError(StringUtil.format("get welcome html file error:{}",
                         Logger.printStackTraceToString(e.fillInStackTrace()))));
                 Logger.ERROR("get welcome html file error:{}",
@@ -79,8 +79,16 @@ public class AppLoadHandler extends AbstractHandler {
             } else {
                 appName = urlPath.substring(urlPath.indexOf('/') + 1);
             }
+            Logger.INFO("ApploadHandle handle with app:{}",appName);
             String path = urlPath.replace("/" + appName, "");
-            controllerBeanList = ControllerCache.getControllerByAppName(appName);
+            try {
+                controllerBeanList = ControllerCache.getControllerByAppName(appName);
+            }catch (IllegalArgumentException e){
+                Logger.ERROR("cannot found this app:{},caused by:{}",appName,Logger
+                        .printStackTraceToString(e.fillInStackTrace()));
+                HttpHelper.serverError(baseResponse);
+                baseResponse.setBodyBytes(HttpHelper.handleError("<h1>cannot found this app,please check the url</h1>"));
+            }
             final String redirectPrefix = appName;
             final boolean[] contain = {true};
             controllerBeanList.forEach(controllerBean -> {
@@ -97,9 +105,11 @@ public class AppLoadHandler extends AbstractHandler {
                             } catch (Exception e) {
                                 Logger.ERROR("handle app controller error:{}",Logger
                                         .printStackTraceToString(e.fillInStackTrace()));
+                                HttpHelper.serverError(baseResponse);
                                 baseResponse.setBodyBytes(HttpHelper.handleError("<h1>invoker controller error</h1>"));
                             }
                         } else {
+                            HttpHelper.serverError(baseResponse);
                             baseResponse.setBodyBytes(HttpHelper.handleError("<h1>matching parameters error</h1>"));
                             throw new AppLoadException("matching parameters error");
                         }
@@ -107,10 +117,12 @@ public class AppLoadHandler extends AbstractHandler {
                 });
             });
             if (contain[0]) {
+                HttpHelper.serverError(baseResponse);
                 baseResponse.setBodyBytes(HttpHelper.handleError("<h1>con not found this url path</h1>"));
                 throw new AppLoadException("con not found this path");
             }
         } catch (Exception e) {
+            HttpHelper.serverError(baseResponse);
             baseResponse.setBodyBytes(HttpHelper.handleError("<h1>matching this url path error</h1>"));
             throw new AppLoadException("matching this url path error");
         }
@@ -177,16 +189,15 @@ public class AppLoadHandler extends AbstractHandler {
                 }
             }
         }
-
         if (RESULT_TYPE_PAGE.equalsIgnoreCase(resultType)) {
-            String staticFilePath = Configuration.DefaultConfig.getInstance()
-                    .getAppsDirectory() + baseRequest.getHeader().getRequestHeader()
-                    .getUrl().getRelativeUrl();
+            String staticFilePath = Configuration.DefaultConfig.getInstance().getAppsDirectory()
+                    + appName + Configuration.DefaultConfig.getInstance().getAppSource()
+                    +result;
             byte[] body = new byte[0];
             try {
                 body = StaticStream.getBytesByFilePath(staticFilePath);
             } catch (IOException e) {
-                baseResponse.setHttpHeader(HttpConstant.HttpEntity.Content_Type.toString(),HttpMedia.Accept.TEXT_HTML.getAccept());
+                HttpHelper.serverError(baseResponse);
                 baseResponse.setBodyBytes(HttpHelper.handleError(StringUtil.format("handle static source from path:\"{}\"error:{}", Configuration.DefaultConfig.getInstance().getAppsDirectory() + baseRequest.getHeader().getRequestHeader()
                                 .getUrl().getRelativeUrl(),
                         Logger.printStackTraceToString(e.fillInStackTrace()))));
@@ -197,7 +208,7 @@ public class AppLoadHandler extends AbstractHandler {
             if (body != null && body.length > 0) {
                 baseResponse.setBodyBytes(body);
                 baseResponse.setHttpHeader(HttpConstant.HttpEntity.Content_Type.toString(), HttpHelper
-                        .sourceCase(baseRequest.getHeader().getRequestHeader().getUrl().getRelativeUrl()).getAccept());
+                        .sourceCase(result).getAccept());
                 //baseResponse.setHttpHeader(HttpConstant.HttpEntity.Content_Encoding.toString(),"gzip");
                 baseResponse.setHttpHeader(HttpConstant.STATUS, HttpConstant.HttpStatusCode.OK.getDesc());
             }
@@ -211,7 +222,7 @@ public class AppLoadHandler extends AbstractHandler {
             baseResponse.setHttpHeader(HttpConstant.HttpResponseLine.Location.getResponseLine(), "/" + appName + result);
             return;
         }else{
-            baseResponse.setHttpHeader(HttpConstant.HttpEntity.Content_Type.toString(),HttpMedia.Accept.TEXT_HTML.getAccept());
+            HttpHelper.serverError(baseResponse);
             baseResponse.setBodyBytes(HttpHelper.handleError("app result is illegal"));
             Logger.ERROR("app result is illegal");
             return;

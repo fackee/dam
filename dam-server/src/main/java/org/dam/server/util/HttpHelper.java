@@ -1,6 +1,8 @@
 package org.dam.server.util;
 
 import com.sun.org.apache.regexp.internal.RE;
+import org.dam.http.Response;
+import org.dam.http.constant.HttpConstant;
 import org.dam.http.statics.HttpMedia;
 import sun.dc.pr.PRError;
 
@@ -46,4 +48,8 @@ public class HttpHelper {
         return result.getBytes();
     }
 
+    public static void serverError(Response response){
+        response.setHttpHeader(HttpConstant.STATUS,HttpConstant.HttpStatusCode.Internal_Server_Error.getDesc());
+        response.setHttpHeader(HttpConstant.HttpEntity.Content_Type.toString(),HttpMedia.Accept.TEXT_HTML.getAccept());
+    }
 }

@@ -7,6 +7,7 @@ import org.dam.io.nio.buffer.ThreadLocalBuffer;
 import org.dam.http.HttpField;
 import org.dam.http.HttpResponse;
 import org.dam.http.Response;
+import org.dam.utils.util.log.Logger;
 
 import java.io.IOException;
 
@@ -42,12 +43,11 @@ public class HttpGenerate {
         final byte[] headerByte = response.getHeaderBytes();
         header.byteBuffer().position(0);
         header.byteBuffer().put(headerByte);
-        System.out.println(new String(headerByte));
+        Logger.INFO("HttpResponseHeader:{}",new String(headerByte));
         final byte[] bodyByte = response.getBodyBytes();
         if(bodyByte != null && bodyByte.length > 0){
             body.byteBuffer().position(0);
             body.byteBuffer().put(bodyByte);
-            System.out.println(new String(bodyByte));
         };
         return true;
 
@@ -55,7 +55,6 @@ public class HttpGenerate {
 
     private void flush(Buffer header, Buffer body){
         try {
-            System.out.println("write:"+endPoint);
             endPoint.flush(header,body);
         } catch (IOException e) {
 

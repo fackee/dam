@@ -3,6 +3,7 @@ package org.dam.io.nio;
 import org.dam.io.EndPoint;
 import org.dam.io.connection.Connection;
 import org.dam.utils.lifecycle.AbstractLifeCycle;
+import org.dam.utils.util.log.Logger;
 
 
 import java.io.IOException;
@@ -179,46 +180,75 @@ public abstract class SelectorManager extends AbstractLifeCycle {
                         ((Runnable)work).run();
                     }
                 }
+                int select = selector.selectNow();
+                if(select == 0 && selector.selectedKeys().isEmpty()){
+
+                }
+
+                if(selector == null || !selector.isOpen()){
+                    return;
+                }
+                for(SelectionKey selectionKey : selector.selectedKeys()){
+                    System.out.println("selectedKeySiez:"+selector.selectedKeys().size());
+                    SocketChannel socketChannel = null;
+                    try {
+                        if(!selectionKey.isValid()){
+                            selectionKey.cancel();
+                            SelectChannelEndPoint endPoint = (SelectChannelEndPoint)selectionKey.attachment();
+                            if(endPoint!=null){
+                                endPoint.doUpdateKey();
+                            }
+                            continue;
+                        }
+                        Object attachment = selectionKey.attachment();
+                        if(attachment instanceof SelectChannelEndPoint){
+                            if(selectionKey.isWritable() || selectionKey.isReadable()){
+                                final SelectChannelEndPoint endPoint = (SelectChannelEndPoint)attachment;
+                                System.out.println("foreach selectionKey    isReadable:"+selectionKey.isReadable()+"     isWritable:"+selectionKey.isWritable());
+                                System.out.println("foreach selectionKey:" + endPoint + "   readBlock:"+endPoint.isReadBloking()+"  writeBlock:"+endPoint.isWriteBloking());
+                                endPoint.schedule();
+                            }
+                        }else if(selectionKey.isConnectable()){
+                            socketChannel = (SocketChannel) selectionKey.channel();
+                            boolean connected = false;
+                            try {
+                                connected = socketChannel.finishConnect();
+                            }catch (Exception e){
+                                Logger.ERROR("");
+                            }finally {
+                                if(connected){
+                                    selectionKey.interestOps(SelectionKey.OP_READ);
+                                    SelectChannelEndPoint endPoint = createEndPoint(socketChannel,selectionKey);
+                                    selectionKey.attach(endPoint);
+                                    endPoint.schedule();
+                                }else{
+                                    selectionKey.cancel();
+                                    socketChannel.close();
+                                }
+                            }
+                        }else{
+                            socketChannel = (SocketChannel)selectionKey.channel();
+                            SelectChannelEndPoint endPoint = createEndPoint(socketChannel,selectionKey);
+                            selectionKey.attach(endPoint);
+                            if(selectionKey.isReadable()){
+                                endPoint.schedule();
+                            }
+                            selectionKey = null;
+                        }
+                    }catch (Exception e){
+                        if(selectionKey != null && !(selectionKey.channel() instanceof ServerSocketChannel) &&
+                                selectionKey.isValid()){
+                            selectionKey.cancel();
+                        }
+                    }
+                }
+
+                currentSelector.selectedKeys().clear();
+
             }catch (IOException e){
                 //TODO doWork IOException
             }
 
-            int select = selector.selectNow();
-            if(select == 0 && selector.selectedKeys().isEmpty()){
-
-            }
-
-            if(selector == null || !selector.isOpen()){
-                return;
-            }
-            for(SelectionKey selectionKey : selector.selectedKeys()){
-                System.out.println("selectedKeySiez:"+selector.selectedKeys().size());
-                SocketChannel socketChannel = null;
-                try {
-                    if(!selectionKey.isValid()){
-                        selectionKey.cancel();
-                        SelectChannelEndPoint endPoint = (SelectChannelEndPoint)selectionKey.attachment();
-                        if(endPoint!=null){
-                            endPoint.doUpdateKey();
-                        }
-                        continue;
-                    }
-                    Object attachment = selectionKey.attachment();
-                    if(attachment instanceof SelectChannelEndPoint){
-                        if(selectionKey.isWritable() || selectionKey.isReadable()){
-                            final SelectChannelEndPoint endPoint = (SelectChannelEndPoint)attachment;
-                            System.out.println("foreach selectionKey    isReadable:"+selectionKey.isReadable()+"     isWritable:"+selectionKey.isWritable());
-                            System.out.println("foreach selectionKey:" + endPoint + "   readBlock:"+endPoint.isReadBloking()+"  writeBlock:"+endPoint.isWriteBloking());
-                            endPoint.schedule();
-                        }
-                    }else if(selectionKey.isConnectable()){
-                        socketChannel = (SocketChannel) selectionKey.channel();
-
-                    }
-                }catch (Exception e){
-
-                }
-            }
         }
 
         private SelectChannelEndPoint createEndPoint(SocketChannel channel, SelectionKey key) throws IOException{
@@ -226,6 +256,11 @@ public abstract class SelectorManager extends AbstractLifeCycle {
             endPointOpend(endPoint);
             endPoints.put(endPoint,this);
             return endPoint;
+        }
+
+        public void destroyEndPoint(SelectChannelEndPoint endPoint) {
+            endPoints.remove(endPoint);
+            closeEndPoint(endPoint);
         }
 
         public void wakeUp() {
@@ -283,10 +318,6 @@ public abstract class SelectorManager extends AbstractLifeCycle {
             return SelectorManager.this;
         }
 
-
-        public void destroyEndPoint(SelectChannelEndPoint endPoint) {
-            closeEndPoint(endPoint);
-        }
     }
 
 

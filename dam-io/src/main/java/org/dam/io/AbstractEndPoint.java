@@ -2,6 +2,7 @@ package org.dam.io;
 
 import org.dam.io.nio.buffer.Buffer;
 import org.dam.io.nio.buffer.NioBuffer;
+import org.dam.utils.util.log.Logger;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -228,6 +229,7 @@ public abstract class AbstractEndPoint implements EndPoint {
         }catch (IOException e){
 
         }finally {
+            Logger.INFO("===============flush messgae finished==============");
             if(!isOutputShutdown()){
                 try {
                     shutdownOutput();

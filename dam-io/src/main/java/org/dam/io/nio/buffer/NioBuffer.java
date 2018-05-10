@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 /**
  * Created by zhujianxin on 2018/3/7.
  */
-public class NioBuffer implements Buffer {
+public class NioBuffer implements Buffer{
 
     private final ByteBuffer byteBuffer;
 

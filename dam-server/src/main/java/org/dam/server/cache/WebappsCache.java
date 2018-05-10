@@ -38,11 +38,15 @@ public class WebappsCache {
                 webAppMap.putIfAbsent(action,controllerBeans);
             });
         } catch (IOException e) {
+            Logger.ERROR("load App jar error:{}",Logger.printStackTraceToString(
+                    e.fillInStackTrace()
+            ));
             System.exit(0);
-            //TODO LOGGER
         } catch (ClassNotFoundException e) {
+            Logger.ERROR("load App jar error:{}",Logger.printStackTraceToString(
+                    e.fillInStackTrace()
+            ));
             System.exit(0);
-            //TODO LOGGER
         }
         return this;
     }
@@ -61,10 +65,14 @@ public class WebappsCache {
                 webAppMap.putIfAbsent(action,controllerBeans);
             });
         } catch (IOException e) {
-            Logger.ERROR("load App classes error:{}",e.toString());
+            Logger.ERROR("load App classes error:{}",Logger.printStackTraceToString(
+                    e.fillInStackTrace()
+            ));
             System.exit(0);
         } catch (ClassNotFoundException e) {
-            Logger.ERROR("load App classes error:{}",e.toString());
+            Logger.ERROR("load App classes error:{}",Logger.printStackTraceToString(
+                    e.fillInStackTrace()
+            ));
             System.exit(0);
         }
         return this;

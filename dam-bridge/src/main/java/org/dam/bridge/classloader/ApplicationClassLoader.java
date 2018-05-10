@@ -1,7 +1,4 @@
 package org.dam.bridge.classloader;
-
-import sun.dc.pr.PRError;
-
 import java.io.*;
 
 /**
@@ -12,10 +9,7 @@ public class ApplicationClassLoader extends ClassLoader{
     private static final String CLASS_SUFFIX = ".class";
     private static final String CLASS_LINK = ".";
     private static final String PACKAGE_LINK = "/";
-
-    public ApplicationClassLoader(){
-
-    }
+    public ApplicationClassLoader(){}
 
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {

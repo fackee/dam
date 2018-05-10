@@ -4,6 +4,8 @@ import org.dam.http.*;
 import org.dam.http.util.HttpGenerate;
 import org.dam.io.EndPoint;
 import org.dam.io.connection.Connection;
+import org.dam.utils.util.log.Logger;
+
 import java.io.IOException;
 
 /**
@@ -34,8 +36,7 @@ public class HttpConnection extends AbstractHttpConnection {
         request.setSession(getHttpField().getSession());
         getServer().handle(request,response);
         try {
-            if(!getEndPoint().blockWritable(10000)){
-                System.out.println("write Event OK? write back");
+            if(!getEndPoint().blockWritable(5000)){
                 HttpGenerate httpGenerate = new HttpGenerate(getEndPoint(),new HttpField.HttpBuilder().builde(),response).generate();
             }
         } catch (IOException e) {
@@ -43,6 +44,7 @@ public class HttpConnection extends AbstractHttpConnection {
         }finally {
             try {
                 getEndPoint().close();
+                Logger.INFO("http finished close endpoint:{}",getEndPoint());
             } catch (IOException e) {
                 e.printStackTrace();
             }

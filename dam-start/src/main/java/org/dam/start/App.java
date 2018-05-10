@@ -24,7 +24,9 @@ public class App {
                     Logger.printStackTraceToString(e.fillInStackTrace()));
             System.exit(0);
         }
+        Logger.INFO("=========load configurations finish============");
         WebappsCache webappsCache = new WebappsCache(configuration).cacheClassesApp();
+        Logger.INFO("=========load appCache finish============");
         Server server = new Server(configuration,webappsCache);
         Connector connector = new NioConnector(server);
         connector.setPort(80);
