@@ -41,17 +41,16 @@ Dam是一款轻量级的基于jvm平台的简易http服务器，采用Java为开
 创建控制器开处理http请求:
 
     package com.dam.controller;
-import com.dam.model.User;
-import com.dam.service.UserService;
-import org.dam.annotation.Parameter;
-import org.dam.annotation.Request;
-import org.dam.annotation.Toylet;
-import org.dam.http.HttpResponse;
-import org.dam.http.Response;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+    import com.dam.model.User;
+    import com.dam.service.UserService;
+    import org.dam.annotation.Parameter;
+    import org.dam.annotation.Request;
+    import org.dam.annotation.Toylet;
+    import org.dam.http.HttpResponse;
+    import org.dam.http.Response;
+    import java.util.ArrayList;
+    import java.util.List;
+    import java.util.Scanner;
 
     /**
     * Created by geeche on 2018/5/7.
