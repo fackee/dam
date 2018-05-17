@@ -1,10 +1,18 @@
 package org.dam.utils.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.SimpleTimeZone;
+
 /**
  * Created by zhujianxin on 2018/3/7.
  */
 public class StringUtil {
 
+    private static final String FORMATTER = "EEE, dd MMM YYYY hh:mm:ss 'GMT'";
+    private static final SimpleDateFormat FORMAT = new SimpleDateFormat(FORMATTER,Locale.ENGLISH);
     public static boolean httpLineEquals(String server,String client){
         char[] serverArr = server.toCharArray();
         char[] clientArr = client.toCharArray();
@@ -56,5 +64,10 @@ public class StringUtil {
     }
 
 
+    public static String getGMTDate(Date date){
+        Calendar calendar = Calendar.getInstance(new SimpleTimeZone(0,"GMT"));
+        FORMAT.setCalendar(calendar);
+        return FORMAT.format(date);
+    }
 
 }

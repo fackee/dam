@@ -15,7 +15,7 @@ public class SessionHandler extends AbstractHandler {
 
     @Override
     public boolean handle(Request baseRequest, Response baseResponse) {
-        Logger.INFO("SessionHandle handle sessionInfo");
+        Logger.INFO("SessionHandle execute sessionInfo");
         return true;
     }
 }

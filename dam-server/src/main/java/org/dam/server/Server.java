@@ -7,6 +7,7 @@ import org.dam.server.handler.Handler;
 import org.dam.http.Request;
 import org.dam.http.Response;
 import org.dam.server.cache.WebappsCache;
+import org.dam.utils.lifecycle.ContainerLifeCycle;
 import org.dam.utils.util.thread.ExecutorThreadPool;
 import org.dam.utils.util.thread.QueueThreadPool;
 import org.dam.utils.util.thread.ThreadPool;
@@ -18,7 +19,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 /**
  * Created by geeche on 2018/1/25.
  */
-public class Server extends AbstractHandler {
+public class Server extends ContainerLifeCycle implements Handler{
 
     private Connector connector;
     private Configuration configuration;
@@ -45,7 +46,7 @@ public class Server extends AbstractHandler {
     }
     public Server(Configuration configuration,int acceptThreadNum, int workThreadNum, ThreadPool threadPool){
         this.configuration = configuration;
-        this.threadPool = threadPool;
+        setThreadPool(threadPool);
         acceptService = new ExecutorThreadPool(acceptThreadNum);
         workerService = new ExecutorThreadPool(workThreadNum);
         handleWrapper = new HandleWrapper(new LinkedList<Handler>());
@@ -56,6 +57,14 @@ public class Server extends AbstractHandler {
 
     public ThreadPool getThreadPool() {
         return threadPool;
+    }
+
+    public void setThreadPool(ThreadPool pool)
+    {
+        if (pool!=null)
+            removeBean(threadPool);
+        threadPool = pool;
+        addBean(threadPool,true);
     }
 
     public void setConnector(Connector connector) {
@@ -89,6 +98,7 @@ public class Server extends AbstractHandler {
 
     @Override
     protected void doStart() throws Exception {
+        super.doStart();
         connector.start();;
     }
 
@@ -97,6 +107,14 @@ public class Server extends AbstractHandler {
         handleWrapper.handle(baseRequest,baseResponse);
         return true;
     }
+
+    @Override
+    public Server getServer() {
+        return this;
+    }
+
+    @Override
+    public void setServer(Server server) {}
 
     public void serve() {
         try {

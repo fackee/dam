@@ -3,15 +3,13 @@ package org.dam.http.constant;
 import sun.dc.pr.PRError;
 
 public class HttpConstant {
-
-    public static final String HTTP_VERSION = "HTTP/1.1 ";
+    ;
     public static final String HTTP_MESSAGE_LINEFEED = "\r\n";
-    public static final String STATUS = "statusCode";
-
+    public static final String HTTP_ENCODING_GZIP = "gzip";
     public enum HttpStatusCode {
         OK("200 OK", 200), Created("201 Created", 201), Accepted("202 Accepted", 202), NO_CONTENT("204 NO Content", 204),
-        Multiple_Choices("300 Mutiple Choices", 300), Moved_Permanently("301 Moved Permanently", 301), Moved_Temporarily("302 Moved Temporarily", 302), Not_Modified("304 Not Modified", 304),
-        Bad_Request("400 Bad Request", 400), Unauthorized("401 Unauthorized", 401), Forbidden("403 Forbidden", 403), Not_Found("Not Found", 404),
+        Multiple_Choices("300 Mutiple Choices", 300), Moved_Permanently("301 Moved Permanently", 301), FOUND("302 Found", 302),SEE_OTHER("303 See Other",303),Not_Modified("304 Not Modified", 304),
+        Bad_Request("400 Bad Request", 400), Unauthorized("401 Unauthorized", 401), Forbidden("403 Forbidden", 403), Not_Found("404 Not Found", 404),
         Internal_Server_Error("500 Internal Server Error", 500), Not_Implemented("501 Not Implemented", 501), Bad_Gateway("502 Bad Gateway", 502), Service_Unavailable("503 Service Unavailable", 503);
 
 
@@ -193,11 +191,11 @@ public class HttpConstant {
 
     public enum HttpEntity {
 
-        Allow("Allow"),
+        Allow("Allow"),Accept_Ranges("Accept-Ranges"),
         Content_Base("Content-Base"), Content_Encoding("Content-Encoding"), Content_Language("Content-Language"), Content_Length("Content-Length"),
         Content_Location("Content-Location"), Content_MD5("Content-MD5"), Content_Range("Content-Range"), Content_Type("Content-Type"),
-        ETag("ETag"), Expires("Expires"), Last_Modified("Last-Modified");
-
+        ETag("ETag"), Expires("Expires"), Last_Modified("Last-Modified"),
+        Content_Disposition("Content-Disposition");
         private String entity;
 
         HttpEntity(String entity) {

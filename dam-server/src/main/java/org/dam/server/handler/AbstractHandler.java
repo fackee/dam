@@ -1,6 +1,7 @@
 package org.dam.server.handler;
 
 
+import org.dam.server.response.ResponseStrategy;
 import org.dam.server.Server;
 import org.dam.http.Request;
 import org.dam.http.Response;
@@ -13,8 +14,11 @@ import org.dam.utils.lifecycle.AbstractLifeCycle;
  */
 public abstract class AbstractHandler extends AbstractLifeCycle implements Handler {
 
+    private ResponseStrategy responseStrategy;
+
     private Server server;
 
+    protected HandleWrapper.HandleResult handleResult;
     @Override
     public abstract boolean handle(Request baseRequest, Response baseResponse);
 
@@ -31,5 +35,21 @@ public abstract class AbstractHandler extends AbstractLifeCycle implements Handl
     @Override
     public void destroy() {
 
+    }
+
+    public void setResponseStrategy(ResponseStrategy responseStrategy) {
+        this.responseStrategy = responseStrategy;
+    }
+
+    public ResponseStrategy getResponseStrategy() {
+        return responseStrategy;
+    }
+
+    public void setHandleResult(HandleWrapper.HandleResult handleResult) {
+        this.handleResult = handleResult;
+    }
+
+    public HandleWrapper.HandleResult getHandleResult() {
+        return handleResult;
     }
 }

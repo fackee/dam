@@ -2,10 +2,10 @@ package org.dam.http;
 
 public interface Session {
 
-    public Object getAttribute(String key);
+    public Object getSession(String key);
 
-    public boolean setAttibute(String key,Object value);
+    public boolean setSession(String key,Object value);
 
-    public boolean addAttribute(String key ,Object value);
+    public boolean addSession(String key ,Object value);
 
 }

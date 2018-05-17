@@ -1,42 +1,31 @@
 package org.dam.http;
 
+import org.dam.http.bean.Cookie;
+import org.dam.http.bean.HttpHeader;
+import org.dam.http.bean.HttpParameter;
+import org.dam.http.bean.Multipart;
+
+import java.util.List;
+
 public class HttpRequest implements Request {
 
     private HttpHeader httpHeader;
     private HttpParameter httpParameter;
-    private Cookie cookie;
-    private Session session;
-
+    private List<Cookie> cookies;
+    private Multipart multipart;
+    private volatile boolean initCookie = true;
     public HttpRequest(){}
     public HttpRequest(HttpHeader httpHeader){
         this(httpHeader,new HttpParameter());
     }
     public HttpRequest(HttpHeader httpHeader, HttpParameter httpParameter){
-        this(httpHeader,httpParameter,new Cookie());
-    }
-    public HttpRequest(HttpHeader httpHeader, HttpParameter httpParameter, Cookie cookie){
-        this(httpHeader,httpParameter,cookie,new HttpSession());
-    }
-    public HttpRequest(HttpHeader httpHeader, HttpParameter httpParameter, Cookie cookie, Session session){
         this.httpHeader = httpHeader;
         this.httpParameter = httpParameter;
-        this.cookie = cookie;
-        this.session = session;
     }
 
     @Override
     public HttpHeader getHeader() {
         return httpHeader;
-    }
-
-    @Override
-    public Cookie getCookie() {
-        return cookie;
-    }
-
-    @Override
-    public Session getSession() {
-        return session;
     }
 
     @Override
@@ -55,12 +44,30 @@ public class HttpRequest implements Request {
     }
 
     @Override
-    public void setCookie(Cookie cookie) {
-        this.cookie = cookie;
+    public void setCookies(List<Cookie> cookies) {
+        if(initCookie){
+            this.cookies = cookies;
+        }
+        initCookie = false;
     }
 
     @Override
-    public void setSession(Session session) {
-        this.session = session;
+    public Cookie getCookie(String name) {
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals(name)){
+                return cookie;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void setMultipart(Multipart multipart) {
+        this.multipart = multipart;
+    }
+
+    @Override
+    public Multipart getMultipart() {
+        return multipart;
     }
 }

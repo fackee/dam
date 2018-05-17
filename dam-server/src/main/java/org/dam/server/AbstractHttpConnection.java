@@ -1,9 +1,10 @@
 package org.dam.server;
 
-import org.dam.http.HttpField;
-import org.dam.http.util.HttpParser;
+import org.dam.http.bean.HttpField;
+import org.dam.http.HttpParser;
 import org.dam.io.EndPoint;
 import org.dam.io.connection.Connection;
+import org.dam.utils.util.log.Logger;
 
 import java.io.IOException;
 
@@ -26,7 +27,7 @@ public class AbstractHttpConnection implements Connection {
 
     @Override
     public Connection handle() {
-        System.out.println("dispatch-->handler,super");
+        Logger.INFO("==============AbstractHttpConnection execute================");
         try {
             httpParser = new HttpParser(endPoint).parse();
         } catch (IOException e) {

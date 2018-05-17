@@ -4,6 +4,8 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dam-annotation" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dam-bridge" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dam-constant" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dam-dynamic-syntax" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dam-exception" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dam-http" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dam-io" charset="UTF-8" />

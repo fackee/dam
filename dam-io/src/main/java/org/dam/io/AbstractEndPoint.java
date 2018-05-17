@@ -69,6 +69,7 @@ public abstract class AbstractEndPoint implements EndPoint {
                     //TODO
                 }finally {
                     if(inShut){
+                        Logger.INFO("=============http over close============");
                         close();
                     }
                 }
@@ -183,10 +184,11 @@ public abstract class AbstractEndPoint implements EndPoint {
         }
         int len = 0;
         if(buffer instanceof NioBuffer) {
-            final NioBuffer nioBuffer = (NioBuffer)buffer;
-            final ByteBuffer byteBuffer = nioBuffer.byteBuffer();
+            NioBuffer nioBuffer = (NioBuffer)buffer;
+            ByteBuffer byteBuffer = nioBuffer.byteBuffer();
             synchronized (byteBuffer){
                 try {
+                    int bufferSize = NioBuffer.DEFAULT_BUFFER_SIZE;
                     len = channel.read(byteBuffer);
                 }catch (IOException e){
 

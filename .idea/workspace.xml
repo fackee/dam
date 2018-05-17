@@ -2,24 +2,95 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90b46d08-5322-4701-8314-fb2908b2923d" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/config/config.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/constant.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-constant/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-constant/src/main/java/org/dam/constant/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-constant/src/main/java/org/dam/constant/ExceptionConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/src/main/java/org/dam/anlyze/AbstractStategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/src/main/java/org/dam/anlyze/AnalyzeStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/src/main/java/org/dam/anlyze/Analyzer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/src/main/java/org/dam/anlyze/ConditionStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/src/main/java/org/dam/anlyze/DynamicAnalyse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/src/main/java/org/dam/anlyze/DynamicDataGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/src/main/java/org/dam/anlyze/LooperStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/src/main/java/org/dam/anlyze/SingleStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/src/main/java/org/dam/dynamic/DynamicSyntax.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/src/main/java/org/dam/dynamic/VariableType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-dynamic-syntax/src/main/java/org/dam/util/SyntaxTree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-exception/src/main/java/org/dam/exception/ClientException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-exception/src/main/java/org/dam/exception/ServerException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-exception/src/main/java/org/dam/exception/VariableIllegalException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/CookieManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/SessionManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/Cookie.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/Multipart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/ClientErrorResultExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/DefaultResultExecuteFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/DynamicResultExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/FileResultExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/JSONResultExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/RedirectResultExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/ResultExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/ServerErrorResultExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/StaticResultExecutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/AbstractReponseStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/ClientErrorResponseStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/OKResponseStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/RedirectReponseStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/ResponseStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/ServerErrorResponseStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/generator/ResponseGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dam-bridge/src/main/java/org/dam/bridge/classloader/ApplicationClassLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-bridge/src/main/java/org/dam/bridge/classloader/ApplicationClassLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/util/HttpGenerate.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/util/HttpGenerate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-annotation/src/main/java/org/dam/annotation/File.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-annotation/src/main/java/org/dam/annotation/File.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-bridge/src/main/java/org/dam/bridge/bean/HandlerBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-bridge/src/main/java/org/dam/bridge/bean/HandlerBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-bridge/src/main/java/org/dam/bridge/util/ReflectUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-bridge/src/main/java/org/dam/bridge/util/ReflectUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Cookie.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpField.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/HttpField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpHeader.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/HttpHeader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpParameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/HttpParameter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpSession.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/constant/HttpConstant.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/constant/HttpConstant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/statics/HttpMedia.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/constant/HttpMedia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/util/HttpGenerate.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpGenerate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/util/HttpParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/AbstractEndPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/AbstractEndPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectChannelEndPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectChannelEndPoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectorManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/buffer/NioBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/buffer/NioBuffer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dam-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/AbstractConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/AbstractConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/AbstractHttpConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/AbstractHttpConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/HttpConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/HttpConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/cache/WebappsCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/cache/WebappsCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/AbstractHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/AbstractHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/AppLoadHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/AppLoadHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/HandleWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/HandleWrapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/HttpHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/HttpHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/SessionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/SessionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/sourcehandle/StaticHandle.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/sourcehandle/StaticHandle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/sourcehandle/DataHandle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/sourcehandle/DynamicHandle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/sourcehandle/RedirectHandle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/sourcehandle/StaticHandle.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/nio/NioConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/nio/NioConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/util/HttpHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/util/HttpHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dam-start/src/main/java/org/dam/start/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-start/src/main/java/org/dam/start/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/util/HttpHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/StringUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/StringUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/log/Logger.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/log/Logger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/stream/StaticStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/stream/StaticStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/thread/QueueThreadPool.java" beforeDir="false" afterPath="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/thread/QueueThreadPool.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web服务器的设计与实现.docx" beforeDir="false" afterPath="$PROJECT_DIR$/web服务器的设计与实现.docx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dam-exception/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -30,6 +101,8 @@
     <ignored path="$PROJECT_DIR$/dam-http/target/" />
     <ignored path="$PROJECT_DIR$/dam-start/target/" />
     <ignored path="$PROJECT_DIR$/dam-annotation/target/" />
+    <ignored path="$PROJECT_DIR$/dam-dynamic-syntax/target/" />
+    <ignored path="$PROJECT_DIR$/dam-constant/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,76 +126,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SelectChannelEndPoint.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectChannelEndPoint.java">
+      <file leaf-file-name="HttpParser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-582">
-              <caret line="250" column="51" lean-forward="true" selection-start-line="250" selection-start-column="51" selection-end-line="250" selection-end-column="51" />
+            <state relative-caret-position="226">
+              <caret line="40" column="48" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
               <folding>
-                <element signature="e#1645#1646#0" expanded="true" />
-                <element signature="e#1675#1676#0" expanded="true" />
-                <element signature="e#1969#1970#0" expanded="true" />
-                <element signature="e#2002#2003#0" expanded="true" />
-                <element signature="method#schedule#0;class#SelectChannelEndPoint#0" />
-                <element signature="method#dispatch#0;class#SelectChannelEndPoint#0" />
+                <element signature="method#parseHttpParameters#0;class#HttpParser#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SelectorManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectorManager.java">
+      <file leaf-file-name="ClientErrorResponseStrategy.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/ClientErrorResponseStrategy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="100" column="25" selection-start-line="100" selection-start-column="25" selection-end-line="100" selection-end-column="25" />
+            <state relative-caret-position="151">
+              <caret line="17" column="75" selection-start-line="17" selection-start-column="75" selection-end-line="17" selection-end-column="75" />
               <folding>
-                <element signature="e#3136#3144#0" expanded="true" />
-                <element signature="e#3326#3356#0" expanded="true" />
-                <element signature="e#3542#3543#0" expanded="true" />
-                <element signature="e#3585#3586#0" expanded="true" />
-                <element signature="e#10793#10794#0" expanded="true" />
-                <element signature="e#10856#10857#0" expanded="true" />
+                <element signature="e#387#388#0" expanded="true" />
+                <element signature="e#427#428#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NioConnector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/nio/NioConnector.java">
+      <file leaf-file-name="AbstractReponseStrategy.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/AbstractReponseStrategy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="103" selection-start-line="103" selection-end-line="103" />
+            <state relative-caret-position="76">
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
               <folding>
-                <element signature="e#4496#4497#0" expanded="true" />
-                <element signature="e#4561#4562#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+      <file leaf-file-name="ResponseGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/generator/ResponseGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/Server.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="95" column="22" selection-start-line="95" selection-start-column="22" selection-end-line="95" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HttpConnection.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/HttpConnection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
+            <state relative-caret-position="59">
+              <caret line="32" column="52" lean-forward="true" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -132,6 +177,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -141,45 +188,87 @@
       <find>HttpHe</find>
       <find>flush</find>
       <find>doUpdatekey-&gt;</find>
+      <find>clo</find>
+      <find>doWor</find>
+      <find>doU</find>
+      <find>addW</find>
+      <find>updateKey</find>
+      <find>dopdateKey</find>
+      <find>open()</find>
+      <find>do</find>
+      <find>dispatch()</find>
+      <find>dis</find>
+      <find>dii</find>
+      <find>doS</find>
+      <find>matching this url path error</find>
+      <find>Accept_Ranges</find>
+      <find>load app</find>
+      <find>RESULT_TYPE</find>
+      <find>gzip After</find>
+      <find>.css</find>
+      <find>HTTP/1.1 200 OK</find>
       <find>des</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="REBASE" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpHeader.java" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/Server.java" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/config/Config.java" />
-        <option value="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/log/Logger.java" />
-        <option value="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/StringUtil.java" />
-        <option value="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/stream/StaticStream.java" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/sourcehandle/StaticHandle.java" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/config/Configuration.java" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/HandleWrapper.java" />
-        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/statics/HttpMedia.java" />
-        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/constant/HttpConstant.java" />
-        <option value="$PROJECT_DIR$/package.xml" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/HttpHandler.java" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/SessionHandler.java" />
-        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/util/HttpGenerate.java" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/cache/WebappsCache.java" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/util/HttpHelper.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/ErrorResultExecute.java" />
+        <option value="$PROJECT_DIR$/dam-exception/src/main/java/org/dam/exception/ServerException.java" />
+        <option value="$PROJECT_DIR$/dam-exception/src/main/java/org/dam/exception/ClientException.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/ResultExecuteFactory.java" />
         <option value="$PROJECT_DIR$/dam-server/pom.xml" />
-        <option value="$PROJECT_DIR$/dam-bridge/src/main/java/org/dam/bridge/classloader/ApplicationClassLoader.java" />
-        <option value="$PROJECT_DIR$/dam-start/src/main/java/org/dam/start/App.java" />
-        <option value="$PROJECT_DIR$/config/config.properties" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/AppLoadHandler.java" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/HttpConnection.java" />
-        <option value="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/AbstractEndPoint.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/HandleWrapper.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/HttpHandler.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/statics/HttpMedia.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/RedirectResultExecute.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/util/HttpHelper.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/RedirectReponseStrategy.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/util/HttpGenerate.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/DynamicResultExecute.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/ClientErrorResultExecute.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/JSONResultExecute.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/ServerErrorResultExecute.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/StaticResultExecute.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/ResultExecute.java" />
+        <option value="$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/StringUtil.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/AbstractReponseStrategy.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Cookie.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/util/HttpParser.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpField.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/CookieManager.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Session.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/SessionManager.java" />
+        <option value="$PROJECT_DIR$/dam-annotation/src/main/java/org/dam/annotation/File.java" />
+        <option value="$PROJECT_DIR$/dam-constant/src/main/java/org/dam/constant/Constants.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/FileResultExecutor.java" />
+        <option value="$PROJECT_DIR$/dam-exception/pom.xml" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/constant/HttpMedia.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/Multipart.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/HttpField.java" />
         <option value="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/buffer/NioBuffer.java" />
-        <option value="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectorManager.java" />
-        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/nio/NioConnector.java" />
-        <option value="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectChannelEndPoint.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/DefaultResultExecuteFactory.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/StaticResultExecutor.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpGenerate.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/HttpHeader.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/constant/HttpConstant.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/OKResponseStrategy.java" />
+        <option value="$PROJECT_DIR$/dam-bridge/src/main/java/org/dam/bridge/util/ReflectUtil.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpResponse.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Request.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpRequest.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/AppLoadHandler.java" />
+        <option value="$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/AbstractEndPoint.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/HttpConnection.java" />
+        <option value="$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpParser.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/ServerErrorResponseStrategy.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/generator/ResponseGenerator.java" />
+        <option value="$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/ClientErrorResponseStrategy.java" />
       </list>
     </option>
   </component>
@@ -224,9 +313,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -237,58 +323,37 @@
             <path>
               <item name="dam" type="b2602c69:ProjectViewProjectNode" />
               <item name="dam" type="462c0819:PsiDirectoryNode" />
-              <item name="dam-io" type="462c0819:PsiDirectoryNode" />
+              <item name="dam-http" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dam" type="b2602c69:ProjectViewProjectNode" />
               <item name="dam" type="462c0819:PsiDirectoryNode" />
-              <item name="dam-io" type="462c0819:PsiDirectoryNode" />
+              <item name="dam-http" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dam" type="b2602c69:ProjectViewProjectNode" />
               <item name="dam" type="462c0819:PsiDirectoryNode" />
-              <item name="dam-io" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="dam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dam" type="462c0819:PsiDirectoryNode" />
-              <item name="dam-io" type="462c0819:PsiDirectoryNode" />
+              <item name="dam-http" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dam" type="b2602c69:ProjectViewProjectNode" />
               <item name="dam" type="462c0819:PsiDirectoryNode" />
-              <item name="dam-io" type="462c0819:PsiDirectoryNode" />
+              <item name="dam-http" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dam" type="b2602c69:ProjectViewProjectNode" />
               <item name="dam" type="462c0819:PsiDirectoryNode" />
-              <item name="dam-io" type="462c0819:PsiDirectoryNode" />
+              <item name="dam-http" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-              <item name="nio" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="dam" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dam" type="462c0819:PsiDirectoryNode" />
-              <item name="dam-io" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-              <item name="nio" type="462c0819:PsiDirectoryNode" />
-              <item name="buffer" type="462c0819:PsiDirectoryNode" />
+              <item name="http" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dam" type="b2602c69:ProjectViewProjectNode" />
@@ -333,22 +398,30 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="handler" type="462c0819:PsiDirectoryNode" />
+              <item name="response" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="E:/Git/bin/git.exe" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="E:/apache-tomcat-8.0.52-src" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\roro\IdeaProjects\dam\config" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -374,24 +447,46 @@
         </pattern>
       </extension>
     </configuration>
-    <configuration name="Configuration" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.dam.server.config.Configuration" />
+    <configuration name="AppLoadHandler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.dam.server.handler.AppLoadHandler" />
       <module name="dam-server" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.dam.server.config.*" />
+          <option name="PATTERN" value="org.dam.server.handler.execute.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
     </configuration>
-    <configuration name="StringUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.dam.utils.util.StringUtil" />
-      <module name="dam-util" />
+    <configuration name="CookieManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.dam.http.CookieManager" />
+      <module name="dam-http" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.dam.utils.util.*" />
+          <option name="PATTERN" value="org.dam.http.bean.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="HandleWrapper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.dam.server.handler.HandleWrapper" />
+      <module name="dam-server" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.dam.server.handler.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="HttpParser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.dam.http.HttpParser" />
+      <module name="dam-http" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.dam.http.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -439,14 +534,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.App" />
-      <item itemvalue="Application.StringUtil" />
-      <item itemvalue="Application.Configuration" />
+      <item itemvalue="Application.AppLoadHandler" />
+      <item itemvalue="Application.HandleWrapper" />
+      <item itemvalue="Application.CookieManager" />
+      <item itemvalue="Application.HttpParser" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
-        <item itemvalue="Application.Configuration" />
-        <item itemvalue="Application.StringUtil" />
+        <item itemvalue="Application.HttpParser" />
+        <item itemvalue="Application.CookieManager" />
+        <item itemvalue="Application.AppLoadHandler" />
+        <item itemvalue="Application.HandleWrapper" />
       </list>
     </recent_temporary>
   </component>
@@ -466,7 +565,16 @@
       <workItem from="1525865404816" duration="295000" />
       <workItem from="1525866159624" duration="591000" />
       <workItem from="1525914583675" duration="1449000" />
-      <workItem from="1525916099147" duration="2358000" />
+      <workItem from="1525916099147" duration="20313000" />
+      <workItem from="1525951963543" duration="1658000" />
+      <workItem from="1526001655400" duration="19444000" />
+      <workItem from="1526090790413" duration="30395000" />
+      <workItem from="1526267288717" duration="14862000" />
+      <workItem from="1526347010700" duration="23065000" />
+      <workItem from="1526394772659" duration="4373000" />
+      <workItem from="1526432644846" duration="20100000" />
+      <workItem from="1526478507496" duration="5817000" />
+      <workItem from="1526517705445" duration="3973000" />
     </task>
     <task id="LOCAL-00001" summary="logger">
       <created>1525839630273</created>
@@ -475,11 +583,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525839630274</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="logger">
+      <created>1525918763721</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1525918763721</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33002000" />
+    <option name="totallyTimeSpent" value="174644000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -496,33 +611,63 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32913387" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32993197" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50075644" side_tool="true" weight="0.3282313" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5015129" side_tool="true" weight="0.37585035" />
       <window_info anchor="right" id="Maven Projects" order="3" weight="0.32980332" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.34013605" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32993197" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49924356" visible="true" weight="0.3265306" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.32993197" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49924356" weight="0.3265306" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28971255" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49822065" visible="true" weight="0.3267776" />
       <window_info anchor="right" id="Database" order="3" weight="0.32980332" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Structure" order="1" sideWeight="0.5017794" side_tool="true" weight="0.3214826" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3894558" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49848714" visible="true" weight="0.52210885" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32993197" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32993197" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2549168" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32913387" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Database" order="6" weight="0.32980332" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49924356" weight="0.3265306" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3894558" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.34013605" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50075644" side_tool="true" weight="0.3282313" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32993197" />
+      <window_info anchor="right" id="Maven Projects" order="8" weight="0.32980332" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -562,372 +707,418 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/AbstractReponseStrategy.java</url>
+          <line>40</line>
+          <properties />
+          <option name="timeStamp" value="146" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="9" />
+      <option name="time" value="147" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/ResultExecuteFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1525">
-          <caret line="61" column="39" lean-forward="true" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/HandleWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="875">
-          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2375">
-          <caret line="95" column="22" selection-start-line="95" selection-start-column="22" selection-end-line="95" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/HttpConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1100">
-          <caret line="44" column="33" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/util/HttpGenerate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="39" column="36" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpHeader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="430" column="40" selection-start-line="430" selection-start-column="40" selection-end-line="430" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/thread/QueueThreadPool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Response.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpResponse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="29" column="58" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-util/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-525" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/config/Config.java" />
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/src.zip!/java/lang/Throwable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="645" column="17" selection-start-line="645" selection-start-column="17" selection-end-line="645" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/log/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="32" column="45" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+        <state relative-caret-position="175">
+          <caret line="7" column="79" selection-start-line="7" selection-start-column="79" selection-end-line="7" selection-end-column="79" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/StringUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="52" column="37" selection-start-line="52" selection-start-column="37" selection-end-line="52" selection-end-column="37" />
+        <state relative-caret-position="-1200">
+          <caret line="14" column="98" selection-start-line="14" selection-start-column="98" selection-end-line="14" selection-end-column="98" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/jre/lib/deploy.jar!/com/sun/deploy/config/DefaultConfig.class">
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/ResultExecutor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204">
-          <caret line="13" column="43" lean-forward="true" selection-start-line="13" selection-start-column="43" selection-end-line="13" selection-end-column="43" />
+        <state relative-caret-position="64">
+          <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/sourcehandle/StaticHandle.java">
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/CookieManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+        <state relative-caret-position="88">
+          <caret line="10" column="32" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/config/Configuration.java">
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/SessionManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="91" column="49" selection-start-line="91" selection-start-column="49" selection-end-line="91" selection-end-column="49" />
+        <state relative-caret-position="271">
+          <caret line="37" column="43" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/statics/HttpMedia.java">
+    <entry file="file://$PROJECT_DIR$/dam-annotation/src/main/java/org/dam/annotation/Parameter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="71" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="71" selection-end-column="4" />
+        <state relative-caret-position="234">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/constant/HttpConstant.java">
+    <entry file="file://$PROJECT_DIR$/dam-annotation/src/main/java/org/dam/annotation/Request.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
-          <caret line="8" column="53" selection-start-line="8" selection-start-column="53" selection-end-line="8" selection-end-column="53" />
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/stream/StaticStream.java">
+    <entry file="file://$PROJECT_DIR$/dam-annotation/src/main/java/org/dam/annotation/File.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+        <state relative-caret-position="175">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.xml">
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Session.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="21" lean-forward="true" selection-start-column="21" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/Cookie.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-constant/src/main/java/org/dam/constant/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="47" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/JSONResultExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="17" column="5" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="17" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/FileResultExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="19" column="79" selection-start-line="19" selection-start-column="79" selection-end-line="19" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-exception/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpSession.java" />
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/HttpParameter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
-          <caret line="30" column="29" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="47" />
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/Multipart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="928">
+          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/HttpField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/buffer/NioBuffer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-199">
+          <caret line="13" column="23" lean-forward="true" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding>
+            <element signature="e#315#316#0" expanded="true" />
+            <element signature="e#348#349#0" expanded="true" />
+            <element signature="e#379#380#0" expanded="true" />
+            <element signature="e#1575#1576#0" expanded="true" />
+            <element signature="e#1613#1614#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/Java/jdk1.8.0_131/src.zip!/java/nio/channels/SocketChannel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="115" column="22" selection-start-line="115" selection-start-column="22" selection-end-line="115" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/Java/jdk1.8.0_131/jre/lib/rt.jar!/sun/nio/ch/SocketChannelImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-666">
+          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/Java/jdk1.8.0_131/src.zip!/java/nio/channels/ByteChannel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/DefaultResultExecuteFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="35" column="32" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/execute/StaticResultExecutor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="22" column="86" selection-start-line="22" selection-start-column="86" selection-end-line="22" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpGenerate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="33" column="37" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/constant/HttpMedia.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="75" column="8" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/bean/HttpHeader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="449" column="42" selection-start-line="449" selection-start-column="23" selection-end-line="449" selection-end-column="42" />
+          <folding>
+            <element signature="e#424#425#0" expanded="true" />
+            <element signature="e#460#461#0" expanded="true" />
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#669#670#0" expanded="true" />
+            <element signature="e#4156#4157#0" expanded="true" />
+            <element signature="e#4191#4192#0" expanded="true" />
+            <element signature="e#4239#4240#0" expanded="true" />
+            <element signature="e#4287#4288#0" expanded="true" />
+            <element signature="e#7001#7002#0" expanded="true" />
+            <element signature="e#7044#7045#0" expanded="true" />
+            <element signature="e#12061#12062#0" expanded="true" />
+            <element signature="e#12111#12112#0" expanded="true" />
+            <element signature="e#13784#13785#0" expanded="true" />
+            <element signature="e#13837#13838#0" expanded="true" />
+            <element signature="e#15652#15653#0" expanded="true" />
+            <element signature="e#15699#15700#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/HandleWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
+        <state relative-caret-position="76">
+          <caret line="93" column="20" lean-forward="true" selection-start-line="93" selection-start-column="20" selection-end-line="93" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/util/HttpGenerate.java">
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+        <state relative-caret-position="-1341">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-annotation/pom.xml">
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/constant/HttpConstant.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-375" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+        <state relative-caret-position="146">
+          <caret line="197" column="27" selection-start-line="197" selection-start-column="27" selection-end-line="197" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-io/pom.xml">
+    <entry file="file://$PROJECT_DIR$/dam-util/src/main/java/org/dam/utils/util/thread/QueueThreadPool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-525" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-http/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-600" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-exception/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-375" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-bridge/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-600" />
-      </provider>
-    </entry>
-    <entry file="file://E:/Dam_v_1.0.0/www/example_0/classes/com/dam/controller/Index.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-150" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-bridge/src/main/java/org/dam/bridge/classloader/ApplicationClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="10" column="51" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
+        <state relative-caret-position="76">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/cache/WebappsCache.java">
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Request.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-bridge/src/main/java/org/dam/bridge/util/ReflectUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-64">
+          <caret line="72" column="33" lean-forward="true" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-bridge/src/main/java/org/dam/bridge/bean/HandlerBean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-start/src/main/java/org/dam/start/App.java">
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpResponse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+        <state relative-caret-position="225">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.properties" />
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/util/HttpHelper.java">
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/Response.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+        <state relative-caret-position="76">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/HttpHandler.java">
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="68" column="47" lean-forward="true" selection-start-line="68" selection-start-column="47" selection-end-line="68" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/AppLoadHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="210" column="55" selection-start-line="210" selection-start-column="55" selection-end-line="210" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/AbstractHttpConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
-          <folding>
-            <element signature="e#1119#1120#0" expanded="true" />
-            <element signature="e#1150#1151#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="396">
+          <caret line="70" column="8" selection-start-line="70" selection-start-column="8" selection-end-line="70" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/EndPoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        <state relative-caret-position="9">
+          <caret line="33" column="15" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/cache/ControllerCache.java">
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/AbstractHttpConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="16" column="42" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="42" />
+        <state relative-caret-position="-561">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+          <folding>
+            <element signature="e#1256#1257#0" expanded="true" />
+            <element signature="e#1288#1289#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_131/src.zip!/java/nio/Buffer.java">
+    <entry file="file://$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectChannelEndPoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3775">
-          <caret line="174" column="22" selection-start-line="174" selection-start-column="22" selection-end-line="174" selection-end-column="22" />
+        <state relative-caret-position="226">
+          <caret line="55" column="23" lean-forward="true" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/SessionHandler.java">
+    <entry file="file://$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectorManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="93">
-          <caret line="17" column="53" selection-start-line="17" selection-start-column="53" selection-end-line="17" selection-end-column="53" />
+        <state relative-caret-position="96">
+          <caret line="278" column="24" selection-start-line="278" selection-start-column="24" selection-end-line="278" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/buffer/Buffer.java">
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/HttpConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="925">
-          <caret line="37" column="11" selection-start-line="37" selection-start-column="11" selection-end-line="37" selection-end-column="11" />
+        <state relative-caret-position="-248">
+          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/AbstractEndPoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="207" column="21" selection-start-line="207" selection-start-column="21" selection-end-line="207" selection-end-column="21" />
+        <state relative-caret-position="126">
+          <caret line="191" column="51" selection-start-line="191" selection-start-column="51" selection-end-line="191" selection-end-column="51" />
+          <folding>
+            <element signature="e#7580#7581#0" expanded="true" />
+            <element signature="e#7619#7620#0" expanded="true" />
+            <element signature="e#7669#7670#0" expanded="true" />
+            <element signature="e#7699#7700#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/handler/AppLoadHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="601">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-http/src/main/java/org/dam/http/HttpParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="40" column="48" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
+          <folding>
+            <element signature="method#parseHttpParameters#0;class#HttpParser#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/OKResponseStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/ServerErrorResponseStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#376#377#0" expanded="true" />
+            <element signature="e#415#416#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/AbstractReponseStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/buffer/NioBuffer.java">
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/generator/ResponseGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-232">
-          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+        <state relative-caret-position="59">
+          <caret line="32" column="52" lean-forward="true" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/response/ClientErrorResponseStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="17" column="75" selection-start-line="17" selection-start-column="75" selection-end-line="17" selection-end-column="75" />
           <folding>
-            <element signature="e#1490#1491#0" expanded="true" />
-            <element signature="e#1523#1524#0" expanded="true" />
+            <element signature="e#387#388#0" expanded="true" />
+            <element signature="e#427#428#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectorManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="100" column="25" selection-start-line="100" selection-start-column="25" selection-end-line="100" selection-end-column="25" />
-          <folding>
-            <element signature="e#3136#3144#0" expanded="true" />
-            <element signature="e#3326#3356#0" expanded="true" />
-            <element signature="e#3542#3543#0" expanded="true" />
-            <element signature="e#3585#3586#0" expanded="true" />
-            <element signature="e#10793#10794#0" expanded="true" />
-            <element signature="e#10856#10857#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/nio/NioConnector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
-          <folding>
-            <element signature="e#4496#4497#0" expanded="true" />
-            <element signature="e#4561#4562#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="95" column="22" selection-start-line="95" selection-start-column="22" selection-end-line="95" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-server/src/main/java/org/dam/server/HttpConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="45" column="37" selection-start-line="45" selection-start-column="37" selection-end-line="45" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dam-io/src/main/java/org/dam/io/nio/SelectChannelEndPoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-582">
-          <caret line="250" column="51" lean-forward="true" selection-start-line="250" selection-start-column="51" selection-end-line="250" selection-end-column="51" />
-          <folding>
-            <element signature="e#1645#1646#0" expanded="true" />
-            <element signature="e#1675#1676#0" expanded="true" />
-            <element signature="e#1969#1970#0" expanded="true" />
-            <element signature="e#2002#2003#0" expanded="true" />
-            <element signature="method#schedule#0;class#SelectChannelEndPoint#0" />
-            <element signature="method#dispatch#0;class#SelectChannelEndPoint#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="49" column="47" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -996,6 +1187,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>Maven: com.alibaba:fastjson:1.2.47</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

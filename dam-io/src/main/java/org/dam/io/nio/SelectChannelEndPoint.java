@@ -4,6 +4,7 @@ import org.dam.io.AbstractEndPoint;
 import org.dam.io.ConnectedEndPoint;
 import org.dam.io.connection.Connection;
 import org.dam.io.nio.buffer.Buffer;
+import org.dam.utils.util.log.Logger;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -110,6 +111,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
     @Override
     public boolean blockWritable(long millisecs) throws IOException{
         synchronized (this){
+            Logger.INFO("===========blockWrite==============");
             if(isOutputShutdown()){
                 throw new EOFException();
             }
@@ -126,6 +128,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
             }
             writeBloking = false;
         }
+        Logger.INFO("I'm write,wake up");
         return false;
     }
 
@@ -141,6 +144,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
 
     @Override
     public void schedule() throws IOException{
+        Logger.INFO("starting schedule current state:'{}'",state);
         synchronized (this){
             if(key == null || !key.isValid()){
                 readBloking = false;
@@ -150,6 +154,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
             }
 
             if(readBloking || writeBloking){
+                Logger.INFO("notify read:'{}' or write:'{}'",readBloking,writeBloking);
                 if(readBloking && key.isReadable()){
                     readBloking = false;
                 }
@@ -162,7 +167,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
                     doUpdateKey();
                 }
             }
-
+            Logger.INFO("key.readyOps():'{}'    key.interestOps():'{}'",key.readyOps(),key.interestOps());
             if((key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE && (key.interestOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE){
                 interestOps = key.interestOps() & ~SelectionKey.OP_WRITE;
                 key.interestOps(interestOps);
@@ -213,15 +218,17 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
                         ((!isOutputShutdown() && writeInterest) ? SelectionKey.OP_WRITE : 0);
 
                 try {
-                    currentOps = (key != null && key.isValid()) ? key.interestOps() : currentOps;
+                    currentOps = (key != null && key.isValid()) ? key.interestOps() : -1;
                 }catch (Exception e){
                     key = null;
                 }
             }
             changed = interestOps != currentOps;
+            Logger.INFO("currentOps:{}  interestOps:{}  changed:{}",currentOps,interestOps,changed);
         }
         if (changed) {
-            System.out.println("updateKey,interestOps change and add self to workQueue"+this);
+            Logger.INFO("updateKey interestOps:'{}'",interestOps);
+            Logger.INFO("add self endpoint to workQueue:{}",this);
             worker.addWork(this);
             worker.wakeUp();
         }
@@ -260,7 +267,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
                             }
                         }
                     }else{
-                        System.out.println("doUpdatekey->register:"+interestOps);
+                        Logger.INFO("doUpdayeKey register event to key,interestOps'{}'",interestOps);
                         key.interestOps(interestOps);
                     }
                 }else{
@@ -286,6 +293,7 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
 
 
     private void handle() throws IOException{
+        Logger.INFO("=============starting connection execute=================");
         connection.handle();
     }
 
@@ -300,6 +308,8 @@ public class SelectChannelEndPoint extends AbstractEndPoint implements Connected
         }catch (IOException e){
 
         }finally {
+            interestOps = -1;
+            Logger.INFO("==============close updateKey channel isOpen:{}",getChannel().isOpen());
             updateKey();
         }
     }

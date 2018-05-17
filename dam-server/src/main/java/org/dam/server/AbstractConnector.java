@@ -2,6 +2,7 @@ package org.dam.server;
 
 
 import org.dam.utils.lifecycle.ContainerLifeCycle;
+import org.dam.utils.util.log.Logger;
 import org.dam.utils.util.thread.ThreadPool;
 
 import java.io.IOException;
@@ -116,7 +117,12 @@ public abstract class AbstractConnector extends ContainerLifeCycle implements Co
     }
 
     protected void configure(Socket socket) {
-
+        try {
+            socket.setTcpNoDelay(true);
+            socket.setSoLinger(true,2);
+        }catch (Exception e){
+            Logger.ERROR("socket configure error:{}",socket);
+        }
     }
 
     protected void connectionOpened(){

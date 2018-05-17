@@ -1,5 +1,9 @@
 package org.dam.http;
 
+import org.dam.http.bean.HttpHeader;
+
+import java.util.Map;
+
 public interface Response {
 
     public void generateHeaderBytes();
@@ -12,6 +16,8 @@ public interface Response {
 
     public HttpHeader getHttpHeader();
 
+
     public void addAttribute(String key, Object value);
-    public Object addAttribute(String key);
+    public Map<String,Object> getAttribute();
+    public Object getAttribute(String key);
 }

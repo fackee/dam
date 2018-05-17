@@ -6,6 +6,7 @@ import org.dam.annotation.Parameter;
 import org.dam.annotation.Request;
 import org.dam.annotation.Toylet;
 import org.dam.http.Response;
+import org.dam.http.bean.Multipart;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -38,6 +39,7 @@ public class ReflectUtil {
         final Map<String,List<String>> result = new HashMap<>(1,1);
         final HandlerBean handlerBean = new HandlerBean();
         handlerBean.setHandlerName(method.getName());
+        handlerBean.setParams(method.getParameterTypes());
         Annotation[] annotations = method.getDeclaredAnnotations();
         for(Annotation annotation : annotations){
             if(annotation instanceof Request){
@@ -51,25 +53,31 @@ public class ReflectUtil {
         return handlerBean;
     }
 
-    private static final  Map<String,Map<String,String>> getMethodParamsAnnotationValue(Method method){
-        Map<String,Map<String,String>> result = new HashMap<>(16);
+    private static final  Map<String,Object> getMethodParamsAnnotationValue(Method method){
+        Map<String,Object> result = new HashMap<>(16);
         java.lang.reflect.Parameter[] parameters = method.getParameters();
         for(java.lang.reflect.Parameter parameter : parameters){
             Annotation[] annotations = parameter.getDeclaredAnnotations();
-            for(Annotation annotation : annotations){
-                if(annotation instanceof Parameter){
-                    Map<String,String> annParamMap = new HashMap<>(1,1);
-                    Parameter param = (Parameter)annotation;
-                    annParamMap.put(param.paramName(),param.defaultValue());
-                    result.put(parameter.getName(),annParamMap);
+            if(annotations.length > 0){
+                for(Annotation annotation : annotations){
+                    if(annotation instanceof Parameter){
+                        Map<String,String> annParamMap = new HashMap<>(1,1);
+                        Parameter param = (Parameter)annotation;
+                        annParamMap.put(param.paramName(),param.defaultValue());
+                        result.put(parameter.getName(),annParamMap);
+                    }
                 }
+                continue;
             }
-            try {
+            try { ;
                 if(parameter.getType().newInstance() instanceof org.dam.http.Request){
-                    result.put("Request",new HashMap<>(0));
+                    result.put(parameter.getName(),"Request");
                 }
                 if(parameter.getType().newInstance() instanceof Response){
-                    result.put("Response",new HashMap<>(0));
+                    result.put(parameter.getName(),"Response");
+                }
+                if(parameter.getType().newInstance() instanceof Multipart){
+                    result.put(parameter.getName(),"Multipart");
                 }
             } catch (InstantiationException e) {
 

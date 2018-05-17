@@ -1,6 +1,7 @@
 package org.dam.utils.util.stream;
 
 import org.dam.utils.util.cache.StaticSourceMap;
+import org.dam.utils.util.log.Logger;
 
 import java.io.*;
 import java.util.zip.GZIPInputStream;
@@ -29,7 +30,7 @@ public class StaticStream {
 //            if(bytes[0] == 0xef && bytes[1] == 0xbb && bytes[2] == 0xbf){
 //                System.out.println("==================POM======================");
 //            }
-            System.out.println(bytes.length);
+//            System.out.println(bytes.length);
             //gzip.write(bytes,0,bytes.length);
             //gzip.finish();
             //System.out.println(outputStream.toByteArray().length);
@@ -43,6 +44,4 @@ public class StaticStream {
 //                gzip.close();
         }
     }
-
-
 }

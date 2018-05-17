@@ -1,7 +1,8 @@
 package org.dam.server;
 
 import org.dam.http.*;
-import org.dam.http.util.HttpGenerate;
+import org.dam.http.bean.HttpField;
+import org.dam.http.HttpGenerate;
 import org.dam.io.EndPoint;
 import org.dam.io.connection.Connection;
 import org.dam.utils.util.log.Logger;
@@ -32,11 +33,12 @@ public class HttpConnection extends AbstractHttpConnection {
         super.handle();
         request.setHttpHeader(getHttpField().getHttpHeader());
         request.setHttpParameter(getHttpField().getHttpParameter());
-        request.setCookie(getHttpField().getCookie());
-        request.setSession(getHttpField().getSession());
+        request.setCookies(getHttpField().getCookies());
+        request.setMultipart(getHttpField().getMultipart());
         getServer().handle(request,response);
         try {
             if(!getEndPoint().blockWritable(5000)){
+                Logger.INFO("wakeup from write and continue generate http response{},{}",getEndPoint(),response);
                 HttpGenerate httpGenerate = new HttpGenerate(getEndPoint(),new HttpField.HttpBuilder().builde(),response).generate();
             }
         } catch (IOException e) {

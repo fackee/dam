@@ -17,6 +17,8 @@
         <module>dam-bridge</module>
         <module>dam-server</module>
         <module>dam-start</module>
+        <module>dam-dynamic-syntax</module>
+        <module>dam-constant</module>
     </modules>
     <name>dam-parent</name>
 

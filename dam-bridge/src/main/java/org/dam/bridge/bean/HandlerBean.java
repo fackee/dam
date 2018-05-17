@@ -10,9 +10,11 @@ public class HandlerBean {
 
     private String method;
 
+    private Class[] params;
+
     private String resultType;
 
-    private Map<String,Map<String,String>> paramsMap;
+    private Map<String,Object> paramsMap;
 
     public String getHandlerName() {
         return handlerName;
@@ -46,11 +48,19 @@ public class HandlerBean {
         this.resultType = resultType;
     }
 
-    public Map<String, Map<String, String>> getParamsMap() {
+    public Map<String,Object> getParamsMap() {
         return paramsMap;
     }
 
-    public void setParamsMap(Map<String, Map<String, String>> paramsMap) {
+    public void setParamsMap(Map<String, Object> paramsMap) {
         this.paramsMap = paramsMap;
+    }
+
+    public void setParams(Class[] params) {
+        this.params = params;
+    }
+
+    public Class[] getParams() {
+        return params;
     }
 }

@@ -16,13 +16,13 @@ public class Logger {
     private static final SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 
     public static void ERROR(String msg,Object ...params){
-        System.out.println("["+Thread.currentThread().getName()+ "]-" +
+        System.out.println("["+Thread.currentThread().getName()+ "]-" +"错误-"+
                 "["+format.format(new Date())+ "]" + ":" +
                 StringUtil.format(msg,params));
     }
 
     public static void INFO(String msg,Object ...params){
-        System.out.println("["+Thread.currentThread().getName()+ "]-" +
+        System.out.println("["+Thread.currentThread().getName()+ "]-" +"信息-"+
                 "["+format.format(new Date())+ "]" + ":" +
                 StringUtil.format(msg,params));
     }

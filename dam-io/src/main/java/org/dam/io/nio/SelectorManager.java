@@ -20,6 +20,7 @@ public abstract class SelectorManager extends AbstractLifeCycle {
     private SelectorWorker[] workers;
     private int workLength;
     private volatile int work = 0;
+    private int selectorPriorityDelta = 0;
 
 
     public void setWorkLength(int workLength) {
@@ -63,35 +64,47 @@ public abstract class SelectorManager extends AbstractLifeCycle {
             workers[i] = new SelectorWorker(i);
         }
         super.doStart();
-        for(int i=0;i<1;i++){
+        Logger.INFO("SelectManager========doStart  workLength:'{}'",getWorkLength());
+        for(int i=0;i<getWorkLength();i++){
             final int id = i;
-            new Thread(new Runnable() {
+            boolean working = dispatch(new Runnable() {
                 @Override
                 public void run() {
+                    String name = Thread.currentThread().getName();
+                    int priority = Thread.currentThread().getPriority();
                     try {
-                        SelectorWorker[] workerArr = workers;
-                        if(workerArr == null){
+                        SelectorWorker selectorWorkers[] = workers;
+                        if(selectorWorkers == null){
                             return;
                         }
-                        SelectorWorker worker = workerArr[id];
+                        SelectorWorker worker = selectorWorkers[id];
+                        Thread.currentThread().setName(name+" Selector"+id);
+                        if (getSelectorPriorityDelta()!=0)
+                            Thread.currentThread().setPriority(Thread.currentThread().getPriority()+getSelectorPriorityDelta());
+                        Logger.INFO("Starting {} on {}",Thread.currentThread(),this);
                         while (isRunning()){
                             try {
                                 worker.doWork();
-                            }catch (IOException e){
-
-                            }catch (Exception e){
-
+                            } catch(IOException e) {
+                                Logger.INFO(Logger.printStackTraceToString(e.fillInStackTrace()));
+                            } catch(Exception e) {
+                                Logger.INFO(Logger.printStackTraceToString(e.fillInStackTrace()));
                             }
                         }
-                    }finally {
-
+                    } finally {
+                        Logger.INFO("Stopped {} on {}",Thread.currentThread(),this);
+                        Thread.currentThread().setName(name);
+                        if (getSelectorPriorityDelta()!=0)
+                            Thread.currentThread().setPriority(priority);
                     }
                 }
-            }).start();
-
+            });
         }
     }
 
+    protected  int getSelectorPriorityDelta(){
+        return selectorPriorityDelta;
+    }
 
 
     public abstract boolean dispatch(Runnable runnable);
@@ -125,6 +138,7 @@ public abstract class SelectorManager extends AbstractLifeCycle {
 
         public void addWork(Object work){
             workQueue.add(work);
+            Logger.INFO("add work:{}    workQueueSize:{}",work,workQueue.size());
         }
 
         public void addWord(SelectableChannel channel,Object att){
@@ -148,10 +162,11 @@ public abstract class SelectorManager extends AbstractLifeCycle {
                 Object work;
                 int works = workQueue.size();
                 while ( works-- >0 && (work = workQueue.poll())!=null){
+                    Logger.INFO(">>>>>>>dowork<<<<<<<<");
                     Channel channel = null;
                     SelectionKey key = null;
                     if(work instanceof EndPoint){
-                        System.out.println(work + "endpoint doUpdatekey->registerSelf");
+                        Logger.INFO("do work endpoint:{}",work);
                         final SelectChannelEndPoint endPoint = (SelectChannelEndPoint)work;
                         channel = endPoint.getChannel();
                         endPoint.doUpdateKey();
@@ -169,11 +184,12 @@ public abstract class SelectorManager extends AbstractLifeCycle {
                             key = sc.register(selector,SelectionKey.OP_CONNECT);
                         }
                     }else if(work instanceof SocketChannel){
-                        System.out.println("newly request,newly endpoint");
+                        Logger.INFO("newly socketChannel:{}",work);
                         final SocketChannel socketChannel = (SocketChannel)work;
                         channel = socketChannel;
                         key = socketChannel.register(selector,SelectionKey.OP_READ,null);
                         SelectChannelEndPoint endPoint = createEndPoint(socketChannel,key);
+                        Logger.INFO("newly endPoint:{}",endPoint);
                         key.attach(endPoint);
                         endPoint.schedule();
                     }else if(work instanceof ChangeTask){
@@ -189,7 +205,8 @@ public abstract class SelectorManager extends AbstractLifeCycle {
                     return;
                 }
                 for(SelectionKey selectionKey : selector.selectedKeys()){
-                    System.out.println("selectedKeySiez:"+selector.selectedKeys().size());
+                    Logger.INFO("current selectionKey:{} event is read : '{}' or write :'{}'",
+                            selectionKey,selectionKey.isReadable(),selectionKey.isWritable());
                     SocketChannel socketChannel = null;
                     try {
                         if(!selectionKey.isValid()){
@@ -204,8 +221,8 @@ public abstract class SelectorManager extends AbstractLifeCycle {
                         if(attachment instanceof SelectChannelEndPoint){
                             if(selectionKey.isWritable() || selectionKey.isReadable()){
                                 final SelectChannelEndPoint endPoint = (SelectChannelEndPoint)attachment;
-                                System.out.println("foreach selectionKey    isReadable:"+selectionKey.isReadable()+"     isWritable:"+selectionKey.isWritable());
-                                System.out.println("foreach selectionKey:" + endPoint + "   readBlock:"+endPoint.isReadBloking()+"  writeBlock:"+endPoint.isWriteBloking());
+                                Logger.INFO("selectKey attched endpoint:{},readBlock:'{}' and writeBlock:'{}'",
+                                        endPoint,endPoint.isReadBloking(),endPoint.isWriteBloking());
                                 endPoint.schedule();
                             }
                         }else if(selectionKey.isConnectable()){
@@ -244,6 +261,7 @@ public abstract class SelectorManager extends AbstractLifeCycle {
                 }
 
                 currentSelector.selectedKeys().clear();
+                selectedThread = null;
 
             }catch (IOException e){
                 //TODO doWork IOException
@@ -259,6 +277,7 @@ public abstract class SelectorManager extends AbstractLifeCycle {
         }
 
         public void destroyEndPoint(SelectChannelEndPoint endPoint) {
+            Logger.INFO("==============destroyEndPoint:{}",endPoint);
             endPoints.remove(endPoint);
             closeEndPoint(endPoint);
         }

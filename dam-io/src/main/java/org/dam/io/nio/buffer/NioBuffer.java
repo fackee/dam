@@ -9,7 +9,7 @@ public class NioBuffer implements Buffer{
 
     private final ByteBuffer byteBuffer;
 
-    private static final int DEFAULT_BUFFER_SIZE = 4*1024;
+    public static final int DEFAULT_BUFFER_SIZE = 4*1024;
 
     public NioBuffer(){
         this(DEFAULT_BUFFER_SIZE);

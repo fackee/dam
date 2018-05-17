@@ -1,17 +1,25 @@
 package org.dam.http;
 
-import org.dam.utils.util.serialize.Serialize;
+import org.dam.http.bean.Cookie;
+import org.dam.http.bean.HttpHeader;
+import org.dam.utils.util.log.Logger;
 
 import java.lang.reflect.Field;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static org.dam.http.constant.HttpConstant.HTTP_MESSAGE_LINEFEED;
 
 public class HttpResponse implements Response {
 
     private static final Map<String,Object> attributeMap = new ConcurrentHashMap<>();
+    private final CookieManager cookieManager = new CookieManager();
+    private final SessionManager sessionManager = new SessionManager();
     private HttpHeader httpHeader = new HttpHeader(new HttpHeader.HttpResponseHeaderBuilder());
     private byte[] header;
     private byte[] body;
+
     public HttpResponse(){
 
     }
@@ -27,21 +35,26 @@ public class HttpResponse implements Response {
                 String value = (String)field.get(responseHeader);
                 if(value != null && !"".equals(value) && value.length() > 0){
                     if("statusCode".equalsIgnoreCase(field.getName())){
-                        String headerLine = responseHeader.getHttpVersion() + " "+ (String) field.get(responseHeader) + "\r\n";
+                        String headerLine = responseHeader.getHttpVersion() + " "+ (String) field.get(responseHeader) + HTTP_MESSAGE_LINEFEED;
                         buffer.append(headerLine);
                         continue;
                     }
                     if("httpVersion".equalsIgnoreCase(field.getName())){
                         continue;
                     }
-                    String headerLine = field.getName().replaceAll("_","-") + ": " + ((String)field.get(responseHeader)) +"\r\n";
+                    String headerLine = field.getName().replaceAll("_","-") + ": " + ((String)field.get(responseHeader)) +HTTP_MESSAGE_LINEFEED;
                     buffer.append(headerLine);
                 }
             } catch (IllegalAccessException e) {
-
+                Logger.INFO("generateHeader error:{}",Logger.printStackTraceToString(e.fillInStackTrace()));
             }
         }
-        buffer.append("\r\n\r\n");
+        Iterator<Cookie> cookieIterator = cookieManager.getCookies();
+        while (cookieIterator.hasNext()){
+            Cookie cookie = cookieIterator.next();
+            buffer.append(cookie.toString() + HTTP_MESSAGE_LINEFEED);
+        }
+        buffer.append(HTTP_MESSAGE_LINEFEED);
         header = buffer.toString().getBytes();
     }
 
@@ -80,11 +93,24 @@ public class HttpResponse implements Response {
 
     @Override
     public void addAttribute(String key, Object value) {
-
+        attributeMap.put(key,value);
     }
 
     @Override
-    public Object addAttribute(String key) {
-        return null;
+    public Map<String, Object> getAttribute() {
+        return attributeMap;
+    }
+
+    @Override
+    public Object getAttribute(String key) {
+        return attributeMap.get(key);
+    }
+
+    public CookieManager getCookieManager() {
+        return cookieManager;
+    }
+
+    public SessionManager getSessionManager() {
+        return sessionManager;
     }
 }
