@@ -1,4 +1,4 @@
-package org.dam.server.config;
+package org.dam.utils.config;
 
 import org.dam.exception.PropertiesNotFoundException;
 import org.dam.utils.util.StringUtil;
@@ -90,6 +90,13 @@ public class Configuration {
                 return propertiesMap.get("welCome");
             }
             return "E:/Dam_v_1.0.0/www/index.html";
+        }
+
+        public String getLogLevel(){
+            if(propertiesMap.containsKey("logLevel")){
+                return propertiesMap.get("logLevel");
+            }
+            return "ERROR";
         }
     }
 }

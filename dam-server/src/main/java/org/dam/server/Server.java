@@ -1,7 +1,6 @@
 package org.dam.server;
 
-import org.dam.server.config.Configuration;
-import org.dam.server.handler.AbstractHandler;
+import org.dam.utils.config.Configuration;
 import org.dam.server.handler.HandleWrapper;
 import org.dam.server.handler.Handler;
 import org.dam.http.Request;

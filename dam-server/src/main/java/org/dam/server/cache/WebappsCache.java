@@ -4,7 +4,7 @@ import org.dam.bridge.LoadAppClasses;
 import org.dam.bridge.LoadAppJar;
 import org.dam.bridge.bean.ControllerBean;
 import org.dam.bridge.util.ReflectUtil;
-import org.dam.server.config.Configuration;
+import org.dam.utils.config.Configuration;
 import org.dam.utils.util.log.Logger;
 
 import java.io.IOException;

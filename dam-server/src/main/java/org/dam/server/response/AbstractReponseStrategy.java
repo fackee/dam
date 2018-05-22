@@ -3,16 +3,11 @@ package org.dam.server.response;
 import org.dam.http.Request;
 import org.dam.http.Response;
 import org.dam.http.constant.HttpConstant;
-import org.dam.server.config.Configuration;
+import org.dam.utils.config.Configuration;
 import org.dam.utils.util.StringUtil;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.SimpleTimeZone;
 
-import static org.dam.constant.Constants.STATUS;
 import static org.dam.constant.Constants.VERSION;
 
 public abstract class AbstractReponseStrategy implements ResponseStrategy{

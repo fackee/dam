@@ -7,7 +7,6 @@ import org.dam.server.handler.HandleWrapper;
 import org.dam.utils.util.StringUtil;
 import org.dam.utils.util.log.Logger;
 import org.dam.utils.util.stream.StaticStream;
-
 import java.io.IOException;
 import java.util.Map;
 

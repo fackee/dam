@@ -7,7 +7,7 @@ import org.dam.http.*;
 import org.dam.http.constant.HttpConstant;
 import org.dam.server.cache.ControllerCache;
 import org.dam.bridge.bean.HandlerBean;
-import org.dam.server.config.Configuration;
+import org.dam.utils.config.Configuration;
 import org.dam.utils.util.StringUtil;
 import org.dam.utils.util.log.Logger;
 
@@ -141,7 +141,8 @@ public class AppLoadHandler extends AbstractHandler {
         return true;
     }
 
-    private Object invoke(Class clazz, Method method, Map<String, Object> map) throws IllegalAccessException, InstantiationException, InvocationTargetException {
+    private Object invoke(Class clazz, Method method, Map<String, Object> map) throws IllegalAccessException
+            , InstantiationException, InvocationTargetException {
         Object params[] = new Object[method.getParameterCount()];
         int index = 0;
         Parameter[] parameters = method.getParameters();

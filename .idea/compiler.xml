@@ -9,13 +9,13 @@
         <module name="dam-annotation" />
         <module name="dam-bridge" />
         <module name="dam-constant" />
+        <module name="dam-dynamic-syntax" />
         <module name="dam-exception" />
         <module name="dam-http" />
         <module name="dam-io" />
         <module name="dam-server" />
         <module name="dam-start" />
         <module name="dam-util" />
-        <module name="damdynamicsyntax" />
       </profile>
     </annotationProcessing>
   </component>

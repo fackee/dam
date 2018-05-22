@@ -1,6 +1,6 @@
 package org.dam.server.handler;
 
-import org.dam.server.config.Configuration.*;
+import org.dam.utils.config.Configuration.*;
 import org.dam.http.Request;
 import org.dam.http.Response;
 import org.dam.http.constant.HttpMedia;
