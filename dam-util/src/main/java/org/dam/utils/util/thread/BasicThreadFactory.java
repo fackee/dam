@@ -18,8 +18,14 @@ public class BasicThreadFactory implements ThreadFactory {
     public Thread newThread(Runnable r) {
         Thread thread = new Thread(r);
         thread.setDaemon(deamon);
-        thread.setName(name);
-        thread.setPriority(priority);
+        if(name != null){
+            thread.setName(name);
+        }
+        if(priority == Thread.MAX_PRIORITY ||
+                priority == Thread.MIN_PRIORITY ||
+                priority == Thread.NORM_PRIORITY){
+            thread.setPriority(priority);
+        }
         return thread;
     }
 

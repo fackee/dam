@@ -5,6 +5,7 @@ import org.dam.utils.util.StringUtil;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by geeche on 2018/5/7.
@@ -47,9 +48,11 @@ public class Logger {
     }
 
     public static synchronized void Persistence(String info){
+        long current = System.currentTimeMillis();
+        long zero = current/(1000*3600*24)*(1000*3600*24) - TimeZone.getDefault().getRawOffset();
         String fileName = Configuration.DefaultConfig.getInstance()
                 .getAppsDirectory().replace("www/","logs/")
-                +System.currentTimeMillis() + ".txt";
+                +zero + ".txt";
         File file = new File(fileName);
         if(!file.exists()){
             try {
@@ -58,19 +61,17 @@ public class Logger {
                 e.printStackTrace();
             }
         }
-        BufferedOutputStream bufferedOutputStream = null;
-        FileOutputStream fileOutputStream = null;
+        Writer writer = null;
         try {
-            fileOutputStream = new FileOutputStream(file);
-            bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-            bufferedOutputStream.write((info + "\n").getBytes());
-            bufferedOutputStream.flush();
+            writer = new FileWriter(file,true);
+            writer.write(info);
+            writer.write("\n");
+            writer.flush();
         }catch (IOException e){
             Logger.ERROR("Persistence logger error:{}",Logger.printStackTraceToString(e));
         }finally {
             try {
-                fileOutputStream.close();
-                bufferedOutputStream.close();
+                writer.close();
             } catch (IOException e) {
                 Logger.ERROR("close io error:{}",Logger.printStackTraceToString(e));
             }
