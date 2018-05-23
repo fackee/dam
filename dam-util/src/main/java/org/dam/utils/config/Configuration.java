@@ -98,5 +98,12 @@ public class Configuration {
             }
             return "ERROR";
         }
+
+        public Integer getLogPeriod(){
+            if(propertiesMap.containsKey("logPeriod")){
+                return Integer.parseInt(propertiesMap.get("logPeriod"));
+            }
+            return 24;
+        }
     }
 }

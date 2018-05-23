@@ -32,6 +32,9 @@ public class LoggerSchedule {
         }
     };
     public static final void schedule(){
-        loggerSchedule.scheduleAtFixedRate(collection,0,24,TimeUnit.HOURS);
+        loggerSchedule.scheduleAtFixedRate(collection,
+                0,
+                Configuration.DefaultConfig.getInstance().getLogPeriod()
+                ,TimeUnit.HOURS);
     }
 }
